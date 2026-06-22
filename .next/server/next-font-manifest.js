@@ -1,0 +1,1 @@
+self.__NEXT_FONT_MANIFEST="{\"pages\":{},\"app\":{\"/Users/julietabertorellosartori/rocio-y-juan/app/layout\":[\"static/media/e4af272ccee01ff0-s.p.woff2\",\"static/media/574741585039d06e-s.p.woff2\"]},\"appUsingSizeAdjust\":true,\"pagesUsingSizeAdjust\":false}"

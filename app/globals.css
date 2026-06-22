@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
+  --font-handwritten: var(--font-handwritten);
+}
+
+:root {
+  --font-serif: "Playfair Display", serif;
+  --font-body: "Cormorant Garamond", serif;
+}
+
+@layer base {
+  body {
+    @apply antialiased bg-[#afb5a6];
+    font-family: var(--font-body);
+  }
+  section[id] {
+    scroll-margin-top: 80px;
+  }
+}
+
+@layer utilities {
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+}
+
+@media (max-width: 767px) {
+  .dudas-section,
+  .itinerario-section,
+  .confirmacion-section {
+    background-image: url("https://res.cloudinary.com/djqtkbyez/image/upload/v1780232440/An%CC%83adir_un_ti%CC%81tulo_2_zuvzwr.png") !important;
+  }
+
+  #lugar {
+    background-image: none !important;
+  }
+}
+
