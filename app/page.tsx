@@ -325,7 +325,7 @@ export default function Home() {
               href="#inicio"
               onClick={(e) => handleNavClick(e, 'inicio')}
               className="text-2xl md:text-3xl font-light tracking-[0.2em] uppercase text-bg-light hover:opacity-80 transition-opacity cursor-pointer"
-              
+
             >
               {weddingConfig.monogram}
             </a>
@@ -445,43 +445,17 @@ export default function Home() {
         {/* 1. HERO - INITIALS & INVITATION + NOMBRES & FECHA */}
         <section
           id="inicio"
-          className="w-full relative pt-32 md:py-32 flex flex-col items-center justify-center text-center overflow-hidden"
+          className="w-full relative py-24 flex flex-col items-center justify-center text-center overflow-hidden"
           style={{
-            backgroundColor: '#fbf9f4',
+            backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1782138238/7afade95-eee3-4d2c-92f0-c27559a51b4c_pfpmft.webp")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundColor: '#afb5a6',
           }}
         >
-          {/* Mobile background - img1 (top half, tiles) */}
-          <div
-            className="absolute inset-0 md:hidden z-0"
-            style={{
-              backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1780232440/An%CC%83adir_un_ti%CC%81tulo_2_zuvzwr.png")',
-              backgroundSize: '100% auto',
-              backgroundPosition: 'top center',
-              backgroundRepeat: 'repeat-y',
-              clipPath: 'inset(0 0 50% 0)',
-            }}
-          />
-          {/* Mobile background - img2 (bottom half, tiles) */}
-          <div
-            className="absolute inset-0 md:hidden z-0"
-            style={{
-              backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1780233671/An%CC%83adir_un_ti%CC%81tulo_3_zgfwis.png")',
-              backgroundSize: '100% auto',
-              backgroundPosition: 'bottom center',
-              backgroundRepeat: 'repeat-y',
-              clipPath: 'inset(50% 0 0 0)',
-            }}
-          />
-          {/* Desktop background override */}
-          <div
-            className="absolute inset-0 hidden md:block z-0"
-            style={{
-              backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1780221257/Disen%CC%83o_sin_ti%CC%81tulo_jv7dnc.png")',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundColor: '#fbf9f4',
-            }}
-          />
+          {/* Ambient mask overlay to ensure perfect contrast and depth */}
+          <div className="absolute inset-0 bg-primary/15 pointer-events-none z-0" />
+
           <motion.div
             initial="hidden"
             animate={showMain ? "visible" : "hidden"}
@@ -497,58 +471,71 @@ export default function Home() {
             }}
             className="max-w-4xl mx-auto px-6 w-full flex flex-col items-center relative z-10"
           >
-            <motion.p
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 1.2, ease: "easeOut" } }
-              }}
-              className="font-serif text-secondary text-lg md:text-xl italic leading-relaxed max-w-sm mx-auto mb-5 text-center px-10 md:px-0"
-            >
-              Hay encuentros que cambian una vida entera…
-            </motion.p>
+            <div className="bg-[#fbf9f4] p-8 md:p-12 rounded-3xl shadow-xl max-w-xl w-full mx-auto flex flex-col items-center border border-primary/10">
+              <motion.p
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 1.2, ease: "easeOut" } }
+                }}
+                className="font-serif text-secondary text-lg md:text-xl italic leading-relaxed max-w-sm mx-auto mb-5 text-center px-10 md:px-0"
+              >
+                Hay encuentros que cambian una vida entera…
+              </motion.p>
 
-            <motion.p
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 1.2, ease: "easeOut" } }
-              }}
-              className="font-serif text-secondary text-lg md:text-xl italic leading-relaxed max-w-sm mx-auto mb-5 text-center px-10 md:px-0"
-            >
-              El nuestro nos ha llevado a compartir sueños, afrontar nuevos retos, descubrir lugares inesperados y construir un proyecto común lleno de alegria e ilusión!
-            </motion.p>
+              <motion.p
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 1.2, ease: "easeOut" } }
+                }}
+                className="font-serif text-secondary text-lg md:text-xl italic leading-relaxed max-w-sm mx-auto mb-5 text-center px-10 md:px-0"
+              >
+                El nuestro nos ha llevado a compartir sueños, afrontar nuevos retos, descubrir lugares inesperados y construir un proyecto común lleno de alegria e ilusión!
+              </motion.p>
 
-            <motion.p
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 1.2, ease: "easeOut" } }
-              }}
-              className="font-serif text-secondary text-lg md:text-xl italic leading-relaxed max-w-sm mx-auto mb-10 text-center px-10 md:px-0"
-            >
-              Ahora, con la certeza de querer recorrer juntos todo lo que está por venir, queremos anunciar que...
-            </motion.p>
+              <motion.p
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 1.2, ease: "easeOut" } }
+                }}
+                className="font-serif text-secondary text-lg md:text-xl italic leading-relaxed max-w-sm mx-auto mb-10 text-center px-10 md:px-0"
+              >
+                Ahora, con la certeza de querer recorrer juntos todo lo que está por venir, queremos anunciar que...
+              </motion.p>
 
-            <motion.h2
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 1.2, ease: "easeOut" } }
-              }}
-              className="tracking-[0.25em] uppercase text-[24px] leading-[24px] text-primary mb-8 text-center no-underline"
-              
-            >
-              ¡Nos casamos!
-            </motion.h2>
+              <motion.h2
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 1.2, ease: "easeOut" } }
+                }}
+                className="tracking-[0.25em] uppercase text-[24px] leading-[24px] text-primary mb-8 text-center no-underline"
+              >
+                ¡Nos casamos!
+              </motion.h2>
 
-            <motion.p
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 1.2, ease: "easeOut" } }
-              }}
-              className="font-serif text-secondary text-lg md:text-xl lg:text-xl italic leading-relaxed max-w-sm mx-auto mb-10 text-center px-9 md:px-0"
-            >
-              Y nos encantaría disfrutar contigo el día más importante de nuestra vida
-            </motion.p>
-
+              <motion.p
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 1.2, ease: "easeOut" } }
+                }}
+                className="font-serif text-secondary text-lg md:text-xl lg:text-xl italic leading-relaxed max-w-sm mx-auto text-center px-9 md:px-0"
+              >
+                Y nos encantaría disfrutar contigo el día más importante de nuestra vida
+              </motion.p>
+            </div>
           </motion.div>
+        </section>
+
+        {/* Section for Couple Names & Date */}
+        <section
+          id="bienvenida"
+          className="w-full relative py-20 flex flex-col items-center justify-center text-center overflow-hidden"
+          style={{
+            backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1777711072/texturapapel-limoncello-scaled_cgfzov.jpg")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundColor: '#fbf9f4',
+          }}
+        >
           <motion.div
             initial="hidden"
             animate={showMain ? "visible" : "hidden"}
@@ -658,45 +645,12 @@ export default function Home() {
           id="lugar"
           className="w-full pt-20 pb-20 md:py-40 relative"
           style={{
-            backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1780227339/An%CC%83adir_un_ti%CC%81tulo_1_cjdhdl.png")',
-            backgroundSize: 'contain',
-            backgroundPosition: 'top center',
-            backgroundRepeat: 'repeat',
+            backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1777711072/texturapapel-limoncello-scaled_cgfzov.jpg")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
             backgroundColor: '#fbf9f4',
           }}
         >
-          {/* Mobile background - img1 (top half, tiles) */}
-          <div
-            className="absolute inset-0 md:hidden z-0"
-            style={{
-              backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1780227339/An%CC%83adir_un_ti%CC%81tulo_1_cjdhdl.png")',
-              backgroundSize: '100% auto',
-              backgroundPosition: 'top center',
-              backgroundRepeat: 'repeat-y',
-              clipPath: 'inset(0 0 50% 0)',
-            }}
-          />
-          {/* Mobile background - img2 (bottom half, tiles) */}
-          <div
-            className="absolute inset-0 md:hidden z-0"
-            style={{
-              backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1780235270/An%CC%83adir_un_ti%CC%81tulo_5_xgark7.png")',
-              backgroundSize: '100% auto',
-              backgroundPosition: 'bottom center',
-              backgroundRepeat: 'repeat-y',
-              clipPath: 'inset(50% 0 0 0)',
-            }}
-          />
-          {/* Desktop background override */}
-          <div
-            className="absolute inset-0 hidden md:block z-0"
-            style={{
-              backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1780221764/Disen%CC%83o_sin_ti%CC%81tulo_1_opovqp.png")',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundColor: '#fbf9f4',
-            }}
-          />
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -742,7 +696,7 @@ export default function Home() {
 
                   <h3
                     className="text-2xl text-primary mb-4 font-normal tracking-wide text-center"
-                    
+
                   >
                     {weddingConfig.churchName}
                   </h3>
@@ -797,7 +751,7 @@ export default function Home() {
 
                   <h3
                     className="text-2xl text-primary mb-4 font-normal tracking-wide text-center"
-                    
+
                   >
                     {weddingConfig.celebrationName}
                   </h3>
@@ -840,27 +794,19 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* 3 & 4. FOTOS Y TEMPORIZADOR UNIFICADO */}
         <section
           id="fotos"
-          className="py-24 pt-16 pb-16 relative overflow-hidden"
+          className="py-24 relative overflow-hidden"
           style={{
-            backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1779659530/An%CC%83adir_un_ti%CC%81tulo_5_umjcus.png")',
-            backgroundSize: 'contain',
-            backgroundPosition: 'top center',
-            backgroundColor: '#fbf9f4',
+            backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1782138238/7afade95-eee3-4d2c-92f0-c27559a51b4c_pfpmft.webp")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundColor: '#afb5a6',
           }}
         >
-          {/* Desktop background override */}
-          <div
-            className="absolute inset-0 hidden md:block z-0"
-            style={{
-              backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1780221763/Disen%CC%83o_sin_ti%CC%81tulo_2_xwwpnf.png")',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundColor: '#fbf9f4',
-            }}
-          />
+          {/* Ambient mask overlay to ensure perfect contrast and depth */}
+          <div className="absolute inset-0 bg-primary/15 pointer-events-none z-0" />
+
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -885,10 +831,10 @@ export default function Home() {
               }}
               className="text-center mb-12"
             >
-              <h3 className="font-serif text-3xl md:text-4xl text-primary font-light italic">
+              <h3 className="font-serif text-3xl md:text-4xl text-bg-light font-light italic">
                 ¡Empieza la cuenta atrás!
               </h3>
-              <div className="h-px w-10 bg-primary/20 mx-auto mt-4" />
+              <div className="h-px w-10 bg-bg-light/35 mx-auto mt-4" />
             </motion.div>
 
             {/* Temporizador Section */}
@@ -1219,23 +1165,12 @@ export default function Home() {
           id="musica"
           className="w-full py-24 pt-16 pb-16 relative"
           style={{
-            backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1779645715/FONDO_2_MOBILE_rwtluf.png")',
-            backgroundSize: 'contain',
-            backgroundPosition: 'top center',
-            backgroundRepeat: 'repeat',
+            backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1777711072/texturapapel-limoncello-scaled_cgfzov.jpg")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
             backgroundColor: '#fbf9f4',
           }}
         >
-          {/* Desktop background override */}
-          <div
-            className="absolute inset-0 hidden md:block z-0"
-            style={{
-              backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1780222660/Disen%CC%83o_sin_ti%CC%81tulo_3_jjgev3.png")',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundColor: '#fbf9f4',
-            }}
-          />
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -1328,7 +1263,16 @@ export default function Home() {
         </section>
 
         {/* 6. NEXT ADVENTURE / LUNA DE MIEL */}
-        <section id="viaje" className="py-24 pt-16 pb-16 bg-[#C9CEBA] relative text-accent">
+        <section
+          id="viaje"
+          className="py-24 pt-16 pb-16 relative text-accent"
+          style={{
+            backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1777711072/texturapapel-limoncello-scaled_cgfzov.jpg")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundColor: '#C9CEBA',
+          }}
+        >
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -1373,7 +1317,7 @@ export default function Home() {
                 hidden: { opacity: 0, y: 20 },
                 visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
               }}
-              className="text-[15px] text-accent/90 italic leading-relaxed max-w-xl mx-auto mb-2"
+              className="text-[15px] text-accent/90 leading-relaxed max-w-xl mx-auto mb-2"
             >
               Emprendemos juntos el viaje más importante de nuestras vidas, que continuará con una luna de miel soñada entre Japón y la Polinesia Francesa.
             </motion.p>
@@ -1486,7 +1430,7 @@ export default function Home() {
                   visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
                 }}
                 className="text-[13px] md:text-sm text-secondary leading-relaxed max-w-md mx-auto"
-                
+
               >
                 Para poder organizar con cariño y detalle este día, por favor, agradeceríamos que rellenarais este formulario antes del <strong className="text-primary">15 de agosto</strong>, gracias.
               </motion.p>
@@ -1515,23 +1459,12 @@ export default function Home() {
           id="informacion"
           className="py-20 pt-16 pb-16 relative"
           style={{
-            backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1779645715/FONDO_1_MOBILE_hcidom.png")',
-            backgroundSize: 'contain',
-            backgroundPosition: 'top center',
-            backgroundRepeat: 'repeat',
+            backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1777711072/texturapapel-limoncello-scaled_cgfzov.jpg")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
             backgroundColor: '#fbf9f4',
           }}
         >
-          {/* Desktop background override */}
-          <div
-            className="absolute inset-0 hidden md:block z-0"
-            style={{
-              backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1780223090/Disen%CC%83o_sin_ti%CC%81tulo_5_vlhguk.png")',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundColor: '#fbf9f4',
-            }}
-          />
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -1673,7 +1606,7 @@ export default function Home() {
                 visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
               }}
               className="text-sm text-secondary leading-relaxed mb-10 max-w-md mx-auto"
-              
+
             >
               Si tenéis alguna duda, pregunta o necesitáis consultarnos algo, no dudéis en llamarnos o escribirnos por WhatsApp:
             </motion.p>
@@ -1724,21 +1657,21 @@ export default function Home() {
           <div className="max-w-2xl mx-auto px-6 relative z-10">
             <span
               className="text-4xl md:text-5xl block mb-6 text-bg-light drop-shadow-sm font-serif"
-              
+
             >
               ¡Te esperamos!
             </span>
-            <p className="font-serif text-[11px] md:text-xs uppercase tracking-[0.3em] text-bg-light mb-2 font-medium drop-shadow-xs">
+            <p className="font-serif text-[12px] md:text-xs uppercase tracking-[0.3em] text-bg-light mb-2 font-bold drop-shadow-xs">
               {weddingConfig.shortNames}
             </p>
-            <p className="font-sans font-medium text-[9px] md:text-[10px] text-bg-light/85 tracking-widest uppercase drop-shadow-xs">
+            <p className="font-sans font-bold text-[9px] md:text-[10px] text-bg-light/85 tracking-widest uppercase drop-shadow-xs">
               12 de Septiembre de 2026 • Sevilla
             </p>
           </div>
 
           {/* Bottom thin bar */}
           <div className="absolute bottom-0 left-0 right-0 py-3 bg-primary/30 border-t border-bg-light/10 z-10">
-            <p className="font-sans text-[9px] md:text-[10px] text-bg-light/80 tracking-widest">
+            <p className="font-sans font-bold text-[9px] md:text-[10px] text-bg-light/80 tracking-widest">
               By{' '}
               <a
                 href="https://wa.me/34660104026"

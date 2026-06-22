@@ -42,16 +42,3 @@
     backface-visibility: hidden;
   }
 }
-
-@media (max-width: 767px) {
-
-  .dudas-section,
-  .itinerario-section,
-  .confirmacion-section {
-    background-image: url("https://res.cloudinary.com/djqtkbyez/image/upload/v1780232440/An%CC%83adir_un_ti%CC%81tulo_2_zuvzwr.png") !important;
-  }
-
-  #lugar {
-    background-image: none !important;
-  }
-}
