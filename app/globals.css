@@ -4,18 +4,30 @@
   --font-serif: var(--font-serif);
   --font-sans: var(--font-sans);
   --font-handwritten: var(--font-handwritten);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-bg-light: var(--bg-light);
+  --color-bg-warm: var(--bg-warm);
+  --color-bg-dark: var(--bg-dark);
 }
 
 :root {
-  --font-serif: "Playfair Display", serif;
-  --font-body: "Cormorant Garamond", serif;
+  --font-body: var(--font-sans);
+  --primary: #6F7856;
+  --secondary: #7a7a60;
+  --accent: #3F4531;
+  --bg-light: #fbf9f4;
+  --bg-warm: #efeae0;
+  --bg-dark: #afb5a6;
 }
 
 @layer base {
   body {
-    @apply antialiased bg-[#afb5a6];
+    @apply antialiased bg-bg-dark;
     font-family: var(--font-body);
   }
+
   section[id] {
     scroll-margin-top: 80px;
   }
@@ -25,12 +37,14 @@
   .preserve-3d {
     transform-style: preserve-3d;
   }
+
   .backface-hidden {
     backface-visibility: hidden;
   }
 }
 
 @media (max-width: 767px) {
+
   .dudas-section,
   .itinerario-section,
   .confirmacion-section {
@@ -41,4 +55,3 @@
     background-image: none !important;
   }
 }
-

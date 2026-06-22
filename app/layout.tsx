@@ -1,13 +1,14 @@
 import type {Metadata} from 'next';
-import { Roboto_Serif, Inter } from 'next/font/google';
+import { Handlee, Outfit } from 'next/font/google';
 import './globals.css';
 
-const robotoSerif = Roboto_Serif({
+const handlee = Handlee({
+  weight: '400',
   subsets: ['latin'],
   variable: '--font-serif',
 });
 
-const inter = Inter({
+const cause = Outfit({
   subsets: ['latin'],
   variable: '--font-sans',
 });
@@ -40,8 +41,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
-    <html lang="es" className={`scroll-smooth ${robotoSerif.variable} ${inter.variable} [--font-handwritten:var(--font-serif)]`}>
-      <body suppressHydrationWarning className="text-[#5a5a40]">
+    <html lang="es" className={`scroll-smooth ${handlee.variable} ${cause.variable} [--font-handwritten:var(--font-serif)]`}>
+      <body suppressHydrationWarning className="text-accent">
         {/* Global Background */}
         <div 
           className="fixed inset-0 pointer-events-none z-[-1] bg-[#fbf9f4]" 

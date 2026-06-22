@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'motion/react';
+import { weddingConfig } from '@/lib/config';
 
 interface EnvelopeIntroProps {
   onComplete: () => void;
@@ -17,11 +18,11 @@ export default function EnvelopeIntro({ onComplete, onStartExit }: EnvelopeIntro
   const [showBackAssets, setShowBackAssets] = useState(false);
 
   const assets = {
-    front: 'https://res.cloudinary.com/djqtkbyez/image/upload/v1777724116/envelope_pg6sel.jpg',
-    backClosed: 'https://res.cloudinary.com/djqtkbyez/image/upload/v1777724116/envelope_4_eilius.png',
-    base: 'https://res.cloudinary.com/djqtkbyez/image/upload/v1777730582/2212.portrait.back_qvmv8o.webp',
-    flapClosed: 'https://res.cloudinary.com/djqtkbyez/image/upload/v1777730583/envelope_1_bd8ltr.webp',
-    flapOpen: 'https://res.cloudinary.com/djqtkbyez/image/upload/v1777730634/parte_arriba_abierta_d4ed3f.webp',
+    front: 'https://res.cloudinary.com/djqtkbyez/image/upload/v1782138241/envelope_vzvnkc.webp',
+    backClosed: 'https://res.cloudinary.com/djqtkbyez/image/upload/v1782138240/envelope_3_x1vucq.webp',
+    base: 'https://res.cloudinary.com/djqtkbyez/image/upload/v1782138238/4072.portrait.back_liqheu.webp',
+    flapClosed: 'https://res.cloudinary.com/djqtkbyez/image/upload/v1782138240/envelope_4_gxzbpf.webp',
+    flapOpen: 'https://res.cloudinary.com/djqtkbyez/image/upload/v1782138411/flapopen.webp',
     cardBg: 'https://res.cloudinary.com/djqtkbyez/image/upload/v1777711072/texturapapel-limoncello-scaled_cgfzov.jpg'
   };
 
@@ -92,7 +93,7 @@ export default function EnvelopeIntro({ onComplete, onStartExit }: EnvelopeIntro
                   className="relative mb-8 w-[180px] md:w-[220px] aspect-[4/3]"
                 >
                   <Image
-                    src="https://res.cloudinary.com/djqtkbyez/image/upload/v1777724116/envelope_4_eilius.png"
+                    src={assets.backClosed}
                     alt="Sobre"
                     fill
                     className="object-contain"
@@ -101,18 +102,18 @@ export default function EnvelopeIntro({ onComplete, onStartExit }: EnvelopeIntro
                   />
                 </motion.div>
 
-                <p className="font-serif text-[#3a3a28] text-2xl md:text-3xl italic mb-1">
+                <p className="font-serif text-accent text-2xl md:text-3xl italic mb-1">
                   Tienes una carta
                 </p>
-                <p className="font-sans text-[#7a7a60] text-[11px] uppercase tracking-[0.35em] mb-10">
-                  de Mariu &amp; Nacho
+                <p className="font-sans text-secondary text-[11px] uppercase tracking-[0.35em] mb-10">
+                  de {weddingConfig.shortNames}
                 </p>
 
                 <motion.button
                   type="button"
                   animate={{ scale: [1, 1.04, 1] }}
                   transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
-                  className="px-8 py-3 rounded-full bg-[#5a5a40] text-[#fbf9f4] font-sans text-xs uppercase tracking-[0.25em] shadow-lg hover:bg-[#5a5a40]/90 transition-colors"
+                  className="px-8 py-3 rounded-full bg-primary text-bg-light font-sans text-xs uppercase tracking-[0.25em] shadow-lg hover:bg-primary/90 transition-colors"
                 >
                   Abrir invitación
                 </motion.button>
@@ -187,11 +188,11 @@ export default function EnvelopeIntro({ onComplete, onStartExit }: EnvelopeIntro
                         transition={{ delay: 0.30, duration: 0.1 }}
                         className="relative z-50 flex flex-col items-center pointer-events-auto"
                       >
-                        <p className="font-serif text-[#7a7a60] text-lg mb-2 italic">Estás invitado/a a la boda de</p>
-                        <h2 className="font-serif text-2xl md:text-3xl text-[#5a5a40] mb-6 leading-tight font-light italic">
-                          Mariu y Nacho
+                        <p className="font-serif text-accent text-lg mb-2 italic">Estás invitado/a a la boda de</p>
+                        <h2 className="font-serif text-2xl md:text-3xl text-accent mb-6 leading-tight font-light italic">
+                          {weddingConfig.shortNames}
                         </h2>
-                        <div className="h-px w-10 bg-[#5a5a40]/20 mb-5" />
+                        <div className="h-px w-10 bg-primary/20 mb-5" />
                         <button
                           type="button"
                           onClick={(e) => {
@@ -201,7 +202,7 @@ export default function EnvelopeIntro({ onComplete, onStartExit }: EnvelopeIntro
                             if (onStartExit) onStartExit();
                             setTimeout(onComplete, 1000);
                           }}
-                          className="relative z-[999] pointer-events-auto px-6 py-2 bg-[#5a5a40] text-white font-sans tracking-[0.2em] text-[9px] uppercase rounded-full shadow-lg transition-all duration-300 hover:scale-105 active:scale-95"
+                          className="relative z-[999] pointer-events-auto px-6 py-2 bg-primary text-white font-sans tracking-[0.2em] text-[9px] uppercase rounded-full shadow-lg transition-all duration-300 hover:scale-105 active:scale-95"
                         >
                           Ver Invitación
                         </button>

@@ -272,10 +272,10 @@ export default function AdminDashboard() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-[#fbf9f4] flex items-center justify-center p-6 font-sans">
-        <div className="bg-white p-8 rounded-lg shadow-sm border border-[#5a5a40]/10 max-w-sm w-full text-center">
-          <h1 className="font-serif text-2xl text-[#5a5a40] mb-2 italic">Acceso Maestro</h1>
-          <p className="text-xs text-[#7a7a60] mb-8">Panel de control de invitaciones</p>
+      <div className="min-h-screen bg-bg-light flex items-center justify-center p-6 font-sans">
+        <div className="bg-white p-8 rounded-lg shadow-sm border border-primary/10 max-w-sm w-full text-center">
+          <h1 className="font-serif text-2xl text-primary mb-2 italic">Acceso Maestro</h1>
+          <p className="text-xs text-secondary mb-8">Panel de control de invitaciones</p>
 
           <form onSubmit={handleLogin} className="space-y-4">
             <input
@@ -283,7 +283,7 @@ export default function AdminDashboard() {
               placeholder="Usuario"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full bg-[#efeae0]/30 border border-[#5a5a40]/20 rounded p-3 text-[#5a5a40] focus:outline-none focus:border-[#5a5a40] text-sm"
+              className="w-full bg-bg-warm/30 border border-primary/20 rounded p-3 text-primary focus:outline-none focus:border-primary text-sm"
               autoCapitalize="none"
               autoComplete="username"
             />
@@ -293,13 +293,13 @@ export default function AdminDashboard() {
                 placeholder="Contraseña"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-[#efeae0]/30 border border-[#5a5a40]/20 rounded p-3 pr-10 text-[#5a5a40] focus:outline-none focus:border-[#5a5a40] text-sm"
+                className="w-full bg-bg-warm/30 border border-primary/20 rounded p-3 pr-10 text-primary focus:outline-none focus:border-primary text-sm"
                 autoComplete="current-password"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(v => !v)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#7a7a60] hover:text-[#5a5a40] transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-secondary hover:text-primary transition-colors"
               >
                 {showPassword ? <EyeOff size={15} /> : <Eye size={15} />}
               </button>
@@ -307,7 +307,7 @@ export default function AdminDashboard() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 bg-[#5a5a40] text-white uppercase tracking-widest text-[10px] rounded hover:bg-[#5a5a40]/90 transition-colors disabled:opacity-50"
+              className="w-full py-3 bg-primary text-white uppercase tracking-widest text-[10px] rounded hover:bg-primary/90 transition-colors disabled:opacity-50"
             >
               {loading ? 'Entrando...' : 'Entrar'}
             </button>
@@ -424,16 +424,16 @@ export default function AdminDashboard() {
   const isMasterAll = userSession?.role === 'master' && selectedClientId === 'all';
 
   return (
-    <div className="min-h-screen bg-[#fbf9f4] text-[#5a5a40] font-sans">
+    <div className="min-h-screen bg-bg-light text-primary font-sans">
       {/* Header */}
-      <header className="bg-white border-b border-[#5a5a40]/10 sticky top-0 z-10">
+      <header className="bg-white border-b border-primary/10 sticky top-0 z-10">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <h1 className="font-serif text-xl italic font-light">
             {userSession?.role === 'master' ? 'Panel Maestro' : 'Panel de Control'}
           </h1>
           <button
             onClick={handleLogout}
-            className="flex items-center space-x-2 text-xs uppercase tracking-wider text-[#7a7a60] hover:text-[#5a5a40] transition-colors"
+            className="flex items-center space-x-2 text-xs uppercase tracking-wider text-secondary hover:text-primary transition-colors"
           >
             <span>Salir</span>
             <LogOut size={14} />
@@ -450,19 +450,19 @@ export default function AdminDashboard() {
                 ? (selectedClientId === 'all' ? 'Todos los Eventos' : clientsList.find(c => c.client_id === selectedClientId)?.display_name || selectedClientId)
                 : userSession?.displayName}
             </h2>
-            <p className="text-sm text-[#7a7a60]">
+            <p className="text-sm text-secondary">
               {userSession?.role === 'master' ? 'Consolidación de invitaciones' : 'Panel de control de confirmaciones'}
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-4 mt-4 md:mt-0">
             {userSession?.role === 'master' && (
-              <div className="flex items-center space-x-2 bg-white px-3 py-1 rounded-lg border border-[#5a5a40]/10">
-                <span className="text-xs text-[#7a7a60] uppercase tracking-wider">Cliente:</span>
+              <div className="flex items-center space-x-2 bg-white px-3 py-1 rounded-lg border border-primary/10">
+                <span className="text-xs text-secondary uppercase tracking-wider">Cliente:</span>
                 <select
                   value={selectedClientId}
                   onChange={(e) => handleClientFilterChange(e.target.value)}
-                  className="bg-transparent text-[#5a5a40] focus:outline-none text-xs font-sans cursor-pointer py-1"
+                  className="bg-transparent text-primary focus:outline-none text-xs font-sans cursor-pointer py-1"
                 >
                   <option value="all">Todos los eventos</option>
                   {clientsList.map((c) => (
@@ -474,16 +474,16 @@ export default function AdminDashboard() {
               </div>
             )}
 
-            <div className="flex space-x-2 bg-white p-1 rounded-lg border border-[#5a5a40]/10">
+            <div className="flex space-x-2 bg-white p-1 rounded-lg border border-primary/10">
               <button
                 onClick={() => setActiveTab('rsvps')}
-                className={`px-3 md:px-6 py-2 rounded-md text-xs uppercase tracking-wider transition-colors ${activeTab === 'rsvps' ? 'bg-[#5a5a40] text-white' : 'text-[#7a7a60] hover:bg-[#efeae0]'}`}
+                className={`px-3 md:px-6 py-2 rounded-md text-xs uppercase tracking-wider transition-colors ${activeTab === 'rsvps' ? 'bg-primary text-white' : 'text-secondary hover:bg-bg-warm'}`}
               >
                 Confirmaciones
               </button>
               <button
                 onClick={() => setActiveTab('songs')}
-                className={`px-3 md:px-6 py-2 rounded-md text-xs uppercase tracking-wider transition-colors ${activeTab === 'songs' ? 'bg-[#5a5a40] text-white' : 'text-[#7a7a60] hover:bg-[#efeae0]'}`}
+                className={`px-3 md:px-6 py-2 rounded-md text-xs uppercase tracking-wider transition-colors ${activeTab === 'songs' ? 'bg-primary text-white' : 'text-secondary hover:bg-bg-warm'}`}
               >
                 Música
               </button>
@@ -492,62 +492,62 @@ export default function AdminDashboard() {
         </div>
 
         {loading ? (
-          <div className="text-center py-20 text-[#7a7a60]">Cargando datos...</div>
+          <div className="text-center py-20 text-secondary">Cargando datos...</div>
         ) : (
           <>
             {activeTab === 'rsvps' && (
               <div className="space-y-6">
                 {/* Stats Row */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <div className="bg-white p-5 rounded-lg border border-[#5a5a40]/10 shadow-sm">
-                    <div className="flex items-center space-x-3 text-[#7a7a60] mb-2">
+                  <div className="bg-white p-5 rounded-lg border border-primary/10 shadow-sm">
+                    <div className="flex items-center space-x-3 text-secondary mb-2">
                       <Users size={16} />
                       <span className="text-xs uppercase tracking-wider">Total Asistentes</span>
                     </div>
                     <p className="text-3xl font-serif">{totalGuests}</p>
-                    <p className="text-[10px] text-[#7a7a60] mt-1">{attendingRsvps.length} invitados · {totalCompanions} acomp.</p>
+                    <p className="text-[10px] text-secondary mt-1">{attendingRsvps.length} invitados · {totalCompanions} acomp.</p>
                   </div>
-                  <div className="bg-white p-5 rounded-lg border border-[#5a5a40]/10 shadow-sm">
-                    <div className="flex items-center space-x-3 text-[#7a7a60] mb-2">
+                  <div className="bg-white p-5 rounded-lg border border-primary/10 shadow-sm">
+                    <div className="flex items-center space-x-3 text-secondary mb-2">
                       <Check size={16} />
                       <span className="text-xs uppercase tracking-wider">No Asisten</span>
                     </div>
                     <p className="text-3xl font-serif">{notAttendingCount}</p>
-                    <p className="text-[10px] text-[#7a7a60] mt-1">{rsvps.length} formularios total</p>
+                    <p className="text-[10px] text-secondary mt-1">{rsvps.length} formularios total</p>
                   </div>
-                  <div className="bg-white p-5 rounded-lg border border-[#5a5a40]/10 shadow-sm">
-                    <div className="flex items-center space-x-3 text-[#7a7a60] mb-2">
+                  <div className="bg-white p-5 rounded-lg border border-primary/10 shadow-sm">
+                    <div className="flex items-center space-x-3 text-secondary mb-2">
                       <Bus size={16} />
                       <span className="text-xs uppercase tracking-wider">Bus Ida</span>
                     </div>
                     <p className="text-3xl font-serif">{busIdaCount}</p>
-                    <p className="text-[10px] text-[#7a7a60] mt-1">personas en total</p>
+                    <p className="text-[10px] text-secondary mt-1">personas en total</p>
                   </div>
-                  <div className="bg-white p-5 rounded-lg border border-[#5a5a40]/10 shadow-sm">
-                    <div className="flex items-center space-x-3 text-[#7a7a60] mb-2">
+                  <div className="bg-white p-5 rounded-lg border border-primary/10 shadow-sm">
+                    <div className="flex items-center space-x-3 text-secondary mb-2">
                       <Bus size={16} />
                       <span className="text-xs uppercase tracking-wider">Bus Vuelta</span>
                     </div>
                     <p className="text-3xl font-serif">{busVueltaCount}</p>
-                    <p className="text-[10px] text-[#7a7a60] mt-1">personas en total</p>
+                    <p className="text-[10px] text-secondary mt-1">personas en total</p>
                   </div>
                 </div>
 
                 {/* Export header */}
-                <div className="flex flex-wrap items-center justify-between gap-3 bg-white px-6 py-4 rounded-lg border border-[#5a5a40]/10 shadow-sm">
-                  <h3 className="font-serif text-lg text-[#5a5a40]">Confirmaciones</h3>
+                <div className="flex flex-wrap items-center justify-between gap-3 bg-white px-6 py-4 rounded-lg border border-primary/10 shadow-sm">
+                  <h3 className="font-serif text-lg text-primary">Confirmaciones</h3>
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => fetchData()}
                       disabled={loading}
-                      className="flex items-center space-x-2 text-xs uppercase tracking-wider font-semibold border border-[#5a5a40]/30 text-[#5a5a40] px-4 py-2 rounded-md hover:bg-[#efeae0] transition-colors cursor-pointer disabled:opacity-40"
+                      className="flex items-center space-x-2 text-xs uppercase tracking-wider font-semibold border border-primary/30 text-primary px-4 py-2 rounded-md hover:bg-bg-warm transition-colors cursor-pointer disabled:opacity-40"
                     >
                       <RefreshCw size={13} className={loading ? 'animate-spin' : ''} />
                       <span>Actualizar</span>
                     </button>
                     <button
                       onClick={exportRsvps}
-                      className="flex items-center space-x-2 text-xs uppercase tracking-wider font-semibold bg-[#5a5a40] text-white px-4 py-2 rounded-md hover:bg-[#5a5a40]/90 transition-colors shadow-sm cursor-pointer"
+                      className="flex items-center space-x-2 text-xs uppercase tracking-wider font-semibold bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition-colors shadow-sm cursor-pointer"
                     >
                       <Download size={14} />
                       <span>Descargar Excel</span>
@@ -556,7 +556,7 @@ export default function AdminDashboard() {
                 </div>
 
                 {/* Filters and Search Bar */}
-                <div className="bg-white p-4 rounded-lg border border-[#5a5a40]/10 shadow-sm space-y-3">
+                <div className="bg-white p-4 rounded-lg border border-primary/10 shadow-sm space-y-3">
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-3">
                     {/* Search Input */}
                     <div className="md:col-span-4 relative">
@@ -565,12 +565,12 @@ export default function AdminDashboard() {
                         placeholder="Buscar por nombre..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full bg-[#efeae0]/20 border border-[#5a5a40]/20 rounded p-2.5 pl-3 text-[#5a5a40] focus:outline-none focus:border-[#5a5a40] text-xs font-sans placeholder-[#7a7a60]/50"
+                        className="w-full bg-bg-warm/20 border border-primary/20 rounded p-2.5 pl-3 text-primary focus:outline-none focus:border-primary text-xs font-sans placeholder-secondary/50"
                       />
                       {searchTerm && (
                         <button
                           onClick={() => setSearchTerm('')}
-                          className="absolute right-3 top-1/2 -translate-y-1/2 text-[#7a7a60] hover:text-[#5a5a40] text-xs"
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-secondary hover:text-primary text-xs"
                         >
                           ✕
                         </button>
@@ -582,7 +582,7 @@ export default function AdminDashboard() {
                       <select
                         value={attendanceFilter}
                         onChange={(e) => setAttendanceFilter(e.target.value as any)}
-                        className="w-full bg-[#efeae0]/20 border border-[#5a5a40]/20 rounded p-2.5 text-[#5a5a40] focus:outline-none focus:border-[#5a5a40] text-xs font-sans cursor-pointer"
+                        className="w-full bg-bg-warm/20 border border-primary/20 rounded p-2.5 text-primary focus:outline-none focus:border-primary text-xs font-sans cursor-pointer"
                       >
                         <option value="all">Asistencia: Todos</option>
                         <option value="yes">Sí asisten</option>
@@ -595,7 +595,7 @@ export default function AdminDashboard() {
                       <select
                         value={busFilter}
                         onChange={(e) => setBusFilter(e.target.value as any)}
-                        className="w-full bg-[#efeae0]/20 border border-[#5a5a40]/20 rounded p-2.5 text-[#5a5a40] focus:outline-none focus:border-[#5a5a40] text-xs font-sans cursor-pointer"
+                        className="w-full bg-bg-warm/20 border border-primary/20 rounded p-2.5 text-primary focus:outline-none focus:border-primary text-xs font-sans cursor-pointer"
                       >
                         <option value="all">Autobús: Todos</option>
                         <option value="ida">Bus Ida</option>
@@ -610,7 +610,7 @@ export default function AdminDashboard() {
                       <select
                         value={dietaryFilter}
                         onChange={(e) => setDietaryFilter(e.target.value as any)}
-                        className="w-full bg-[#efeae0]/20 border border-[#5a5a40]/20 rounded p-2.5 text-[#5a5a40] focus:outline-none focus:border-[#5a5a40] text-xs font-sans cursor-pointer"
+                        className="w-full bg-bg-warm/20 border border-primary/20 rounded p-2.5 text-primary focus:outline-none focus:border-primary text-xs font-sans cursor-pointer"
                       >
                         <option value="all">Dietas: Todos</option>
                         <option value="intolerance">Con intolerancia</option>
@@ -622,7 +622,7 @@ export default function AdminDashboard() {
                       <select
                         value={sortBy}
                         onChange={(e) => setSortBy(e.target.value as any)}
-                        className="w-full bg-[#efeae0]/20 border border-[#5a5a40]/20 rounded p-2.5 text-[#5a5a40] focus:outline-none focus:border-[#5a5a40] text-xs font-sans cursor-pointer"
+                        className="w-full bg-bg-warm/20 border border-primary/20 rounded p-2.5 text-primary focus:outline-none focus:border-primary text-xs font-sans cursor-pointer"
                       >
                         <option value="date_desc">Fecha (Novedades primero)</option>
                         <option value="date_asc">Fecha (Antiguos primero)</option>
@@ -634,9 +634,9 @@ export default function AdminDashboard() {
 
                   {/* Active filters summary */}
                   {(searchTerm || attendanceFilter !== 'all' || busFilter !== 'all' || dietaryFilter !== 'all') && (
-                    <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-[#5a5a40]/5 text-xs text-[#7a7a60]">
+                    <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-primary/5 text-xs text-secondary">
                       <div>
-                        Mostrando <span className="font-semibold text-[#5a5a40]">{displayedMainRsvps.length}</span> de <span className="font-semibold text-[#5a5a40]">{mainRsvps.length}</span> confirmaciones principales.
+                        Mostrando <span className="font-semibold text-primary">{displayedMainRsvps.length}</span> de <span className="font-semibold text-primary">{mainRsvps.length}</span> confirmaciones principales.
                       </div>
                       <button
                         onClick={() => {
@@ -645,7 +645,7 @@ export default function AdminDashboard() {
                           setBusFilter('all');
                           setDietaryFilter('all');
                         }}
-                        className="text-[#5a5a40] hover:underline font-medium"
+                        className="text-primary hover:underline font-medium"
                       >
                         Restablecer filtros
                       </button>
@@ -656,11 +656,11 @@ export default function AdminDashboard() {
                 {/* Mobile Cards */}
                 <div className="md:hidden space-y-3">
                   {rsvps.length === 0 ? (
-                    <div className="bg-white rounded-lg border border-[#5a5a40]/10 p-8 text-center text-[#7a7a60] shadow-sm">
+                    <div className="bg-white rounded-lg border border-primary/10 p-8 text-center text-secondary shadow-sm">
                       No hay confirmaciones todavía.
                     </div>
                   ) : displayedMainRsvps.length === 0 ? (
-                    <div className="bg-white rounded-lg border border-[#5a5a40]/10 p-8 text-center text-[#7a7a60] shadow-sm">
+                    <div className="bg-white rounded-lg border border-primary/10 p-8 text-center text-secondary shadow-sm">
                       No se encontraron resultados con los filtros aplicados.
                     </div>
                   ) : (
@@ -668,48 +668,48 @@ export default function AdminDashboard() {
                       const isAttending = rsvp.attending !== false;
                       const companions = rsvps.filter((c: any) => c.parent_rsvp_id === rsvp.id);
                       return (
-                        <div key={rsvp.id} className="bg-white rounded-lg border border-[#5a5a40]/10 shadow-sm p-4">
+                        <div key={rsvp.id} className="bg-white rounded-lg border border-primary/10 shadow-sm p-4">
                           {isMasterAll && (
-                            <span className="text-[9px] uppercase tracking-wider font-bold text-[#7a7a60]/60 block mb-1">{rsvp.client_id}</span>
+                            <span className="text-[9px] uppercase tracking-wider font-bold text-secondary/60 block mb-1">{rsvp.client_id}</span>
                           )}
                           <div className="flex items-start justify-between mb-3">
                             <div>
-                              <p className="font-medium text-[#5a5a40]">
+                              <p className="font-medium text-primary">
                                 {rsvp.guest_name || '-'}
                                 {companions.length > 0 && (
-                                  <span className="ml-1.5 text-[10px] text-[#7a7a60] bg-[#efeae0] px-1.5 py-0.5 rounded-full">+{companions.length}</span>
+                                  <span className="ml-1.5 text-[10px] text-secondary bg-bg-warm px-1.5 py-0.5 rounded-full">+{companions.length}</span>
                                 )}
                               </p>
-                              <p className="text-[10px] text-[#7a7a60] mt-0.5">
+                              <p className="text-[10px] text-secondary mt-0.5">
                                 {new Date(rsvp.created_at).toLocaleDateString('es-ES', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
                               </p>
                             </div>
                             <div className="flex items-center gap-2">
-                              <button onClick={() => setSelectedRsvp({ rsvp, companions })} className="p-1.5 rounded-full hover:bg-[#efeae0] text-[#7a7a60] transition-colors">
+                              <button onClick={() => setSelectedRsvp({ rsvp, companions })} className="p-1.5 rounded-full hover:bg-bg-warm text-secondary transition-colors">
                                 <Eye size={14} />
                               </button>
-                              <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-sans font-semibold uppercase tracking-wide ${isAttending ? 'bg-[#5a5a40]/10 text-[#5a5a40]' : 'bg-red-50 text-red-500'}`}>
+                              <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-sans font-semibold uppercase tracking-wide ${isAttending ? 'bg-primary/10 text-primary' : 'bg-red-50 text-red-500'}`}>
                                 {isAttending ? 'Sí' : 'No'}
                               </span>
                             </div>
                           </div>
                           {isAttending && (
-                            <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 text-xs border-t border-[#5a5a40]/5 pt-3">
-                              <div><span className="text-[#7a7a60]">Intolerancia: </span><span className="text-[#5a5a40]">{rsvp.dietary_restrictions || '—'}</span></div>
-                              <div><span className="text-[#7a7a60]">Bus ida: </span><span className="text-[#5a5a40]">{rsvp.bus_ida ? 'Sí' : 'No'}</span></div>
-                              <div><span className="text-[#7a7a60]">Bus vuelta: </span><span className="text-[#5a5a40]">{rsvp.bus_vuelta ? 'Sí' : 'No'}</span></div>
+                            <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 text-xs border-t border-primary/5 pt-3">
+                              <div><span className="text-secondary">Intolerancia: </span><span className="text-primary">{rsvp.dietary_restrictions || '—'}</span></div>
+                              <div><span className="text-secondary">Bus ida: </span><span className="text-primary">{rsvp.bus_ida ? 'Sí' : 'No'}</span></div>
+                              <div><span className="text-secondary">Bus vuelta: </span><span className="text-primary">{rsvp.bus_vuelta ? 'Sí' : 'No'}</span></div>
                             </div>
                           )}
                           {rsvp.message && (
-                            <p className="text-xs text-[#7a7a60] italic mt-2 pt-2 border-t border-[#5a5a40]/5">"{rsvp.message}"</p>
+                            <p className="text-xs text-secondary italic mt-2 pt-2 border-t border-primary/5">"{rsvp.message}"</p>
                           )}
                           {companions.map((c: any, ci: number) => (
-                            <div key={c.id} className="mt-2 pl-3 border-l-2 border-[#5a5a40]/10 pt-1">
-                              <p className="text-xs text-[#5a5a40] font-medium">
-                                <span className="text-[9px] uppercase tracking-wider text-[#7a7a60]/60 mr-1">Acomp. {ci + 1}</span>
+                            <div key={c.id} className="mt-2 pl-3 border-l-2 border-primary/10 pt-1">
+                              <p className="text-xs text-primary font-medium">
+                                <span className="text-[9px] uppercase tracking-wider text-secondary/60 mr-1">Acomp. {ci + 1}</span>
                                 {c.guest_name || '-'}
                               </p>
-                              <div className="text-[10px] text-[#7a7a60] mt-0.5 flex gap-3">
+                              <div className="text-[10px] text-secondary mt-0.5 flex gap-3">
                                 {c.dietary_restrictions && <span>Intol.: {c.dietary_restrictions}</span>}
                                 <span>Bus: {[c.bus_ida && 'Ida', c.bus_vuelta && 'Vuelta'].filter(Boolean).join(' + ') || 'No'}</span>
                               </div>
@@ -722,11 +722,11 @@ export default function AdminDashboard() {
                 </div>
 
                 {/* Desktop Table */}
-                <div className="hidden md:block bg-white rounded-lg border border-[#5a5a40]/10 shadow-sm overflow-hidden">
+                <div className="hidden md:block bg-white rounded-lg border border-primary/10 shadow-sm overflow-hidden">
                   <div className="overflow-x-auto">
                     <table className="w-full text-left border-collapse">
                       <thead>
-                        <tr className="bg-[#efeae0]/30 border-b border-[#5a5a40]/10 text-xs uppercase tracking-wider text-[#7a7a60]">
+                        <tr className="bg-bg-warm/30 border-b border-primary/10 text-xs uppercase tracking-wider text-secondary">
                           {isMasterAll && <th className="p-4 font-medium">Evento</th>}
                           <th className="p-4 font-medium">Asiste</th>
                           <th className="p-4 font-medium">Nombre</th>
@@ -738,16 +738,16 @@ export default function AdminDashboard() {
                           <th className="p-4 w-10" />
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-[#5a5a40]/5 text-sm">
+                      <tbody className="divide-y divide-primary/5 text-sm">
                         {rsvps.length === 0 ? (
                           <tr>
-                            <td colSpan={isMasterAll ? 9 : 8} className="p-8 text-center text-[#7a7a60]">
+                            <td colSpan={isMasterAll ? 9 : 8} className="p-8 text-center text-secondary">
                               No hay confirmaciones todavía.
                             </td>
                           </tr>
                         ) : displayedMainRsvps.length === 0 ? (
                           <tr>
-                            <td colSpan={isMasterAll ? 9 : 8} className="p-8 text-center text-[#7a7a60]">
+                            <td colSpan={isMasterAll ? 9 : 8} className="p-8 text-center text-secondary">
                               No se encontraron resultados con los filtros aplicados.
                             </td>
                           </tr>
@@ -757,47 +757,47 @@ export default function AdminDashboard() {
                             const companions = rsvps.filter((c: any) => c.parent_rsvp_id === rsvp.id);
                             return (
                               <React.Fragment key={rsvp.id}>
-                                <tr className="hover:bg-[#fbf9f4]/50 transition-colors">
+                                <tr className="hover:bg-bg-light/50 transition-colors">
                                   {isMasterAll && (
-                                    <td className="p-4 font-bold text-xs uppercase tracking-wide text-[#7a7a60] bg-[#efeae0]/10">
+                                    <td className="p-4 font-bold text-xs uppercase tracking-wide text-secondary bg-bg-warm/10">
                                       {rsvp.client_id}
                                     </td>
                                   )}
                                   <td className="p-4">
-                                    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-sans font-semibold uppercase tracking-wide ${isAttending ? 'bg-[#5a5a40]/10 text-[#5a5a40]' : 'bg-red-50 text-red-500'}`}>
+                                    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-sans font-semibold uppercase tracking-wide ${isAttending ? 'bg-primary/10 text-primary' : 'bg-red-50 text-red-500'}`}>
                                       {isAttending ? 'Sí' : 'No'}
                                     </span>
                                   </td>
-                                  <td className="p-4 font-medium text-[#5a5a40]">
+                                  <td className="p-4 font-medium text-primary">
                                     {rsvp.guest_name || '-'}
                                     {companions.length > 0 && (
-                                      <span className="ml-2 text-[10px] text-[#7a7a60] bg-[#efeae0] px-1.5 py-0.5 rounded-full">+{companions.length}</span>
+                                      <span className="ml-2 text-[10px] text-secondary bg-bg-warm px-1.5 py-0.5 rounded-full">+{companions.length}</span>
                                     )}
                                   </td>
-                                  <td className="p-4 text-[#7a7a60]">{isAttending ? (rsvp.dietary_restrictions || '-') : '—'}</td>
-                                  <td className="p-4 text-[#7a7a60]">{isAttending && rsvp.bus_ida ? 'SI' : 'NO'}</td>
-                                  <td className="p-4 text-[#7a7a60]">{isAttending && rsvp.bus_vuelta ? 'SI' : 'NO'}</td>
-                                  <td className="p-4 text-[#7a7a60] max-w-xs truncate" title={rsvp.message}>{rsvp.message || '-'}</td>
-                                  <td className="p-4 text-right text-[#7a7a60] text-xs">
+                                  <td className="p-4 text-secondary">{isAttending ? (rsvp.dietary_restrictions || '-') : '—'}</td>
+                                  <td className="p-4 text-secondary">{isAttending && rsvp.bus_ida ? 'SI' : 'NO'}</td>
+                                  <td className="p-4 text-secondary">{isAttending && rsvp.bus_vuelta ? 'SI' : 'NO'}</td>
+                                  <td className="p-4 text-secondary max-w-xs truncate" title={rsvp.message}>{rsvp.message || '-'}</td>
+                                  <td className="p-4 text-right text-secondary text-xs">
                                     {new Date(rsvp.created_at).toLocaleDateString('es-ES', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
                                   </td>
                                   <td className="p-4">
-                                    <button onClick={() => setSelectedRsvp({ rsvp, companions })} className="p-1.5 rounded-full hover:bg-[#efeae0] text-[#7a7a60] transition-colors">
+                                    <button onClick={() => setSelectedRsvp({ rsvp, companions })} className="p-1.5 rounded-full hover:bg-bg-warm text-secondary transition-colors">
                                       <Eye size={14} />
                                     </button>
                                   </td>
                                 </tr>
                                 {companions.map((c: any, ci: number) => (
-                                  <tr key={c.id} className="bg-[#fbf9f4]/60">
+                                  <tr key={c.id} className="bg-bg-light/60">
                                     {isMasterAll && <td className="pl-4 py-2" />}
                                     <td className="pl-4 py-2" />
-                                    <td className="py-2 pl-8 pr-4 text-xs text-[#7a7a60] border-l-2 border-[#5a5a40]/10">
-                                      <span className="text-[9px] uppercase tracking-wider text-[#7a7a60]/60 mr-1">Acomp. {ci + 1}</span>
+                                    <td className="py-2 pl-8 pr-4 text-xs text-secondary border-l-2 border-primary/10">
+                                      <span className="text-[9px] uppercase tracking-wider text-secondary/60 mr-1">Acomp. {ci + 1}</span>
                                       {c.guest_name || '-'}
                                     </td>
-                                    <td className="py-2 px-4 text-xs text-[#7a7a60]">{c.dietary_restrictions || '-'}</td>
-                                    <td className="py-2 px-4 text-xs text-[#7a7a60]">{c.bus_ida ? 'SI' : 'NO'}</td>
-                                    <td className="py-2 px-4 text-xs text-[#7a7a60]">{c.bus_vuelta ? 'SI' : 'NO'}</td>
+                                    <td className="py-2 px-4 text-xs text-secondary">{c.dietary_restrictions || '-'}</td>
+                                    <td className="py-2 px-4 text-xs text-secondary">{c.bus_ida ? 'SI' : 'NO'}</td>
+                                    <td className="py-2 px-4 text-xs text-secondary">{c.bus_vuelta ? 'SI' : 'NO'}</td>
                                     <td className="py-2 px-4" />
                                     <td className="py-2 px-4" />
                                     <td className="py-2 px-4" />
@@ -816,11 +816,11 @@ export default function AdminDashboard() {
 
             {activeTab === 'songs' && (
               <div className="space-y-6 max-w-4xl mx-auto">
-                <div className="flex flex-wrap items-center justify-between gap-3 bg-white px-6 py-4 rounded-lg border border-[#5a5a40]/10 shadow-sm">
-                  <h3 className="font-serif text-lg text-[#5a5a40]">Sugerencias de Música</h3>
+                <div className="flex flex-wrap items-center justify-between gap-3 bg-white px-6 py-4 rounded-lg border border-primary/10 shadow-sm">
+                  <h3 className="font-serif text-lg text-primary">Sugerencias de Música</h3>
                   <button
                     onClick={exportSongs}
-                    className="flex items-center space-x-2 text-xs uppercase tracking-wider font-semibold bg-[#5a5a40] text-white px-4 py-2 rounded-md hover:bg-[#5a5a40]/90 transition-colors shadow-sm cursor-pointer"
+                    className="flex items-center space-x-2 text-xs uppercase tracking-wider font-semibold bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition-colors shadow-sm cursor-pointer"
                   >
                     <Download size={14} />
                     <span>Descargar Excel</span>
@@ -830,23 +830,23 @@ export default function AdminDashboard() {
                 {/* Mobile Cards */}
                 <div className="md:hidden space-y-2">
                   {songs.length === 0 ? (
-                    <div className="bg-white rounded-lg border border-[#5a5a40]/10 p-8 text-center text-[#7a7a60] shadow-sm">
+                    <div className="bg-white rounded-lg border border-primary/10 p-8 text-center text-secondary shadow-sm">
                       No hay canciones sugeridas todavía.
                     </div>
                   ) : (
                     songs.map((song, index) => (
-                      <div key={song.id} className="bg-white rounded-lg border border-[#5a5a40]/10 shadow-sm p-4 flex items-center justify-between">
+                      <div key={song.id} className="bg-white rounded-lg border border-primary/10 shadow-sm p-4 flex items-center justify-between">
                         <div className="flex items-center gap-3 min-w-0">
-                          <span className="text-xs font-bold text-[#5a5a40]/40 w-5 shrink-0 text-right">#{index + 1}</span>
+                          <span className="text-xs font-bold text-primary/40 w-5 shrink-0 text-right">#{index + 1}</span>
                           <div className="min-w-0">
-                            {isMasterAll && <span className="text-[9px] uppercase tracking-wider font-bold text-[#7a7a60]/60 block">{song.client_id}</span>}
-                            <p className="font-medium text-[#5a5a40] text-sm truncate">{song.title}</p>
-                            <p className="text-xs text-[#7a7a60] truncate">{song.artist}</p>
+                            {isMasterAll && <span className="text-[9px] uppercase tracking-wider font-bold text-secondary/60 block">{song.client_id}</span>}
+                            <p className="font-medium text-primary text-sm truncate">{song.title}</p>
+                            <p className="text-xs text-secondary truncate">{song.artist}</p>
                           </div>
                         </div>
                         <div className="flex items-center gap-2 shrink-0 ml-3">
-                          <div className="inline-flex items-center space-x-1 bg-[#efeae0] px-2 py-1 rounded text-[#5a5a40] font-medium text-xs">
-                            <Heart size={11} className="fill-[#5a5a40]/20" />
+                          <div className="inline-flex items-center space-x-1 bg-bg-warm px-2 py-1 rounded text-primary font-medium text-xs">
+                            <Heart size={11} className="fill-primary/20" />
                             <span>{song.votes}</span>
                           </div>
                           <button
@@ -863,11 +863,11 @@ export default function AdminDashboard() {
                 </div>
 
                 {/* Desktop Table */}
-                <div className="hidden md:block bg-white rounded-lg border border-[#5a5a40]/10 shadow-sm overflow-hidden">
+                <div className="hidden md:block bg-white rounded-lg border border-primary/10 shadow-sm overflow-hidden">
                   <div className="overflow-x-auto">
                     <table className="w-full text-left border-collapse">
                       <thead>
-                        <tr className="bg-[#efeae0]/30 border-b border-[#5a5a40]/10 text-xs uppercase tracking-wider text-[#7a7a60]">
+                        <tr className="bg-bg-warm/30 border-b border-primary/10 text-xs uppercase tracking-wider text-secondary">
                           {isMasterAll && <th className="p-4 font-medium">Evento</th>}
                           <th className="p-4 font-medium w-16 text-center">Votos</th>
                           <th className="p-4 font-medium">Título de la Canción</th>
@@ -875,29 +875,29 @@ export default function AdminDashboard() {
                           <th className="p-4 w-12 text-center">Acciones</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-[#5a5a40]/5 text-sm">
+                      <tbody className="divide-y divide-primary/5 text-sm">
                         {songs.length === 0 ? (
                           <tr>
-                            <td colSpan={isMasterAll ? 5 : 4} className="p-8 text-center text-[#7a7a60]">
+                            <td colSpan={isMasterAll ? 5 : 4} className="p-8 text-center text-secondary">
                               No hay canciones sugeridas todavía.
                             </td>
                           </tr>
                         ) : (
                           songs.map((song) => (
-                            <tr key={song.id} className="hover:bg-[#fbf9f4]/50 transition-colors">
+                            <tr key={song.id} className="hover:bg-bg-light/50 transition-colors">
                               {isMasterAll && (
-                                <td className="p-4 font-bold text-xs uppercase tracking-wide text-[#7a7a60] bg-[#efeae0]/10">
+                                <td className="p-4 font-bold text-xs uppercase tracking-wide text-secondary bg-bg-warm/10">
                                   {song.client_id}
                                 </td>
                               )}
                               <td className="p-4 text-center">
-                                <div className="inline-flex items-center space-x-1 bg-[#efeae0] px-2 py-1 rounded text-[#5a5a40] font-medium">
-                                  <Heart size={12} className="fill-[#5a5a40]/20" />
+                                <div className="inline-flex items-center space-x-1 bg-bg-warm px-2 py-1 rounded text-primary font-medium">
+                                  <Heart size={12} className="fill-primary/20" />
                                   <span>{song.votes}</span>
                                 </div>
                               </td>
-                              <td className="p-4 font-medium text-[#5a5a40]">{song.title}</td>
-                              <td className="p-4 text-[#7a7a60]">{song.artist}</td>
+                              <td className="p-4 font-medium text-primary">{song.title}</td>
+                              <td className="p-4 text-secondary">{song.artist}</td>
                               <td className="p-4 text-center">
                                 <button
                                   onClick={() => handleDeleteSong(song.id)}
@@ -924,16 +924,16 @@ export default function AdminDashboard() {
       {selectedRsvp && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/30 backdrop-blur-sm" onClick={() => setSelectedRsvp(null)}>
           <div className="bg-white rounded-xl shadow-xl max-w-md w-full max-h-[85vh] overflow-y-auto p-6 relative" onClick={(e) => e.stopPropagation()}>
-            <button onClick={() => setSelectedRsvp(null)} className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-[#efeae0] text-[#7a7a60] transition-colors">
+            <button onClick={() => setSelectedRsvp(null)} className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-bg-warm text-secondary transition-colors">
               <X size={16} />
             </button>
 
             <div className="mb-5">
-              <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wide mb-2 ${selectedRsvp.rsvp.attending !== false ? 'bg-[#5a5a40]/10 text-[#5a5a40]' : 'bg-red-50 text-red-500'}`}>
+              <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wide mb-2 ${selectedRsvp.rsvp.attending !== false ? 'bg-primary/10 text-primary' : 'bg-red-50 text-red-500'}`}>
                 {selectedRsvp.rsvp.attending !== false ? 'Asiste' : 'No asiste'}
               </span>
-              <h3 className="font-serif text-xl text-[#3a3a28]">{selectedRsvp.rsvp.guest_name || '-'}</h3>
-              <p className="text-[11px] text-[#7a7a60] mt-1">
+              <h3 className="font-serif text-xl text-accent">{selectedRsvp.rsvp.guest_name || '-'}</h3>
+              <p className="text-[11px] text-secondary mt-1">
                 {new Date(selectedRsvp.rsvp.created_at).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
               </p>
             </div>
@@ -941,13 +941,13 @@ export default function AdminDashboard() {
             {selectedRsvp.rsvp.attending !== false && (
               <div className="space-y-3 text-sm">
                 <div className="grid grid-cols-2 gap-3">
-                  <div className="bg-[#fbf9f4] rounded-lg p-3">
-                    <p className="text-[10px] uppercase tracking-wider text-[#7a7a60] mb-1">Intolerancia</p>
-                    <p className="text-[#5a5a40]">{selectedRsvp.rsvp.dietary_restrictions || 'Ninguna'}</p>
+                  <div className="bg-bg-light rounded-lg p-3">
+                    <p className="text-[10px] uppercase tracking-wider text-secondary mb-1">Intolerancia</p>
+                    <p className="text-primary">{selectedRsvp.rsvp.dietary_restrictions || 'Ninguna'}</p>
                   </div>
-                  <div className="bg-[#fbf9f4] rounded-lg p-3">
-                    <p className="text-[10px] uppercase tracking-wider text-[#7a7a60] mb-1">Autobús</p>
-                    <p className="text-[#5a5a40]">
+                  <div className="bg-bg-light rounded-lg p-3">
+                    <p className="text-[10px] uppercase tracking-wider text-secondary mb-1">Autobús</p>
+                    <p className="text-primary">
                       {[selectedRsvp.rsvp.bus_ida && 'Ida', selectedRsvp.rsvp.bus_vuelta && 'Vuelta'].filter(Boolean).join(' + ') || 'No'}
                     </p>
                   </div>
@@ -955,12 +955,12 @@ export default function AdminDashboard() {
 
                 {selectedRsvp.companions.length > 0 && (
                   <div>
-                    <p className="text-[10px] uppercase tracking-wider text-[#7a7a60] mb-2">Acompañantes ({selectedRsvp.companions.length})</p>
+                    <p className="text-[10px] uppercase tracking-wider text-secondary mb-2">Acompañantes ({selectedRsvp.companions.length})</p>
                     <div className="space-y-2">
                       {selectedRsvp.companions.map((c: any, i: number) => (
-                        <div key={c.id} className="bg-[#fbf9f4] rounded-lg p-3 border-l-2 border-[#5a5a40]/20">
-                          <p className="font-medium text-[#5a5a40]">{c.guest_name || '-'}</p>
-                          <p className="text-[11px] text-[#7a7a60] mt-0.5">
+                        <div key={c.id} className="bg-bg-light rounded-lg p-3 border-l-2 border-primary/20">
+                          <p className="font-medium text-primary">{c.guest_name || '-'}</p>
+                          <p className="text-[11px] text-secondary mt-0.5">
                             Intol.: {c.dietary_restrictions || 'Ninguna'} · Bus: {[c.bus_ida && 'Ida', c.bus_vuelta && 'Vuelta'].filter(Boolean).join(' + ') || 'No'}
                           </p>
                         </div>
@@ -970,18 +970,18 @@ export default function AdminDashboard() {
                 )}
 
                 {selectedRsvp.rsvp.message && (
-                  <div className="bg-[#fbf9f4] rounded-lg p-3">
-                    <p className="text-[10px] uppercase tracking-wider text-[#7a7a60] mb-1">Mensaje</p>
-                    <p className="text-[#5a5a40] italic">"{selectedRsvp.rsvp.message}"</p>
+                  <div className="bg-bg-light rounded-lg p-3">
+                    <p className="text-[10px] uppercase tracking-wider text-secondary mb-1">Mensaje</p>
+                    <p className="text-primary italic">"{selectedRsvp.rsvp.message}"</p>
                   </div>
                 )}
               </div>
             )}
 
             {selectedRsvp.rsvp.attending === false && selectedRsvp.rsvp.message && (
-              <div className="bg-[#fbf9f4] rounded-lg p-3 text-sm">
-                <p className="text-[10px] uppercase tracking-wider text-[#7a7a60] mb-1">Mensaje</p>
-                <p className="text-[#5a5a40] italic">"{selectedRsvp.rsvp.message}"</p>
+              <div className="bg-bg-light rounded-lg p-3 text-sm">
+                <p className="text-[10px] uppercase tracking-wider text-secondary mb-1">Mensaje</p>
+                <p className="text-primary italic">"{selectedRsvp.rsvp.message}"</p>
               </div>
             )}
           </div>
