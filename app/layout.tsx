@@ -1,9 +1,9 @@
 import type {Metadata} from 'next';
-import { Handlee, Outfit } from 'next/font/google';
+import { Overlock, Outfit } from 'next/font/google';
 import './globals.css';
 
-const handlee = Handlee({
-  weight: '400',
+const handlee = Overlock({
+  weight: ['400', '700', '900'],
   subsets: ['latin'],
   variable: '--font-serif',
 });
