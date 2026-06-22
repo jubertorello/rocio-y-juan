@@ -13,12 +13,14 @@ const cause = Outfit({
   variable: '--font-sans',
 });
 
+import { weddingConfig } from '@/lib/config';
+
 export const metadata: Metadata = {
-  title: 'Mariu & Nacho · 12.09.2026',
-  description: '¡Nos casamos! El 12 de septiembre de 2026 celebramos el día más importante de nuestra vida y nos encantaría que nos acompañes.',
+  title: `${weddingConfig.shortNames} · ${weddingConfig.weddingDay}.${weddingConfig.weddingMonth === 'Septiembre' ? '09' : '09'}.${weddingConfig.weddingYear}`,
+  description: `¡Nos casamos! El ${weddingConfig.weddingDateText} celebramos el día más importante de nuestra vida y nos encantaría que nos acompañes.`,
   openGraph: {
-    title: 'Mariu & Nacho · 12.09.2026',
-    description: '¡Nos casamos! El 12 de septiembre de 2026 celebramos el día más importante de nuestra vida y nos encantaría que nos acompañes.',
+    title: `${weddingConfig.shortNames} · ${weddingConfig.weddingDay}.${weddingConfig.weddingMonth === 'Septiembre' ? '09' : '09'}.${weddingConfig.weddingYear}`,
+    description: `¡Nos casamos! El ${weddingConfig.weddingDateText} celebramos el día más importante de nuestra vida y nos encantaría que nos acompañes.`,
     type: 'website',
     locale: 'es_ES',
     images: [
@@ -27,14 +29,14 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         type: 'image/jpeg',
-        alt: 'Mariu & Nacho · Boda 12 de Septiembre 2026',
+        alt: `${weddingConfig.shortNames} · Boda ${weddingConfig.weddingDateText}`,
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mariu & Nacho · 12.09.2026',
-    description: '¡Nos casamos! El 12 de septiembre de 2026 celebramos el día más importante de nuestra vida y nos encantaría que nos acompañes.',
+    title: `${weddingConfig.shortNames} · ${weddingConfig.weddingDay}.${weddingConfig.weddingMonth === 'Septiembre' ? '09' : '09'}.${weddingConfig.weddingYear}`,
+    description: `¡Nos casamos! El ${weddingConfig.weddingDateText} celebramos el día más importante de nuestra vida y nos encantaría que nos acompañes.`,
     images: ['https://res.cloudinary.com/djqtkbyez/image/upload/f_jpg,w_1200,h_630,c_fill,q_auto/v1780238506/Disen%CC%83o_sin_ti%CC%81tulo_6_wnd34x.png'],
   },
 };

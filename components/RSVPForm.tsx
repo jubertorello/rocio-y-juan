@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { supabase } from '@/lib/supabase';
 import { Check, ChevronLeft, ChevronRight, Info, Minus, Plus, Smile, Frown, Heart } from 'lucide-react';
+import { weddingConfig } from '@/lib/config';
 
 export interface CompanionData {
   name: string;
@@ -113,15 +114,15 @@ function GuestFields({
       </div>
       <div>
         <FieldLabel>¿Necesitas autobús de ida?</FieldLabel>
-        <p className="text-[10.5px] text-secondary italic mb-2 leading-snug">
-          Salida: Parroquia Corpus Christi (18:15h) &rarr; Hacienda de Orán
+        <p className="text-[10.5px] text-[#7a7a60] italic mb-2 leading-snug">
+          Salida: {weddingConfig.churchName} ({weddingConfig.busDepartureTime}) &rarr; {weddingConfig.celebrationName}
         </p>
         <YesNoToggle value={busIda} onChange={onBusIda} />
       </div>
       <div>
         <FieldLabel>¿Necesitas autobús de vuelta?</FieldLabel>
-        <p className="text-[10.5px] text-secondary italic mb-2 leading-snug">
-          Salida: Hacienda de Orán &rarr; Sevilla (varios horarios)
+        <p className="text-[10.5px] text-[#7a7a60] italic mb-2 leading-snug">
+          Salida: {weddingConfig.celebrationName} &rarr; Sevilla (varios horarios)
         </p>
         <YesNoToggle value={busVuelta} onChange={onBusVuelta} />
       </div>

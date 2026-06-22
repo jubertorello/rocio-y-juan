@@ -195,7 +195,7 @@ export default function Home() {
 
   // Copy IBAN handler
   const handleCopyIban = () => {
-    const iban = "ES29 0182 4015 6002 0257 8448";
+    const iban = weddingConfig.bankDetails.iban;
     navigator.clipboard.writeText(iban);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -203,7 +203,7 @@ export default function Home() {
 
   // Copy Swift handler
   const handleCopySwift = () => {
-    const swift = "BBVAESMM";
+    const swift = weddingConfig.bankDetails.swift;
     navigator.clipboard.writeText(swift);
     setCopiedSwift(true);
     setTimeout(() => setCopiedSwift(false), 2000);
@@ -618,13 +618,13 @@ export default function Home() {
                     className="tracking-[0.2em] uppercase text-accent font-light block"
                     style={{ fontSize: '14px', lineHeight: '14px', textAlign: 'center' }}
                   >
-                    Septiembre
+                    {weddingConfig.weddingMonth}
                   </span>
                 </div>
 
                 {/* Big Day */}
                 <div className="text-5xl sm:text-6xl md:text-7xl font-serif font-light text-accent leading-none px-1 flex-shrink-0">
-                  12
+                  {weddingConfig.weddingDay}
                 </div>
 
                 {/* Year with borders */}
@@ -633,7 +633,7 @@ export default function Home() {
                     className="tracking-[0.2em] text-accent font-light block"
                     style={{ fontSize: '18px', lineHeight: '18px', textAlign: 'center' }}
                   >
-                    2026
+                    {weddingConfig.weddingYear}
                   </span>
                 </div>
               </div>
@@ -644,7 +644,7 @@ export default function Home() {
                   className="font-serif tracking-[0.25em] text-accent uppercase font-light"
                   style={{ fontSize: '16px', lineHeight: '16px' }}
                 >
-                  Sábado • 17:00 H
+                  {weddingConfig.weddingTimeText}
                 </span>
               </div>
             </motion.div>
@@ -744,11 +744,11 @@ export default function Home() {
                     className="text-2xl text-primary mb-4 font-normal tracking-wide text-center"
                     
                   >
-                    Parroquia Corpus Christi
+                    {weddingConfig.churchName}
                   </h3>
 
                   <p className="font-serif text-secondary text-sm italic mb-6 leading-relaxed text-center">
-                    Av. de la Palmera 39, 41013, Sevilla
+                    {weddingConfig.churchAddress}
                   </p>
 
                   <div className="relative h-64 md:h-72 w-full">
@@ -764,13 +764,13 @@ export default function Home() {
 
                   <div className="flex items-center justify-center space-x-1.5 mb-8 text-secondary text-xs">
                     <Clock size={13} className="opacity-85" />
-                    <span >17:00 H</span>
+                    <span >{weddingConfig.churchTime}</span>
                   </div>
                 </div>
 
                 <div className="flex justify-center">
                   <a
-                    href="https://maps.google.com/?q=Parroquia+Corpus+Christi+Sevilla"
+                    href={weddingConfig.churchMapUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center space-x-2 w-[220px] py-3 bg-primary hover:bg-primary/90 text-white rounded-full font-sans text-[10px] uppercase tracking-[0.2em] transition-all duration-300 shadow-md hover:shadow-lg hover:scale-[1.02]"
@@ -799,11 +799,11 @@ export default function Home() {
                     className="text-2xl text-primary mb-4 font-normal tracking-wide text-center"
                     
                   >
-                    Hacienda de Orán
+                    {weddingConfig.celebrationName}
                   </h3>
 
                   <p className="font-serif text-secondary text-sm italic mb-6 leading-relaxed text-center">
-                    A-8029, km 7, 41710 Utrera, Sevilla
+                    {weddingConfig.celebrationAddress}
                   </p>
 
                   <div className="relative h-64 md:h-72 w-full">
@@ -819,13 +819,13 @@ export default function Home() {
 
                   <div className="flex items-center justify-center space-x-1.5 mb-8 text-secondary text-xs">
                     <Clock size={13} className="opacity-85" />
-                    <span >A partir de las 19:00 H</span>
+                    <span >{weddingConfig.celebrationTime}</span>
                   </div>
                 </div>
 
                 <div className="flex justify-center">
                   <a
-                    href="https://maps.google.com/?q=Hacienda+de+Oran+Utrera"
+                    href={weddingConfig.celebrationMapUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center space-x-2 w-[220px] py-3 bg-primary hover:bg-primary/90 text-white rounded-full font-sans text-[10px] uppercase tracking-[0.2em] transition-all duration-300 shadow-md hover:shadow-lg hover:scale-[1.02]"
@@ -1799,7 +1799,7 @@ export default function Home() {
                   </span>
                   <div className="flex items-center justify-between mb-4">
                     <span className="font-sans text-xs md:text-sm text-primary select-all font-bold tracking-wider">
-                      ES29 0182 4015 6002 0257 8448
+                      {weddingConfig.bankDetails.iban}
                     </span>
                     <button
                       onClick={handleCopyIban}
@@ -1820,7 +1820,7 @@ export default function Home() {
                   </span>
                   <div className="flex items-center justify-between">
                     <span className="font-sans text-xs md:text-sm text-primary select-all font-bold tracking-wider">
-                      BBVAESMM
+                      {weddingConfig.bankDetails.swift}
                     </span>
                     <button
                       onClick={handleCopySwift}
@@ -1842,7 +1842,7 @@ export default function Home() {
                   </div>
 
                   <span className="block text-[8px] text-secondary mt-3 pt-2 border-t border-primary/5">
-                    Titulares: María Eugenia M. V. e Ignacio H. M.
+                    Titulares: {weddingConfig.bankDetails.holders}
                   </span>
                 </div>
 
