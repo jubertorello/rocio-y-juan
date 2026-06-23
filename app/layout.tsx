@@ -16,28 +16,28 @@ const cause = Outfit({
 import { weddingConfig } from '@/lib/config';
 
 export const metadata: Metadata = {
-  title: `${weddingConfig.shortNames} · ${weddingConfig.weddingDay}.${weddingConfig.weddingMonth === 'Septiembre' ? '09' : '09'}.${weddingConfig.weddingYear}`,
+  title: `${weddingConfig.shortNames} · ${weddingConfig.weddingDay}.${weddingConfig.weddingMonth === 'Septiembre' ? '09' : '10'}.${weddingConfig.weddingYear}`,
   description: `¡Nos casamos! El ${weddingConfig.weddingDateText} celebramos el día más importante de nuestra vida y nos encantaría que nos acompañes.`,
   openGraph: {
-    title: `${weddingConfig.shortNames} · ${weddingConfig.weddingDay}.${weddingConfig.weddingMonth === 'Septiembre' ? '09' : '09'}.${weddingConfig.weddingYear}`,
+    title: `${weddingConfig.shortNames} · ${weddingConfig.weddingDay}.${weddingConfig.weddingMonth === 'Septiembre' ? '09' : '10'}.${weddingConfig.weddingYear}`,
     description: `¡Nos casamos! El ${weddingConfig.weddingDateText} celebramos el día más importante de nuestra vida y nos encantaría que nos acompañes.`,
     type: 'website',
     locale: 'es_ES',
     images: [
       {
-        url: 'https://res.cloudinary.com/djqtkbyez/image/upload/f_jpg,w_1200,h_630,c_fill,q_auto/v1780238506/Disen%CC%83o_sin_ti%CC%81tulo_6_wnd34x.png',
+        url: 'https://res.cloudinary.com/djqtkbyez/image/upload/v1782215811/Disen%CC%83o_sin_ti%CC%81tulo_8_rsgpql.png',
         width: 1200,
         height: 630,
-        type: 'image/jpeg',
+        type: 'image/png',
         alt: `${weddingConfig.shortNames} · Boda ${weddingConfig.weddingDateText}`,
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${weddingConfig.shortNames} · ${weddingConfig.weddingDay}.${weddingConfig.weddingMonth === 'Septiembre' ? '09' : '09'}.${weddingConfig.weddingYear}`,
+    title: `${weddingConfig.shortNames} · ${weddingConfig.weddingDay}.${weddingConfig.weddingMonth === 'Septiembre' ? '09' : '10'}.${weddingConfig.weddingYear}`,
     description: `¡Nos casamos! El ${weddingConfig.weddingDateText} celebramos el día más importante de nuestra vida y nos encantaría que nos acompañes.`,
-    images: ['https://res.cloudinary.com/djqtkbyez/image/upload/f_jpg,w_1200,h_630,c_fill,q_auto/v1780238506/Disen%CC%83o_sin_ti%CC%81tulo_6_wnd34x.png'],
+    images: ['https://res.cloudinary.com/djqtkbyez/image/upload/v1782215811/Disen%CC%83o_sin_ti%CC%81tulo_8_rsgpql.png'],
   },
 };
 
