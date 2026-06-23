@@ -783,7 +783,7 @@ export default function Home() {
 
                   <div className="relative h-64 md:h-72 w-full">
                     <Image
-                      src="https://res.cloudinary.com/djqtkbyez/image/upload/v1779822783/hacienda-v1_transpa_axivb6.png"
+                      src="https://res.cloudinary.com/djqtkbyez/image/upload/v1782233059/WhatsApp_Image_2026-06-23_at_16.17.38-removebg-preview_yv0jqz.png"
                       alt="Lugar de la Celebración"
                       fill
                       priority
@@ -1039,7 +1039,7 @@ export default function Home() {
                   <div className="absolute left-[60px] md:left-1/2 transform -translate-x-1/2 flex items-center justify-center z-10">
                     <div className="relative w-28 h-28 md:w-36 md:h-36">
                       <Image
-                        src="https://res.cloudinary.com/djqtkbyez/image/upload/v1782205927/coctel.png"
+                        src="https://res.cloudinary.com/djqtkbyez/image/upload/v1782233461/WhatsApp_Image_2026-06-23_at_16.29.23-removebg-preview_ozq2km.png"
                         alt="El Cóctel"
                         fill
                         className="object-contain"
@@ -1070,7 +1070,7 @@ export default function Home() {
                   <div className="absolute left-[60px] md:left-1/2 transform -translate-x-1/2 flex items-center justify-center z-10">
                     <div className="relative w-28 h-28 md:w-36 md:h-36">
                       <Image
-                        src="https://res.cloudinary.com/djqtkbyez/image/upload/v1780068415/WhatsApp_Image_2026-05-29_at_16.26.02-removebg-preview_xyaohc.png"
+                        src="https://res.cloudinary.com/djqtkbyez/image/upload/v1782233574/WhatsApp_Image_2026-06-23_at_16.45.59-removebg-preview_dggjb1.png"
                         alt="Boda Civil"
                         fill
                         className="object-contain"
@@ -1100,7 +1100,7 @@ export default function Home() {
                   <div className="absolute left-[60px] md:left-1/2 transform -translate-x-1/2 flex items-center justify-center z-10">
                     <div className="relative w-28 h-28 md:w-36 md:h-36">
                       <Image
-                        src="https://res.cloudinary.com/djqtkbyez/image/upload/v1780067585/WhatsApp_Image_2026-05-26_at_23.44.58-removebg-preview_auvopz.png"
+                        src="https://res.cloudinary.com/djqtkbyez/image/upload/v1782233388/WhatsApp_Image_2026-06-23_at_16.21.06__1_-removebg-preview_ljw5cw.png"
                         alt="La Cena"
                         fill
                         className="object-contain"
@@ -1131,7 +1131,7 @@ export default function Home() {
                   <div className="absolute left-[60px] md:left-1/2 transform -translate-x-1/2 flex items-center justify-center z-10">
                     <div className="relative w-28 h-28 md:w-36 md:h-36">
                       <Image
-                        src="https://res.cloudinary.com/djqtkbyez/image/upload/v1780067739/WhatsApp_Image_2026-05-28_at_00.18.22-removebg-preview_mpdsw2.png"
+                        src="https://res.cloudinary.com/djqtkbyez/image/upload/v1782233345/WhatsApp_Image_2026-06-23_at_16.38.05__1_-removebg-preview_lmcy0v.png"
                         alt="El Baile & Fiesta"
                         fill
                         className="object-contain"
@@ -1335,7 +1335,7 @@ export default function Home() {
                 className="relative w-84 h-52 md:w-106 md:h-80"
               >
                 <Image
-                  src="https://res.cloudinary.com/djqtkbyez/image/upload/v1780068415/WhatsApp_Image_2026-05-29_at_16.26.02-removebg-preview_xyaohc.png"
+                  src="https://res.cloudinary.com/djqtkbyez/image/upload/v1782233517/WhatsApp_Image_2026-06-23_at_18.02.57-removebg-preview_lweluw.png"
                   alt="Japón y Polinesia Francesa"
                   fill
                   className="object-contain"
