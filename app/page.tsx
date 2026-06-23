@@ -307,7 +307,7 @@ export default function Home() {
           onClick={togglePlay}
           className="fixed bottom-6 right-6 z-[70] flex items-center gap-2 px-4 py-2 rounded-full bg-black/20 backdrop-blur-sm text-white/80 hover:bg-black/30 hover:text-white transition-all duration-200 text-[11px] font-sans uppercase tracking-[0.2em]"
         >
-          {isPlaying ? <VolumeX size={14} /> : <Volume2 size={14} />}
+          {isPlaying ? <Volume2 size={14} /> : <VolumeX size={14} />}
           {isPlaying ? '' : ''}
         </motion.button>
       )}
@@ -477,9 +477,9 @@ export default function Home() {
                   hidden: { opacity: 0, y: 20 },
                   visible: { opacity: 1, y: 0, transition: { duration: 1.2, ease: "easeOut" } }
                 }}
-                className="font-serif text-secondary text-lg md:text-xl italic leading-relaxed max-w-sm mx-auto mb-5 text-center px-10 md:px-0"
+                className="font-serif text-secondary text-base md:text-lg italic leading-relaxed max-w-md mx-auto mb-6 text-center px-4 md:px-0"
               >
-                Hay encuentros que cambian una vida entera…
+                Nos cruzamos durante 5 años de lunes a viernes en los pasillos de ingeniería de la UCC sin imaginarnos lo que el futuro nos tenía preparado. Pero, el destino finalmente hizo de las suyas… Nos fuimos cada uno por su cuenta a vivir a Madrid, a solo media cuadra de distancia uno del otro, para que empezara a escribirse una vida juntos.
               </motion.p>
 
               <motion.p
@@ -487,19 +487,9 @@ export default function Home() {
                   hidden: { opacity: 0, y: 20 },
                   visible: { opacity: 1, y: 0, transition: { duration: 1.2, ease: "easeOut" } }
                 }}
-                className="font-serif text-secondary text-lg md:text-xl italic leading-relaxed max-w-sm mx-auto mb-5 text-center px-10 md:px-0"
+                className="font-serif text-secondary text-base md:text-lg italic leading-relaxed max-w-md mx-auto mb-8 text-center px-4 md:px-0"
               >
-                El nuestro nos ha llevado a compartir sueños, afrontar nuevos retos, descubrir lugares inesperados y construir un proyecto común lleno de alegria e ilusión!
-              </motion.p>
-
-              <motion.p
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0, transition: { duration: 1.2, ease: "easeOut" } }
-                }}
-                className="font-serif text-secondary text-lg md:text-xl italic leading-relaxed max-w-sm mx-auto mb-10 text-center px-10 md:px-0"
-              >
-                Ahora, con la certeza de querer recorrer juntos todo lo que está por venir, queremos anunciar que...
+                En la distancia nos convertimos en “nuestro complemento perfecto”, como nos gusta decir. Después de prometer frente a la virgencita de Medjugore estar juntos para toda la vida, llegó el momento de festejarlo con la gente que tanto queremos y nos ha ido acompañando en estos 29 años de vida.
               </motion.p>
 
               <motion.h2
@@ -507,7 +497,7 @@ export default function Home() {
                   hidden: { opacity: 0, y: 20 },
                   visible: { opacity: 1, y: 0, transition: { duration: 1.2, ease: "easeOut" } }
                 }}
-                className="tracking-[0.25em] uppercase text-[24px] leading-[24px] text-primary mb-8 text-center no-underline"
+                className="tracking-[0.25em] uppercase text-[24px] leading-[24px] text-primary mb-6 text-center no-underline"
               >
                 ¡Nos casamos!
               </motion.h2>
@@ -517,9 +507,9 @@ export default function Home() {
                   hidden: { opacity: 0, y: 20 },
                   visible: { opacity: 1, y: 0, transition: { duration: 1.2, ease: "easeOut" } }
                 }}
-                className="font-serif text-secondary text-lg md:text-xl lg:text-xl italic leading-relaxed max-w-sm mx-auto text-center px-9 md:px-0"
+                className="font-serif text-secondary text-lg md:text-xl italic leading-relaxed max-w-sm mx-auto text-center px-9 md:px-0"
               >
-                Y nos encantaría disfrutar contigo el día más importante de nuestra vida
+                ¡Y queremos que seas parte de este día tan especial!
               </motion.p>
             </div>
           </motion.div>
@@ -707,7 +697,7 @@ export default function Home() {
 
                   <div className="relative h-64 md:h-72 w-full">
                     <Image
-                      src="https://res.cloudinary.com/djqtkbyez/image/upload/v1779822783/acuarela-v1_corpus_transpa_whkfz1.png"
+                      src="https://res.cloudinary.com/djqtkbyez/image/upload/v1782205830/capilla.png"
                       alt="Lugar de la Ceremonia"
                       fill
                       priority
@@ -1046,7 +1036,7 @@ export default function Home() {
                   <div className="absolute left-[60px] md:left-1/2 transform -translate-x-1/2 flex items-center justify-center z-10">
                     <div className="relative w-28 h-28 md:w-36 md:h-36">
                       <Image
-                        src="https://res.cloudinary.com/djqtkbyez/image/upload/v1780067867/WhatsApp_Image_2026-05-29_at_16.37.21-removebg-preview_rpf1kt.png"
+                        src="https://res.cloudinary.com/djqtkbyez/image/upload/v1782206513/ceremonia-itinerario.png"
                         alt="La Ceremonia"
                         fill
                         className="object-contain"
@@ -1057,7 +1047,7 @@ export default function Home() {
 
                   <div className="w-full md:w-1/2 md:pr-28 md:text-right mt-1 pl-[130px] md:pl-0">
                     <div className="inline-block px-3 py-1 bg-primary/5 border border-primary/15 rounded-full text-primary font-sans font-medium text-xs mb-2">
-                      17:00 H
+                      16:00 H
                     </div>
                     <h4 className="font-serif text-xl text-primary font-medium font-serif" >La Ceremonia</h4>
                   </div>
@@ -1076,7 +1066,7 @@ export default function Home() {
                   <div className="absolute left-[60px] md:left-1/2 transform -translate-x-1/2 flex items-center justify-center z-10">
                     <div className="relative w-28 h-28 md:w-36 md:h-36">
                       <Image
-                        src="https://res.cloudinary.com/djqtkbyez/image/upload/v1780225503/ChatGPT_Image_31_may_2026_12_58_38_rcugl3.png"
+                        src="https://res.cloudinary.com/djqtkbyez/image/upload/v1782205927/coctel.png"
                         alt="El Cóctel"
                         fill
                         className="object-contain"
@@ -1090,13 +1080,43 @@ export default function Home() {
 
                   <div className="w-full md:w-1/2 md:pl-28 mt-1 pl-[130px]">
                     <div className="inline-block px-3 py-1 bg-primary/5 border border-primary/15 rounded-full text-primary font-sans font-medium text-xs mb-2">
-                      19:00 H
+                      17:45 H
                     </div>
                     <h4 className="font-serif text-xl text-primary font-medium font-serif" >El Cóctel</h4>
                   </div>
                 </motion.div>
 
-                {/* Event 3: Cena */}
+                {/* Event 3: Boda Civil */}
+                <motion.div
+                  initial={{ opacity: 0, y: 60, scale: 0.92 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ type: "spring", stiffness: 90, damping: 13 }}
+                  className="relative flex flex-col md:flex-row items-start md:items-center min-h-[48px]"
+                >
+                  <div className="absolute left-[60px] md:left-1/2 transform -translate-x-1/2 flex items-center justify-center z-10">
+                    <div className="relative w-28 h-28 md:w-36 md:h-36">
+                      <Image
+                        src="https://res.cloudinary.com/djqtkbyez/image/upload/v1780068415/WhatsApp_Image_2026-05-29_at_16.26.02-removebg-preview_xyaohc.png"
+                        alt="Boda Civil"
+                        fill
+                        className="object-contain"
+                        referrerPolicy="no-referrer"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="w-full md:w-1/2 md:pr-28 md:text-right mt-1 pl-[130px] md:pl-0">
+                    <div className="inline-block px-3 py-1 bg-primary/5 border border-primary/15 rounded-full text-primary font-sans font-medium text-xs mb-2">
+                      19:00 H
+                    </div>
+                    <h4 className="font-serif text-xl text-primary font-medium font-serif" >Boda Civil</h4>
+                  </div>
+                  {/* Spacer for desktop layout alignment */}
+                  <div className="w-full md:w-1/2 hidden md:block" />
+                </motion.div>
+
+                {/* Event 4: Cena */}
                 <motion.div
                   initial={{ opacity: 0, y: 60, scale: 0.92 }}
                   whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -1116,16 +1136,18 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="w-full md:w-1/2 md:pr-28 md:text-right mt-1 pl-[130px] md:pl-0">
+                  {/* Left blank on desktop */}
+                  <div className="w-full md:w-1/2 hidden md:block" />
+
+                  <div className="w-full md:w-1/2 md:pl-28 mt-1 pl-[130px]">
                     <div className="inline-block px-3 py-1 bg-primary/5 border border-primary/15 rounded-full text-primary font-sans font-medium text-xs mb-2">
-                      21:30 H
+                      20:00 H
                     </div>
                     <h4 className="font-serif text-xl text-primary font-medium font-serif" >La Cena</h4>
                   </div>
-                  <div className="w-full md:w-1/2 hidden md:block" />
                 </motion.div>
 
-                {/* Event 4: Baile */}
+                {/* Event 5: Baile */}
                 <motion.div
                   initial={{ opacity: 0, y: 60, scale: 0.92 }}
                   whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -1145,14 +1167,13 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="w-full md:w-1/2 hidden md:block" />
-
-                  <div className="w-full md:w-1/2 md:pl-28 mt-1 pl-[130px]">
+                  <div className="w-full md:w-1/2 md:pr-28 md:text-right mt-1 pl-[130px] md:pl-0">
                     <div className="inline-block px-3 py-1 bg-primary/5 border border-primary/15 rounded-full text-primary font-sans font-medium text-xs mb-2">
-                      23:00 H
+                      21:30 H
                     </div>
                     <h4 className="font-serif text-xl text-primary font-medium font-serif" >El Baile & Fiesta</h4>
                   </div>
+                  <div className="w-full md:w-1/2 hidden md:block" />
                 </motion.div>
 
               </div>

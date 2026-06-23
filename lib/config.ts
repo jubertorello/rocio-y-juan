@@ -18,10 +18,10 @@ export const weddingConfig = {
   weddingTimeText: 'Sábado • 17:00 H',
 
   // Ceremonia
-  churchName: 'Parroquia Corpus Christi',
-  churchAddress: 'Av. de la Palmera 39, 41013, Sevilla',
-  churchTime: '17:00 H',
-  churchMapUrl: 'https://maps.google.com/?q=Parroquia+Corpus+Christi+Sevilla',
+  churchName: 'Capilla Falda del Carmen',
+  churchAddress: 'Falda del Carmen, Córdoba',
+  churchTime: '16:00 H',
+  churchMapUrl: 'https://maps.app.goo.gl/FY7fwBdd2Wdrszsd9?g_st=iw',
 
   // Celebración
   celebrationName: 'Hacienda de Orán',
