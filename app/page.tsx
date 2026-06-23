@@ -583,7 +583,7 @@ export default function Home() {
               }}
               className="font-serif text-secondary text-lg md:text-xl lg:text-xl italic leading-relaxed max-w-sm mx-auto mb-5 text-center px-8 md:px-0"
             >
-              queremos celebrar este "Sí" rodeados de quienes habéis formado parte de nuestra historia desde el principio
+              queremos celebrar este "Sí" rodeados de quienes formaron parte de nuestra historia desde el principio
             </motion.p>
 
             {/* DATE REPRESENTATION */}

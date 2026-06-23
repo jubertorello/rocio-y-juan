@@ -177,8 +177,8 @@ export default function EnvelopeIntro({ onComplete, onStartExit }: EnvelopeIntro
                         state === 'OPENED'
                           ? { y: '-140px', opacity: 1, zIndex: 20 }
                           : state === 'OPENING'
-                          ? { y: '0', opacity: 1, zIndex: 20 }
-                          : { y: '0', opacity: 0, zIndex: 20 }
+                            ? { y: '0', opacity: 1, zIndex: 20 }
+                            : { y: '0', opacity: 0, zIndex: 20 }
                       }
                       transition={{ y: { duration: 1.5, ease: [0.33, 1, 0.68, 1], delay: 0.30 } }}
                     >
@@ -188,7 +188,7 @@ export default function EnvelopeIntro({ onComplete, onStartExit }: EnvelopeIntro
                         transition={{ delay: 0.30, duration: 0.1 }}
                         className="relative z-50 flex flex-col items-center pointer-events-auto"
                       >
-                        <p className="font-serif text-accent text-lg mb-2 italic">Estás invitado/a a la boda de</p>
+                        <p className="font-serif text-accent text-lg mb-2 italic">Estás invitado/a al casamiento de</p>
                         <h2 className="font-serif text-2xl md:text-3xl text-accent mb-6 leading-tight font-light italic">
                           {weddingConfig.shortNames}
                         </h2>
