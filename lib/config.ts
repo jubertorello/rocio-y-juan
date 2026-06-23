@@ -41,7 +41,7 @@ export const weddingConfig = {
 
   // Contacto WhatsApp
   whatsappContact: {
-    number: '34697775560',
+    number: '5493512161616',
     text: 'Hola Rocío! Tengo una duda sobre la boda...'
   }
 };

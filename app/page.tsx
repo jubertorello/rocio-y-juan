@@ -1646,23 +1646,23 @@ export default function Home() {
               className="flex flex-col sm:flex-row justify-center items-center gap-4 max-w-md mx-auto"
             >
               <a
-                href="https://wa.me/34697775560?text=Hola%20Mariu!%20Tengo%20una%20duda%20sobre%20la%20boda..."
+                href="https://wa.me/5493512161616?text=Hola%20Roc%C3%ADo!%20Tengo%20una%20duda%20sobre%20la%20boda..."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center space-x-3 w-full sm:w-auto px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-full font-sans text-[10px] uppercase tracking-[0.2em] transition-all duration-300 shadow-md hover:scale-105 active:scale-95"
               >
                 <PhoneCall size={12} />
-                <span>WhatsApp Mariu</span>
+                <span>WhatsApp Rocío</span>
               </a>
 
               <a
-                href="https://wa.me/34666085451?text=Hola%20Nacho!%20Tengo%20una%20duda%20sobre%20la%20boda..."
+                href="https://wa.me/5493534224505?text=Hola%20Juan!%20Tengo%20una%20duda%20sobre%20la%20boda..."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center space-x-3 w-full sm:w-auto px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-full font-sans text-[10px] uppercase tracking-[0.2em] transition-all duration-300 shadow-md hover:scale-105 active:scale-95"
               >
                 <PhoneCall size={12} />
-                <span>WhatsApp Nacho</span>
+                <span>WhatsApp Juan</span>
               </a>
             </motion.div>
           </motion.div>
@@ -1692,21 +1692,20 @@ export default function Home() {
               {weddingConfig.shortNames}
             </p>
             <p className="font-sans font-bold text-[9px] md:text-[10px] text-bg-light/85 tracking-widest uppercase drop-shadow-xs">
-              12 de Septiembre de 2026 • Sevilla
+              {weddingConfig.weddingDateText} • Córdoba
             </p>
           </div>
 
           {/* Bottom thin bar */}
           <div className="absolute bottom-0 left-0 right-0 py-3 bg-primary/30 border-t border-bg-light/10 z-10">
-            <p className="font-sans font-bold text-[9px] md:text-[10px] text-bg-light/80 tracking-widest">
-              By{' '}
+            <p className="font-sans font-bold text-[11px] md:text-[12px] text-bg-light/80 tracking-widest">
               <a
                 href="https://wa.me/34660104026"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="underline underline-offset-2 hover:text-bg-light transition-colors"
               >
-                Jules
+                By Jules
               </a>
               . Todos los derechos reservados.
             </p>
