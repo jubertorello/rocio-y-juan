@@ -54,8 +54,33 @@ const weddingPhotos = [
 export default function Home() {
   const [showMain, setShowMain] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const sectionVideoRef = useRef<HTMLVideoElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [audioStarted, setAudioStarted] = useState(false);
+
+  // Play video only when visible in viewport
+  useEffect(() => {
+    const video = sectionVideoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(video);
+    return () => {
+      observer.unobserve(video);
+    };
+  }, []);
 
   // Play audio on first user interaction — only until audioStarted
   useEffect(() => {
@@ -898,82 +923,24 @@ export default function Home() {
               </motion.div>
             </div>
 
-            {/* Collage de Fotos — foto destacada + polaroids en sus bordes */}
+            {/* Video de la Ceremonia — en formato cuadrado, reproducido en bucle y silenciado */}
             <motion.div
               variants={{
-                hidden: { opacity: 0, y: 45 },
-                visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 60, damping: 14 } }
+                hidden: { opacity: 0, y: 45, scale: 0.96 },
+                visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 60, damping: 14 } }
               }}
-              className="relative w-full max-w-[440px] md:max-w-[720px] mx-auto h-[480px] md:h-[580px]"
+              className="relative w-full max-w-[340px] md:max-w-[420px] mx-auto aspect-square rounded-3xl overflow-hidden shadow-2xl border border-white/20 bg-black/5"
             >
-              {/* Foto destacada — bordes difusos */}
-              <div
-                className="absolute cursor-pointer top-[15px] md:top-0 bottom-[48px] left-[5%] right-[5%]"
-                style={{
-                  WebkitMaskImage: 'linear-gradient(to right, transparent, black 18%, black 82%, transparent), linear-gradient(to bottom, transparent, black 18%, black 82%, transparent)',
-                  WebkitMaskComposite: 'destination-in',
-                  maskImage: 'linear-gradient(to right, transparent, black 18%, black 82%, transparent), linear-gradient(to bottom, transparent, black 18%, black 82%, transparent)',
-                  maskComposite: 'intersect',
-                }}
-                onClick={() => setActivePhoto(weddingPhotos[1])}
-              >
-                <Image src={weddingPhotos[1]} alt="Mariu y Nacho" fill className="object-cover object-center" referrerPolicy="no-referrer" />
-              </div>
-
-              {/* Polaroid 1 — arriba izquierda */}
-              <div
-                className="absolute z-20 hover:z-40 bg-white p-2 pb-7 shadow-[0_6px_24px_rgba(0,0,0,0.25)] w-[42%] md:w-[28%] -rotate-[8deg] hover:-rotate-[5deg] hover:scale-[1.05] transition-all duration-300 origin-center cursor-pointer"
-                style={{ top: '6px', left: '4px' }}
-                onClick={() => setActivePhoto(weddingPhotos[0])}
-              >
-                <div className="relative w-full aspect-square overflow-hidden">
-                  <Image src={weddingPhotos[0]} alt="Mariu y Nacho" fill className="object-cover" referrerPolicy="no-referrer" />
-                </div>
-              </div>
-
-              {/* Polaroid 2 — arriba derecha */}
-              <div
-                className="absolute z-20 hover:z-40 bg-white p-2 pb-7 shadow-[0_6px_24px_rgba(0,0,0,0.25)] w-[42%] md:w-[28%] rotate-[7deg] hover:rotate-[4deg] hover:scale-[1.05] transition-all duration-300 origin-center cursor-pointer"
-                style={{ top: '4px', right: '4px' }}
-                onClick={() => setActivePhoto(weddingPhotos[2])}
-              >
-                <div className="relative w-full aspect-square overflow-hidden">
-                  <Image src={weddingPhotos[2]} alt="Mariu y Nacho" fill className="object-cover" referrerPolicy="no-referrer" />
-                </div>
-              </div>
-
-              {/* Polaroid 3 — abajo izquierda */}
-              <div
-                className="absolute z-20 hover:z-40 bg-white p-2 pb-7 shadow-[0_6px_24px_rgba(0,0,0,0.25)] w-[32%] md:w-[22%] rotate-[6deg] hover:rotate-[3deg] hover:scale-[1.05] transition-all duration-300 origin-center cursor-pointer"
-                style={{ bottom: '-36px', left: '2px' }}
-                onClick={() => setActivePhoto(weddingPhotos[3])}
-              >
-                <div className="relative w-full aspect-square overflow-hidden">
-                  <Image src={weddingPhotos[3]} alt="Mariu y Nacho" fill className="object-cover" referrerPolicy="no-referrer" />
-                </div>
-              </div>
-
-              {/* Polaroid 4 — abajo centro */}
-              <div
-                className="absolute z-20 hover:z-40 bg-white p-2 pb-7 shadow-[0_6px_24px_rgba(0,0,0,0.25)] w-[32%] md:w-[22%] left-[34%] md:left-[39%] -rotate-[2deg] hover:rotate-0 hover:scale-[1.05] transition-all duration-300 origin-center cursor-pointer"
-                style={{ bottom: '-40px' }}
-                onClick={() => setActivePhoto(weddingPhotos[4])}
-              >
-                <div className="relative w-full aspect-square overflow-hidden">
-                  <Image src={weddingPhotos[4]} alt="Mariu y Nacho" fill className="object-cover" referrerPolicy="no-referrer" />
-                </div>
-              </div>
-
-              {/* Polaroid 5 — abajo derecha */}
-              <div
-                className="absolute z-20 hover:z-40 bg-white p-2 pb-7 shadow-[0_6px_24px_rgba(0,0,0,0.25)] w-[32%] md:w-[22%] -rotate-[7deg] hover:-rotate-[4deg] hover:scale-[1.05] transition-all duration-300 origin-center cursor-pointer"
-                style={{ bottom: '-32px', right: '2px' }}
-                onClick={() => setActivePhoto(weddingPhotos[5])}
-              >
-                <div className="relative w-full aspect-square overflow-hidden">
-                  <Image src={weddingPhotos[5]} alt="Mariu y Nacho" fill className="object-cover" referrerPolicy="no-referrer" />
-                </div>
-              </div>
+              <video
+                ref={sectionVideoRef}
+                src="https://res.cloudinary.com/djqtkbyez/video/upload/v1782232543/WhatsApp_Video_2026-06-23_at_16.03.52_nospat.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="auto"
+                className="w-full h-full object-cover"
+              />
             </motion.div>
 
           </motion.div>
