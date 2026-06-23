@@ -8,14 +8,14 @@ export const weddingConfig = {
   brideFullName: 'Rocío Piantoni',
   groomFullName: 'Juan Ignacio Rossi',
   shortNames: 'Rocío y Juan', // Apodo corto
-  weddingDate: '2026-09-12T17:00:00+02:00', // Fecha y hora del evento para cuenta regresiva
+  weddingDate: '2026-10-24T16:00:00-03:00', // Fecha y hora del evento para cuenta regresiva
   
   // Detalles de fecha para mostrar
-  weddingDay: '12',
-  weddingMonth: 'Septiembre',
+  weddingDay: '24',
+  weddingMonth: 'Octubre',
   weddingYear: '2026',
-  weddingDateText: '12 de Septiembre de 2026',
-  weddingTimeText: 'Sábado • 17:00 H',
+  weddingDateText: '24 de Octubre de 2026',
+  weddingTimeText: 'Sábado • 16:00 H',
 
   // Ceremonia
   churchName: 'Capilla Falda del Carmen',
@@ -24,10 +24,10 @@ export const weddingConfig = {
   churchMapUrl: 'https://maps.app.goo.gl/FY7fwBdd2Wdrszsd9?g_st=iw',
 
   // Celebración
-  celebrationName: 'Hacienda de Orán',
-  celebrationAddress: 'A-362 Kms 5, 41710 Utrera, Sevilla',
-  celebrationTime: 'A partir de las 19:00 H',
-  celebrationMapUrl: 'https://maps.google.com/?q=Hacienda+de+Oran+Utrera',
+  celebrationName: 'Estancia Causana',
+  celebrationAddress: 'Malagueño, Córdoba',
+  celebrationTime: 'A partir de las 17:45 H',
+  celebrationMapUrl: 'https://maps.app.goo.gl/28QJ4sY5FzHM1WH8A?g_st=iw',
 
   // Autobuses
   busDepartureTime: '18:15h',

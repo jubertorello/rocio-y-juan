@@ -293,9 +293,8 @@ export default function Home() {
 
   return (
     <main className={`min-h-screen relative selection:bg-primary/20 select-none md:select-text ${!showMain ? 'h-screen overflow-hidden' : ''}`}>
-      {/* Reproductor de audio oculto */}
       <audio ref={audioRef} loop preload="auto">
-        <source src="https://res.cloudinary.com/djqtkbyez/video/upload/v1780238039/Can_t_Take_My_Eyes_off_You_hnormu.mp3" type="audio/mpeg" />
+        <source src="https://res.cloudinary.com/djqtkbyez/video/upload/v1782214795/ViolinTribution_-_Felicita%CC%80_-_Violino_-_64_Kbps_phmbcm.mp3" type="audio/mpeg" />
       </audio>
 
       {/* Botón mute flotante — visible desde que arranca el audio */}
@@ -471,7 +470,13 @@ export default function Home() {
             }}
             className="max-w-4xl mx-auto px-6 w-full flex flex-col items-center relative z-10"
           >
-            <div className="bg-[#fbf9f4] p-8 md:p-12 rounded-3xl shadow-xl max-w-xl w-full mx-auto flex flex-col items-center border border-primary/10">
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 35, scale: 0.96 },
+                visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 1.4, ease: "easeOut" } }
+              }}
+              className="bg-[#fbf9f4] p-8 md:p-12 rounded-3xl shadow-xl max-w-xl w-full mx-auto flex flex-col items-center border border-primary/10"
+            >
               <motion.p
                 variants={{
                   hidden: { opacity: 0, y: 20 },
@@ -511,7 +516,7 @@ export default function Home() {
               >
                 ¡Y queremos que seas parte de este día tan especial!
               </motion.p>
-            </div>
+            </motion.div>
           </motion.div>
         </section>
 
@@ -528,12 +533,13 @@ export default function Home() {
         >
           <motion.div
             initial="hidden"
-            animate={showMain ? "visible" : "hidden"}
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
             variants={{
               hidden: { opacity: 0 },
               visible: {
                 opacity: 1,
-                transition: { staggerChildren: 0.2, delayChildren: 0.3 }
+                transition: { staggerChildren: 0.2, delayChildren: 0.1 }
               }
             }}
             className="max-w-4xl mx-auto px-6 w-full flex flex-col items-center relative z-10"
@@ -706,9 +712,9 @@ export default function Home() {
                     />
                   </div>
 
-                  <div className="flex items-center justify-center space-x-1.5 mb-8 text-secondary text-xs">
-                    <Clock size={13} className="opacity-85" />
-                    <span >{weddingConfig.churchTime}</span>
+                  <div className="flex items-center justify-center space-x-2 mt-6 mb-8 text-secondary text-sm md:text-base">
+                    <Clock size={16} className="opacity-85" />
+                    <span>{weddingConfig.churchTime}</span>
                   </div>
                 </div>
 
@@ -761,9 +767,9 @@ export default function Home() {
                     />
                   </div>
 
-                  <div className="flex items-center justify-center space-x-1.5 mb-8 text-secondary text-xs">
-                    <Clock size={13} className="opacity-85" />
-                    <span >{weddingConfig.celebrationTime}</span>
+                  <div className="flex items-center justify-center space-x-2 mt-6 mb-8 text-secondary text-sm md:text-base">
+                    <Clock size={16} className="opacity-85" />
+                    <span>{weddingConfig.celebrationTime}</span>
                   </div>
                 </div>
 
