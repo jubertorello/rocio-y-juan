@@ -67,7 +67,7 @@ export default function Home() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            video.play().catch(() => {});
+            video.play().catch(() => { });
           } else {
             video.pause();
           }
@@ -1326,13 +1326,13 @@ export default function Home() {
               Si deseáis acompañarnos de una forma especial en esta experiencia inolvidable, podéis hacerlo rellenando vuestro granito de arena aquí:
             </motion.p>
 
-            <div className="flex justify-center">
+            <div className="flex justify-center my-8 md:my-10">
               <motion.div
                 variants={{
                   hidden: { opacity: 0, scale: 0.92, rotate: -2 },
                   visible: { opacity: 1, scale: 1, rotate: 0, transition: { type: "spring", stiffness: 60, damping: 15 } }
                 }}
-                className="relative w-84 h-52 md:w-106 md:h-80"
+                className="relative w-84 h-50 md:w-90 md:h-62"
               >
                 <Image
                   src="https://res.cloudinary.com/djqtkbyez/image/upload/v1782233517/WhatsApp_Image_2026-06-23_at_18.02.57-removebg-preview_lweluw.png"
@@ -1349,7 +1349,7 @@ export default function Home() {
                 hidden: { opacity: 0, y: 20 },
                 visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 90, damping: 14 } }
               }}
-              className="flex flex-col items-center gap-2"
+              className="flex flex-col items-center gap-2 mt-6 md:mt-8"
             >
               <p className="font-serif text-accent/75 text-sm italic">
                 ¿Quieres hacernos un regalo? Haz click aquí:
