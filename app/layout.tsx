@@ -1,4 +1,4 @@
-import type {Metadata} from 'next';
+import type {Metadata, Viewport} from 'next';
 import { Overlock, Outfit } from 'next/font/google';
 import './globals.css';
 
@@ -14,6 +14,13 @@ const cause = Outfit({
 });
 
 import { weddingConfig } from '@/lib/config';
+
+export const viewport: Viewport = {
+  themeColor: '#faf8f3',
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+};
 
 export const metadata: Metadata = {
   title: `${weddingConfig.shortNames} · ${weddingConfig.weddingDay}.${weddingConfig.weddingMonth === 'Septiembre' ? '09' : '10'}.${weddingConfig.weddingYear}`,

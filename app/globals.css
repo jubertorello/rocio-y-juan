@@ -24,7 +24,7 @@
 
 @layer base {
   body {
-    @apply antialiased bg-bg-dark;
+    @apply antialiased bg-bg-light;
     font-family: var(--font-body);
   }
 

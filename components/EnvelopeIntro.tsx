@@ -54,23 +54,23 @@ export default function EnvelopeIntro({ onComplete, onStartExit }: EnvelopeIntro
         >
           {/* Mobile Background */}
           <div
-            className="absolute inset-0 z-[-1] md:hidden"
+            className="absolute -inset-y-16 inset-x-0 z-[-1] md:hidden"
             style={{
               backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1782379379/An%CC%83adir_un_ti%CC%81tulo_11_ymomd0.png")',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
-              backgroundColor: '#afb5a6',
+              backgroundColor: '#faf8f3',
             }}
           />
 
           {/* Desktop Background */}
           <div
-            className="absolute inset-0 z-[-1] hidden md:block"
+            className="absolute -inset-y-16 inset-x-0 z-[-1] hidden md:block"
             style={{
               backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1782378603/An%CC%83adir_un_ti%CC%81tulo_9_e4ecrh.png")',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
-              backgroundColor: '#afb5a6',
+              backgroundColor: '#faf8f3',
             }}
           />
 
@@ -129,7 +129,7 @@ export default function EnvelopeIntro({ onComplete, onStartExit }: EnvelopeIntro
                 initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
-                className="relative w-[88vw] max-w-[430px] aspect-[4/3] flex items-center justify-center perspective-[1500px] translate-y-0 md:translate-y-[5vh]"
+                className="relative w-[88vw] max-w-[430px] aspect-[4/3] flex items-center justify-center perspective-[1500px] translate-y-[4vh] md:translate-y-[5vh]"
               >
                 <motion.div
                   className="relative w-full h-full preserve-3d"
