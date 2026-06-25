@@ -65,9 +65,9 @@ export default function EnvelopeIntro({ onComplete, onStartExit }: EnvelopeIntro
 
           {/* Desktop Background */}
           <div
-            className="absolute -inset-y-16 inset-x-0 z-[-1] hidden md:block"
+            className="absolute inset-0 z-[-1] hidden md:block"
             style={{
-              backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1782378603/An%CC%83adir_un_ti%CC%81tulo_9_e4ecrh.png")',
+              backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1782377623/Disen%CC%83o_sin_ti%CC%81tulo_9_yb1wm6.png")',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundColor: '#faf8f3',

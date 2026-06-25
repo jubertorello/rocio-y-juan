@@ -997,7 +997,7 @@ export default function Home() {
               {/* Center line */}
               <div className="absolute left-[60px] md:left-1/2 top-0 bottom-0 w-px bg-primary/20 transform md:-translate-x-1/2" />
 
-              <div className="space-y-16">
+              <div className="space-y-16 md:space-y-24">
                 {/* Event 1: Ceremonia */}
                 <motion.div
                   initial={{ opacity: 0, y: 60, scale: 0.92 }}
