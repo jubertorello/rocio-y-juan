@@ -103,7 +103,7 @@ export default function EnvelopeIntro({ onComplete, onStartExit }: EnvelopeIntro
                 </motion.div>
 
                 <p className="font-serif text-accent text-2xl md:text-3xl italic mb-1">
-                  Tienes una carta
+                  Tenés una carta
                 </p>
                 <p className="font-sans text-secondary text-[11px] uppercase tracking-[0.35em] mb-10">
                   de {weddingConfig.shortNames}

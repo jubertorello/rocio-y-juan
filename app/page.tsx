@@ -193,8 +193,7 @@ export default function Home() {
 
   // Timer interval
   useEffect(() => {
-    // September 12, 2026 at 17:00:00 CET / UTC
-    const weddingDate = new Date('2026-09-12T17:00:00+02:00').getTime();
+    const weddingDate = new Date(weddingConfig.weddingDate).getTime();
 
     const updateTimer = () => {
       const now = new Date().getTime();
@@ -548,7 +547,7 @@ export default function Home() {
         {/* Section for Couple Names & Date */}
         <section
           id="bienvenida"
-          className="w-full relative py-20 flex flex-col items-center justify-center text-center overflow-hidden"
+          className="w-full relative pt-20 pb-10 flex flex-col items-center justify-center text-center overflow-hidden"
           style={{
             backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1777711072/texturapapel-limoncello-scaled_cgfzov.jpg")',
             backgroundSize: 'cover',
@@ -664,7 +663,7 @@ export default function Home() {
         {/* 2. LUGAR / LOCATION CARDS (Ubicaciones) */}
         <section
           id="lugar"
-          className="w-full pt-20 pb-20 md:py-40 relative"
+          className="w-full pt-10 pb-20 md:pt-20 md:pb-40 relative"
           style={{
             backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1777711072/texturapapel-limoncello-scaled_cgfzov.jpg")',
             backgroundSize: 'cover',
