@@ -120,9 +120,10 @@ export default function Home() {
   };
 
   const [mounted, setMounted] = useState(false);
-  const [copied, setCopied] = useState(false);
-  const [copiedSwift, setCopiedSwift] = useState(false);
+  const [copiedCbu, setCopiedCbu] = useState(false);
+  const [copiedAlias, setCopiedAlias] = useState(false);
   const [showIbanModal, setShowIbanModal] = useState(false);
+  const [currency, setCurrency] = useState<'ars' | 'usd'>('ars');
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showMusicModal, setShowMusicModal] = useState(false);
   const [showAllSongsModal, setShowAllSongsModal] = useState(false);
@@ -217,20 +218,20 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
-  // Copy IBAN handler
-  const handleCopyIban = () => {
-    const iban = weddingConfig.bankDetails.iban;
-    navigator.clipboard.writeText(iban);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  // Copy CBU handler
+  const handleCopyCbu = () => {
+    const cbu = weddingConfig.bankDetails[currency].cbu;
+    navigator.clipboard.writeText(cbu);
+    setCopiedCbu(true);
+    setTimeout(() => setCopiedCbu(false), 2000);
   };
 
-  // Copy Swift handler
-  const handleCopySwift = () => {
-    const swift = weddingConfig.bankDetails.swift;
-    navigator.clipboard.writeText(swift);
-    setCopiedSwift(true);
-    setTimeout(() => setCopiedSwift(false), 2000);
+  // Copy Alias handler
+  const handleCopyAlias = () => {
+    const alias = weddingConfig.bankDetails[currency].alias;
+    navigator.clipboard.writeText(alias);
+    setCopiedAlias(true);
+    setTimeout(() => setCopiedAlias(false), 2000);
   };
 
   // Handle smooth scroll to section with offset for fixed header
@@ -318,7 +319,7 @@ export default function Home() {
   return (
     <main className={`min-h-screen relative selection:bg-primary/20 select-none md:select-text ${!showMain ? 'h-screen overflow-hidden' : ''}`}>
       <audio ref={audioRef} loop preload="auto">
-        <source src="https://res.cloudinary.com/djqtkbyez/video/upload/v1782214795/ViolinTribution_-_Felicita%CC%80_-_Violino_-_64_Kbps_phmbcm.mp3" type="audio/mpeg" />
+        <source src="https://res.cloudinary.com/djqtkbyez/video/upload/v1782844474/Felicita%CC%80_-_Al_Bano_Romina_Power___Sax_and_Violin___Daniele_Vitale_Karolina_Protsenko_-_64_Kbps_iyy37x.mp3" type="audio/mpeg" />
       </audio>
 
       {/* Botón mute flotante — visible desde que arranca el audio */}
@@ -388,7 +389,7 @@ export default function Home() {
                 onClick={(e) => handleNavClick(e, 'confirmacion')}
                 className="hidden md:inline-block px-4 py-1.5 border border-white/30 text-bg-light hover:bg-bg-light hover:text-primary transition-all duration-300 rounded-full text-[10px] uppercase font-sans tracking-[0.2em]"
               >
-                Confirma tu asistencia
+                Confirmanos tu asistencia
               </a>
 
               {/* Mobile Menu button */}
@@ -455,7 +456,7 @@ export default function Home() {
                       onClick={(e) => handleNavClick(e, 'confirmacion')}
                       className="inline-block w-full py-2.5 bg-bg-light text-primary hover:bg-bg-warm transition-colors rounded-full text-[10px] tracking-[0.2em] font-bold"
                     >
-                      Confirma tu asistencia
+                      Confirmanos tu asistencia
                     </a>
                   </div>
                 </div>
@@ -468,7 +469,7 @@ export default function Home() {
         {/* 1. HERO - INITIALS & INVITATION + NOMBRES & FECHA */}
         <section
           id="inicio"
-          className="w-full relative py-24 flex flex-col items-center justify-center text-center overflow-hidden"
+          className="w-full relative py-16 flex flex-col items-center justify-center text-center overflow-hidden"
           style={{
             backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1782138238/7afade95-eee3-4d2c-92f0-c27559a51b4c_pfpmft.webp")',
             backgroundSize: 'cover',
@@ -547,7 +548,7 @@ export default function Home() {
         {/* Section for Couple Names & Date */}
         <section
           id="bienvenida"
-          className="w-full relative pt-20 pb-10 flex flex-col items-center justify-center text-center overflow-hidden"
+          className="w-full relative pt-12 pb-8 flex flex-col items-center justify-center text-center overflow-hidden"
           style={{
             backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1777711072/texturapapel-limoncello-scaled_cgfzov.jpg")',
             backgroundSize: 'cover',
@@ -663,7 +664,7 @@ export default function Home() {
         {/* 2. LUGAR / LOCATION CARDS (Ubicaciones) */}
         <section
           id="lugar"
-          className="w-full pt-10 pb-20 md:pt-20 md:pb-40 relative"
+          className="w-full pt-8 pb-12 md:pt-12 md:pb-24 relative"
           style={{
             backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1777711072/texturapapel-limoncello-scaled_cgfzov.jpg")',
             backgroundSize: 'cover',
@@ -816,7 +817,7 @@ export default function Home() {
 
         <section
           id="fotos"
-          className="py-24 relative overflow-hidden"
+          className="py-16 relative overflow-hidden"
           style={{
             backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1782138238/7afade95-eee3-4d2c-92f0-c27559a51b4c_pfpmft.webp")',
             backgroundSize: 'cover',
@@ -949,7 +950,7 @@ export default function Home() {
         {/* 4. ITINERARIO SECTION */}
         <section
           id="itinerario"
-          className="py-24 pt-16 pb-16 text-primary itinerario-section"
+          className="py-12 text-primary itinerario-section"
           style={{
             backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1777711072/texturapapel-limoncello-scaled_cgfzov.jpg")',
             backgroundSize: 'contain',
@@ -1130,7 +1131,7 @@ export default function Home() {
                   <div className="absolute left-[60px] md:left-1/2 transform -translate-x-1/2 flex items-center justify-center z-10">
                     <div className="relative w-28 h-28 md:w-36 md:h-36">
                       <Image
-                        src="https://res.cloudinary.com/djqtkbyez/image/upload/v1782233345/WhatsApp_Image_2026-06-23_at_16.38.05__1_-removebg-preview_lmcy0v.png"
+                        src="https://res.cloudinary.com/djqtkbyez/image/upload/v1782844020/WhatsApp_Image_2026-06-30_at_20.19.23-removebg-preview_qxlv2n.png"
                         alt="El Baile & Fiesta"
                         fill
                         className="object-contain"
@@ -1156,7 +1157,7 @@ export default function Home() {
         {/* 5. PLAYLIST / MUSIC SUGGESTIONS */}
         <section
           id="musica"
-          className="w-full py-24 pt-16 pb-16 relative"
+          className="w-full py-12 relative"
           style={{
             backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1777711072/texturapapel-limoncello-scaled_cgfzov.jpg")',
             backgroundSize: 'cover',
@@ -1258,7 +1259,7 @@ export default function Home() {
         {/* 6. NEXT ADVENTURE / LUNA DE MIEL */}
         <section
           id="viaje"
-          className="py-24 pt-16 pb-16 relative text-accent"
+          className="py-12 relative text-accent"
           style={{
             backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1777711072/texturapapel-limoncello-scaled_cgfzov.jpg")',
             backgroundSize: 'cover',
@@ -1284,25 +1285,25 @@ export default function Home() {
                 hidden: { opacity: 0, y: 20 },
                 visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
               }}
-              className="font-sans text-[10px] uppercase tracking-[0.3em] text-accent/80 mb-2 block font-medium"
+              className="font-sans text-[10px] uppercase tracking-[0.3em] text-secondary mb-2 block font-medium"
             >
-              Luna de Miel · Regalo
+              Regalo
             </motion.span>
             <motion.h2
               variants={{
                 hidden: { opacity: 0, y: 20 },
                 visible: { opacity: 1, y: 0, transition: { duration: 0.7 } }
               }}
-              className="font-serif text-3xl md:text-4xl text-accent font-medium mb-6 italic"
+              className="font-serif text-3xl md:text-4xl text-primary font-medium mb-6 italic"
             >
-              Nuestra próxima aventura
+              Un detalle con nosotros
             </motion.h2>
             <motion.div
               variants={{
                 hidden: { opacity: 0, scaleX: 0 },
                 visible: { opacity: 1, scaleX: 1, transition: { duration: 0.6 } }
               }}
-              className="h-px w-10 bg-accent/40 mx-auto mb-3"
+              className="h-px w-10 bg-primary/20 mx-auto mb-3"
             />
 
             <motion.p
@@ -1312,7 +1313,7 @@ export default function Home() {
               }}
               className="text-[15px] text-accent/90 leading-relaxed max-w-xl mx-auto mb-2"
             >
-              Emprendemos juntos el viaje más importante de nuestras vidas, que continuará con una luna de miel soñada entre Japón y la Polinesia Francesa.
+              Lo más importante para nosotros es tu presencia en este día tan especial.
             </motion.p>
 
             <motion.p
@@ -1322,8 +1323,24 @@ export default function Home() {
               }}
               className="text-[15px] text-accent leading-relaxed max-w-lg mx-auto mb-1"
             >
-              Si deseáis acompañarnos de una forma especial en esta experiencia inolvidable, podéis hacerlo rellenando vuestro granito de arena aquí:
+              No obstante, si querés hacernos un regalo para ayudarnos a empezar esta nueva familia, podés aportar tu granito de arena aca:
             </motion.p>
+
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 90, damping: 14 } }
+              }}
+              className="flex flex-col items-center gap-2 mt-6 md:mt-8"
+            >
+              <button
+                onClick={() => setShowIbanModal(true)}
+                className="inline-flex items-center space-x-2 px-8 py-3.5 bg-white text-primary hover:bg-white/90 font-sans text-[11px] uppercase tracking-[0.22em] rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 cursor-pointer font-semibold"
+              >
+                <Gift size={13} />
+                <span>Ver datos regalo</span>
+              </button>
+            </motion.div>
 
             <div className="flex justify-center my-8 md:my-10">
               <motion.div
@@ -1334,46 +1351,26 @@ export default function Home() {
                 className="relative w-84 h-50 md:w-90 md:h-62"
               >
                 <Image
-                  src="https://res.cloudinary.com/djqtkbyez/image/upload/v1782233517/WhatsApp_Image_2026-06-23_at_18.02.57-removebg-preview_lweluw.png"
-                  alt="Japón y Polinesia Francesa"
+                  src="https://res.cloudinary.com/djqtkbyez/image/upload/v1782843667/WhatsApp_Image_2026-06-30_at_20.16.59-removebg-preview_irfc66.png"
+                  alt="Regalo"
                   fill
                   className="object-contain"
                   referrerPolicy="no-referrer"
                 />
               </motion.div>
             </div>
-
-            <motion.div
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 90, damping: 14 } }
-              }}
-              className="flex flex-col items-center gap-2 mt-6 md:mt-8"
-            >
-              <p className="font-serif text-accent/75 text-sm italic">
-                ¿Quieres hacernos un regalo? Haz click aquí:
-              </p>
-              <button
-                onClick={() => setShowIbanModal(true)}
-                className="inline-flex items-center space-x-2 px-8 py-3.5 bg-white text-primary hover:bg-white/90 font-sans text-[11px] uppercase tracking-[0.22em] rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 cursor-pointer font-semibold"
-              >
-                <Gift size={13} />
-                <span>Ver datos regalo</span>
-              </button>
-            </motion.div>
           </motion.div>
         </section>
 
         {/* 7. CONFIRMA TU ASISTENCIA (RSVP Form) */}
         <section
           id="confirmacion"
-          className="w-full py-24 pt-16 pb-16 confirmacion-section"
+          className="w-full py-12 confirmacion-section"
           style={{
             backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1777711072/texturapapel-limoncello-scaled_cgfzov.jpg")',
-            backgroundSize: 'contain',
-            backgroundPosition: 'top center',
-            backgroundRepeat: 'repeat',
-            backgroundColor: '#fbf9f4',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundColor: '#C9CEBA',
           }}
         >
           <motion.div
@@ -1408,7 +1405,7 @@ export default function Home() {
                 }}
                 className="font-serif text-3xl md:text-4xl text-primary font-light italic"
               >
-                Confirma tu asistencia
+                Confirmanos tu asistencia
               </motion.h2>
               <motion.div
                 variants={{
@@ -1425,7 +1422,7 @@ export default function Home() {
                 className="text-[13px] md:text-sm text-secondary leading-relaxed max-w-md mx-auto"
 
               >
-                Para poder organizar con cariño y detalle este día, por favor, agradeceríamos que rellenarais este formulario antes del <strong className="text-primary">15 de agosto</strong>, gracias.
+                Para poder organizar con cariño y detalle este día, por favor, agradeceríamos que rellenarás este formulario antes del <strong className="text-primary">24 de septiembre</strong>, gracias.
               </motion.p>
             </div>
 
@@ -1450,7 +1447,7 @@ export default function Home() {
         {/* 8. INFORMACIÓN DE INTERÉS */}
         <section
           id="informacion"
-          className="py-20 pt-16 pb-16 relative"
+          className="py-12 relative"
           style={{
             backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1777711072/texturapapel-limoncello-scaled_cgfzov.jpg")',
             backgroundSize: 'cover',
@@ -1484,14 +1481,14 @@ export default function Home() {
               </h3>
             </motion.div>
 
-            <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
               <motion.div
                 variants={{
                   hidden: { opacity: 0, y: 40 },
                   visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 80, damping: 14 } }
                 }}
                 whileHover={{ y: -4, boxShadow: "0 10px 25px -10px rgba(90,90,64,0.2)" }}
-                className="bg-[#C9CEBA] p-8 border border-white/10 rounded shadow-sm flex flex-col justify-between items-start text-left"
+                className="bg-[#C9CEBA] p-8 border border-white/10 rounded shadow-sm flex flex-col items-start text-left"
               >
                 <div>
                   <h4
@@ -1502,7 +1499,16 @@ export default function Home() {
                   <p
                     className="text-xs text-accent/85 leading-relaxed"
                   >
-                    Respecto a los hoteles, os recomendamos reservar por la zona de la Parroquia, ya que los autobuses de vuelta tendrán ahí una de las paradas principales de regreso.
+                    Para tu estadía, te recomendamos reservar en el{' '}
+                    <a
+                      href="https://maps.app.goo.gl/Z45hk3uDxLtTA3fK8?g_st=iw"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-bold underline hover:text-accent/70 transition-colors cursor-pointer"
+                    >
+                      Hotel Quinto Centenario
+                    </a>{' '}
+                    (al hacer tu reserva, recordá mencionar que es a nombre del casamiento de Rocío y Juan).
                   </p>
                 </div>
               </motion.div>
@@ -1519,40 +1525,12 @@ export default function Home() {
                   <h4
                     className="text-[17px] text-accent font-medium mb-3"
                   >
-                    Servicio de Autobuses
+                    Traslado (Uber / Taxi)
                   </h4>
                   <p
                     className="text-xs text-accent/85 leading-relaxed"
                   >
-                    Dispondremos de autobuses para los traslados del evento:
-                    <span className="block mt-2 font-semibold">
-                      • Ida: Parroquia Corpus Christi (18:15h) &rarr; Hacienda de Orán
-                    </span>
-                    <span className="block mt-1.5 font-semibold">
-                      • Vuelta: Hacienda de Orán &rarr; Sevilla (varios horarios)
-                    </span>
-                  </p>
-                </div>
-              </motion.div>
-
-              <motion.div
-                variants={{
-                  hidden: { opacity: 0, y: 40 },
-                  visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 80, damping: 14 } }
-                }}
-                whileHover={{ y: -4, boxShadow: "0 10px 25px -10px rgba(90,90,64,0.2)" }}
-                className="bg-[#C9CEBA] p-8 border border-white/10 rounded shadow-sm flex flex-col justify-between items-start text-left"
-              >
-                <div>
-                  <h4
-                    className="text-[17px] text-accent font-medium mb-3"
-                  >
-                    Celebración de Adultos
-                  </h4>
-                  <p
-                    className="text-xs text-accent/85 leading-relaxed"
-                  >
-                    Aunque adoramos y apreciamos con todo el alma a los más pequeños, por temas organizativos del espacio y dinámica, esta será una celebración reservada solo para mayores de 18 años.
+                    Para viajar hacia y desde el evento, tené en cuenta que hay posibilidad de pre-contratar Uber (con la opción de programar viaje) o pedir taxis tradicionales. Ambos servicios llegan sin inconvenientes hasta el lugar.
                   </p>
                 </div>
               </motion.div>
@@ -1562,12 +1540,12 @@ export default function Home() {
 
         {/* 9. ¿DUDAS? (WHATSAPP INVITADOS CHAT LINKS) */}
         <section
-          className="py-20 pt-16 pb-16 dudas-section"
+          className="py-12 dudas-section"
           style={{
             backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1777711072/texturapapel-limoncello-scaled_cgfzov.jpg")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            backgroundColor: '#fbf9f4',
+            backgroundColor: '#C9CEBA',
           }}
         >
           <motion.div
@@ -1601,7 +1579,7 @@ export default function Home() {
               className="text-sm text-secondary leading-relaxed mb-10 max-w-md mx-auto"
 
             >
-              Si tenéis alguna duda, pregunta o necesitáis consultarnos algo, no dudéis en llamarnos o escribirnos por WhatsApp:
+              Si tenés alguna duda o pregunta, no dudes en escribirnos por WhatsApp:
             </motion.p>
 
             <motion.div
@@ -1708,66 +1686,92 @@ export default function Home() {
                 </button>
 
                 <div className="flex justify-center mb-4 text-secondary">
-                  <Plane size={32} className="animate-bounce" />
+                  <Gift size={32} className="animate-bounce" />
                 </div>
 
-                <h3 className="font-serif text-2xl text-primary mb-3">Luna de Miel · Regalo</h3>
+                <h3 className="font-serif text-2xl text-primary mb-6">Regalo</h3>
 
-                <p className="text-xs text-secondary leading-relaxed mb-6">
-                  Tu presencia es nuestro mayor regalo. Sin embargo, si deseas acompañarnos de una forma diferente y ayudarnos a construir momentos mágicos en Japón y la Polinesia Francesa, ponemos a tu disposición nuestra cuenta bancaria:
-                </p>
+                {/* Tab Selector */}
+                <div className="flex justify-center bg-primary/5 p-1 rounded-full border border-primary/10 mb-5 max-w-[240px] mx-auto">
+                  <button
+                    onClick={() => setCurrency('ars')}
+                    className={`flex-1 py-1.5 px-4 rounded-full font-sans text-[10px] uppercase tracking-wider font-semibold transition-all duration-300 cursor-pointer ${currency === 'ars'
+                      ? 'bg-primary text-white shadow-sm'
+                      : 'text-primary/70 hover:text-primary hover:bg-primary/5'
+                      }`}
+                  >
+                    Pesos (ARS)
+                  </button>
+                  <button
+                    onClick={() => setCurrency('usd')}
+                    className={`flex-1 py-1.5 px-4 rounded-full font-sans text-[10px] uppercase tracking-wider font-semibold transition-all duration-300 cursor-pointer ${currency === 'usd'
+                      ? 'bg-primary text-white shadow-sm'
+                      : 'text-primary/70 hover:text-primary hover:bg-primary/5'
+                      }`}
+                  >
+                    Dólares (USD)
+                  </button>
+                </div>
 
                 <div className="bg-bg-warm/60 p-4 rounded-md border border-primary/10 mb-6 relative text-left">
-                  {/* IBAN Section */}
-                  <span className="block text-[8px] font-sans uppercase tracking-[0.2em] text-secondary mb-2 font-bold">
-                    Número de cuenta (IBAN):
-                  </span>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="font-sans text-xs md:text-sm text-primary select-all font-bold tracking-wider">
-                      {weddingConfig.bankDetails.iban}
+                  {/* Bank Section */}
+                  <div className="mb-4">
+                    <span className="block text-[8px] font-sans uppercase tracking-[0.2em] text-secondary mb-1 font-bold">
+                      Banco:
                     </span>
-                    <button
-                      onClick={handleCopyIban}
-                      className="p-2 bg-primary/5 hover:bg-primary/10 text-primary rounded transition-all active:scale-95 cursor-pointer"
-                      title="Copiar IBAN"
-                    >
-                      {copied ? (
-                        <span className="text-[10px] font-sans uppercase tracking-wider font-semibold">¡Copiado!</span>
-                      ) : (
-                        <Copy size={14} />
-                      )}
-                    </button>
+                    <span className="font-sans text-xs md:text-sm text-primary font-bold">
+                      {weddingConfig.bankDetails.bank}
+                    </span>
                   </div>
 
-                  {/* SWIFT/BIC Section */}
-                  <span className="block text-[8px] font-sans uppercase tracking-[0.2em] text-secondary mb-2 font-bold">
-                    Código Swift/BIC:
-                  </span>
-                  <div className="flex items-center justify-between">
-                    <span className="font-sans text-xs md:text-sm text-primary select-all font-bold tracking-wider">
-                      {weddingConfig.bankDetails.swift}
+                  {/* CBU Section */}
+                  <div className="mb-4">
+                    <span className="block text-[8px] font-sans uppercase tracking-[0.2em] text-secondary mb-1 font-bold">
+                      CBU:
                     </span>
-                    <button
-                      onClick={handleCopySwift}
-                      className="p-2 bg-primary/5 hover:bg-primary/10 text-primary rounded transition-all active:scale-95 cursor-pointer"
-                      title="Copiar Swift/BIC"
-                    >
-                      {copiedSwift ? (
-                        <span className="text-[10px] font-sans uppercase tracking-wider font-semibold">¡Copiado!</span>
-                      ) : (
-                        <Copy size={14} />
-                      )}
-                    </button>
+                    <div className="flex items-center justify-between">
+                      <span className="font-sans text-xs md:text-sm text-primary select-all font-bold tracking-wider">
+                        {weddingConfig.bankDetails[currency].cbu}
+                      </span>
+                      <button
+                        onClick={handleCopyCbu}
+                        className="p-2 bg-primary/5 hover:bg-primary/10 text-primary rounded transition-all active:scale-95 cursor-pointer"
+                        title="Copiar CBU"
+                      >
+                        {copiedCbu ? (
+                          <span className="text-[10px] font-sans uppercase tracking-wider font-semibold">¡Copiado!</span>
+                        ) : (
+                          <Copy size={14} />
+                        )}
+                      </button>
+                    </div>
                   </div>
 
-                  {/* Info notice */}
-                  <div className="flex items-start gap-1.5 mt-3 text-[9px] text-secondary leading-snug">
-                    <Info size={11} className="mt-0.5 flex-shrink-0 text-secondary" />
-                    <span>Con este código podrás recibir transferencias internacionales</span>
+                  {/* Alias Section */}
+                  <div className="mb-4">
+                    <span className="block text-[8px] font-sans uppercase tracking-[0.2em] text-secondary mb-1 font-bold">
+                      Alias:
+                    </span>
+                    <div className="flex items-center justify-between">
+                      <span className="font-sans text-xs md:text-sm text-primary select-all font-bold tracking-wider">
+                        {weddingConfig.bankDetails[currency].alias}
+                      </span>
+                      <button
+                        onClick={handleCopyAlias}
+                        className="p-2 bg-primary/5 hover:bg-primary/10 text-primary rounded transition-all active:scale-95 cursor-pointer"
+                        title="Copiar Alias"
+                      >
+                        {copiedAlias ? (
+                          <span className="text-[10px] font-sans uppercase tracking-wider font-semibold">¡Copiado!</span>
+                        ) : (
+                          <Copy size={14} />
+                        )}
+                      </button>
+                    </div>
                   </div>
 
                   <span className="block text-[8px] text-secondary mt-3 pt-2 border-t border-primary/5">
-                    Titulares: {weddingConfig.bankDetails.holders}
+                    Titular: {weddingConfig.bankDetails.holders}
                   </span>
                 </div>
 

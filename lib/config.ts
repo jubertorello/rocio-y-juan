@@ -32,11 +32,17 @@ export const weddingConfig = {
   // Autobuses
   busDepartureTime: '18:15h',
   
-  // Regalos / Cuenta bancaria
   bankDetails: {
-    iban: 'ES29 0182 4015 6002 0257 8448',
-    swift: 'BBVAESMM',
-    holders: 'Rocío P. y Juan I. R.'
+    bank: 'Brubank',
+    holders: 'Rocío Piantoni',
+    ars: {
+      cbu: '1430001713002418680010',
+      alias: 'juan.y.ro'
+    },
+    usd: {
+      cbu: '1430001714002418680028',
+      alias: 'rossi.piantoni'
+    }
   },
 
   // Contacto WhatsApp
