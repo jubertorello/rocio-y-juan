@@ -278,22 +278,20 @@ export default function RSVPForm({ onSubmitted, onEdit, rsvpData, formSubmitted 
         <button
           type="button"
           onClick={() => setAttending(true)}
-          className={`flex-1 py-4 font-sans text-xs uppercase tracking-[0.2em] rounded-full transition-all duration-300 shadow border cursor-pointer ${
-            attending === true
+          className={`flex-1 py-4 font-sans text-xs uppercase tracking-[0.2em] rounded-full transition-all duration-300 shadow border cursor-pointer ${attending === true
               ? 'bg-primary text-white border-primary'
               : 'bg-white text-primary border-primary/20 hover:border-primary/50'
-          }`}
+            }`}
         >
           Sí, asistiré 🎉
         </button>
         <button
           type="button"
           onClick={() => setAttending(false)}
-          className={`flex-1 py-4 font-sans text-xs uppercase tracking-[0.2em] rounded-full transition-all duration-300 shadow border cursor-pointer ${
-            attending === false
+          className={`flex-1 py-4 font-sans text-xs uppercase tracking-[0.2em] rounded-full transition-all duration-300 shadow border cursor-pointer ${attending === false
               ? 'bg-primary text-white border-primary'
               : 'bg-white text-primary border-primary/20 hover:border-primary/50'
-          }`}
+            }`}
         >
           No podré asistir
         </button>
@@ -329,8 +327,7 @@ export default function RSVPForm({ onSubmitted, onEdit, rsvpData, formSubmitted 
               <p className="text-[11px] uppercase tracking-wider font-sans text-secondary font-semibold text-center mb-1">
                 ¿Vendrás con acompañante(s)?
               </p>
-              <p className="text-[10px] font-sans text-secondary/70 text-center mb-4">(si procede, máximo 7)</p>
-              
+
               <div className="flex items-center justify-center gap-5 mb-5">
                 <button
                   type="button"

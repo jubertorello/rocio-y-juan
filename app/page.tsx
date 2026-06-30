@@ -933,7 +933,7 @@ export default function Home() {
             >
               <video
                 ref={sectionVideoRef}
-                src="https://res.cloudinary.com/djqtkbyez/video/upload/v1782232543/WhatsApp_Video_2026-06-23_at_16.03.52_nospat.mp4"
+                src="https://res.cloudinary.com/djqtkbyez/video/upload/v1782850085/WhatsApp_Video_2026-06-24_at_01.33.58_kvtvwr.mp4"
                 autoPlay
                 loop
                 muted
@@ -1836,7 +1836,7 @@ export default function Home() {
                     <input
                       type="text"
                       required
-                      placeholder="Ej. La Camisa Negra"
+                      placeholder="Ej. La Morocha"
                       value={newSongTitle}
                       onChange={(e) => setNewSongTitle(e.target.value)}
                       className="w-full bg-bg-warm/30 border border-primary/20 rounded p-2 text-primary focus:outline-none focus:border-primary focus:bg-bg-warm/50 transition-colors font-sans"
@@ -1850,7 +1850,7 @@ export default function Home() {
                     <input
                       type="text"
                       required
-                      placeholder="Ej. Juanes"
+                      placeholder="Ej. Lukra"
                       value={newSongArtist}
                       onChange={(e) => setNewSongArtist(e.target.value)}
                       className="w-full bg-bg-warm/30 border border-primary/20 rounded p-2 text-primary focus:outline-none focus:border-primary focus:bg-bg-warm/50 transition-colors font-sans"
