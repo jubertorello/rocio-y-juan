@@ -1,6 +1,6 @@
 export const weddingConfig = {
   clientId: 'rocio-y-juan',
-  monogram: 'R & P',
+  monogram: 'R & J',
   brideFirstName: 'Rocío',
   brideLastName: 'Piantoni',
   groomFirstName: 'Juan Ignacio',
@@ -9,7 +9,7 @@ export const weddingConfig = {
   groomFullName: 'Juan Ignacio Rossi',
   shortNames: 'Rocío y Juan', // Apodo corto
   weddingDate: '2026-10-24T16:00:00-03:00', // Fecha y hora del evento para cuenta regresiva
-  
+
   // Detalles de fecha para mostrar
   weddingDay: '24',
   weddingMonth: 'Octubre',
@@ -31,7 +31,7 @@ export const weddingConfig = {
 
   // Autobuses
   busDepartureTime: '18:15h',
-  
+
   bankDetails: {
     bank: 'Brubank',
     holders: 'Rocío Piantoni',
