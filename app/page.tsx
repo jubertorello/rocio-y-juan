@@ -180,7 +180,7 @@ export default function Home() {
       const { data: songsData, error: songsError } = await supabase
         .from('songs')
         .select('*')
-        .eq('client_id', 'rocio-y-juan')
+        .eq('client_id', weddingConfig.clientId)
         .order('votes', { ascending: false });
 
       if (songsData && !songsError) {
@@ -253,7 +253,7 @@ export default function Home() {
     if (!newSongTitle.trim() || !newSongArtist.trim()) return;
 
     const newSong = {
-      client_id: 'rocio-y-juan',
+      client_id: weddingConfig.clientId,
       title: newSongTitle.trim(),
       artist: newSongArtist.trim(),
       votes: 1

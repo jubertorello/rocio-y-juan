@@ -155,7 +155,7 @@ export default function RSVPForm({ onSubmitted, onEdit, rsvpData, formSubmitted 
     setSubmitting(true);
     try {
       const dataToSave = {
-        client_id: 'rocio-y-juan',
+        client_id: weddingConfig.clientId,
         attending: attending ?? true,
         guest_name: guestName.trim() || null,
         dietary_restrictions: attending && hasIntolerance ? intolerance.trim() : '',
@@ -170,7 +170,7 @@ export default function RSVPForm({ onSubmitted, onEdit, rsvpData, formSubmitted 
         if (attending && companions.length > 0) {
           await supabase.from('rsvps').insert(
             companions.map((c) => ({
-              client_id: 'rocio-y-juan',
+              client_id: weddingConfig.clientId,
               parent_rsvp_id: data.id,
               attending: true,
               guest_name: c.name.trim(),

@@ -119,40 +119,14 @@ export default function AdminDashboard() {
 
     setLoading(true);
     try {
-      // 1. Try secure Postgres RPC login
       const { data, error } = await supabase.rpc('verify_client_password', {
         input_username: username.trim().toLowerCase(),
         input_password: password.trim()
       });
 
       if (error) {
-        console.warn('RPC login not available, falling back to legacy login:', error.message);
-        // Fallback for backward compatibility/local dev if table/RPC is not yet created
-        if (username.trim().toLowerCase() === 'admin' && password.trim() === 'admin123') {
-          const legacySession: UserSession = {
-            role: 'master',
-            clientId: 'master',
-            displayName: 'Acceso Maestro (Legacy)',
-            passwordUsed: password.trim()
-          };
-          setUserSession(legacySession);
-          setIsAuthenticated(true);
-          await fetchData(legacySession, 'all');
-          return;
-        }
-        if (username.trim().toLowerCase() === 'rocio' && password.trim() === 'rocioyjuan2026') {
-          const legacySession: UserSession = {
-            role: 'client',
-            clientId: 'rocio-y-juan',
-            displayName: 'Rocío & Juan (Legacy)',
-            passwordUsed: password.trim()
-          };
-          setUserSession(legacySession);
-          setIsAuthenticated(true);
-          await fetchData(legacySession, 'rocio-y-juan');
-          return;
-        }
-        alert('Usuario o contraseña incorrectos, o error al iniciar sesión.');
+        console.error('Login RPC error:', error.message);
+        alert('Error al iniciar sesión. Inténtalo de nuevo.');
         return;
       }
 
@@ -178,31 +152,6 @@ export default function AdminDashboard() {
 
         await fetchData(session, session.role === 'master' ? 'all' : session.clientId);
       } else {
-        // Fallback check for admin/admin123 if SQL table doesn't exist yet
-        if (username.trim().toLowerCase() === 'admin' && password.trim() === 'admin123') {
-          const legacySession: UserSession = {
-            role: 'master',
-            clientId: 'master',
-            displayName: 'Acceso Maestro (Legacy)',
-            passwordUsed: password.trim()
-          };
-          setUserSession(legacySession);
-          setIsAuthenticated(true);
-          await fetchData(legacySession, 'all');
-          return;
-        }
-        if (username.trim().toLowerCase() === 'rocio' && password.trim() === 'rocioyjuan2026') {
-          const legacySession: UserSession = {
-            role: 'client',
-            clientId: 'rocio-y-juan',
-            displayName: 'Rocío & Juan (Legacy)',
-            passwordUsed: password.trim()
-          };
-          setUserSession(legacySession);
-          setIsAuthenticated(true);
-          await fetchData(legacySession, 'rocio-y-juan');
-          return;
-        }
         alert('Usuario o contraseña incorrecta');
       }
     } catch (err) {
