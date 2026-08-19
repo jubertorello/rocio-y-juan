@@ -215,7 +215,7 @@ export default function RSVPForm({ onSubmitted, onEdit, rsvpData, formSubmitted 
           <>
             <h4 className="font-serif text-xl text-primary mb-3">¡Confirmado con éxito!</h4>
             <p className="font-sans text-sm text-secondary mb-6 leading-relaxed">
-              ¡Tenemos muchísima ilusión por vivir este día tan bonito a tu lado!
+              ¡Tenemos muchísima ilusión por vivir este día tan lindo a tu lado!
             </p>
             <div className="bg-bg-warm/40 p-4 rounded text-left font-sans text-xs text-primary mb-8 space-y-2 border border-primary/5">
               <div><span className="font-semibold uppercase tracking-wider text-[10px] text-secondary">Invitado</span><br />{rsvpData.guestName}</div>
@@ -242,7 +242,7 @@ export default function RSVPForm({ onSubmitted, onEdit, rsvpData, formSubmitted 
           <>
             <h4 className="font-serif text-xl text-primary mb-3">Gracias por avisarnos</h4>
             <p className="font-sans text-sm text-secondary mb-6 leading-relaxed">
-              Lamentamos que no puedas acompañarnos, ¡te echaremos de menos!
+              Qué pena que no puedas acompañarnos! Te vamos a extrañar mucho!
             </p>
             {rsvpData.message && (
               <div className="bg-bg-warm/40 p-4 rounded text-left font-sans text-xs text-primary mb-8 border border-primary/5">
@@ -279,8 +279,8 @@ export default function RSVPForm({ onSubmitted, onEdit, rsvpData, formSubmitted 
           type="button"
           onClick={() => setAttending(true)}
           className={`flex-1 py-4 font-sans text-xs uppercase tracking-[0.2em] rounded-full transition-all duration-300 shadow border cursor-pointer ${attending === true
-              ? 'bg-primary text-white border-primary'
-              : 'bg-white text-primary border-primary/20 hover:border-primary/50'
+            ? 'bg-primary text-white border-primary'
+            : 'bg-white text-primary border-primary/20 hover:border-primary/50'
             }`}
         >
           Sí, asistiré 🎉
@@ -289,8 +289,8 @@ export default function RSVPForm({ onSubmitted, onEdit, rsvpData, formSubmitted 
           type="button"
           onClick={() => setAttending(false)}
           className={`flex-1 py-4 font-sans text-xs uppercase tracking-[0.2em] rounded-full transition-all duration-300 shadow border cursor-pointer ${attending === false
-              ? 'bg-primary text-white border-primary'
-              : 'bg-white text-primary border-primary/20 hover:border-primary/50'
+            ? 'bg-primary text-white border-primary'
+            : 'bg-white text-primary border-primary/20 hover:border-primary/50'
             }`}
         >
           No podré asistir

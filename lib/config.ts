@@ -26,22 +26,29 @@ export const weddingConfig = {
   // Celebración
   celebrationName: 'Estancia Causana',
   celebrationAddress: 'Malagueño, Córdoba',
-  celebrationTime: 'A partir de las 17:45 H',
+  celebrationTime: 'Después de la ceremonia nos dirigimos al salón',
   celebrationMapUrl: 'https://maps.app.goo.gl/28QJ4sY5FzHM1WH8A?g_st=iw',
 
   // Autobuses
   busDepartureTime: '18:15h',
 
+  // Hotel Recomendado
+  hotelName: 'Hotel Holiday Inn Córdoba by IHG',
+  hotelMapUrl: 'https://maps.app.goo.gl/MypDDNwTwawdXWxT8?g_st=iw',
+
   bankDetails: {
     bank: 'Brubank',
     holders: 'Rocío Piantoni',
+    cuit: '27-40245109-8',
     ars: {
       cbu: '1430001713002418680010',
-      alias: 'juan.y.ro'
+      alias: 'piantoni.rossi',
+      accountNumber: '1300241868001'
     },
     usd: {
       cbu: '1430001714002418680028',
-      alias: 'rossi.piantoni'
+      alias: 'piantoni.rossi.usd',
+      accountNumber: '1400241868002'
     }
   },
 

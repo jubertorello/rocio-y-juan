@@ -357,6 +357,7 @@ export default function Home() {
               <a href="#lugar" onClick={(e) => handleNavClick(e, 'lugar')} className="hover:text-white transition-colors duration-200">Lugar</a>
               <a href="#itinerario" onClick={(e) => handleNavClick(e, 'itinerario')} className="hover:text-white transition-colors duration-200">Itinerario</a>
               <a href="#viaje" onClick={(e) => handleNavClick(e, 'viaje')} className="hover:text-white transition-colors duration-200">Viaje · Regalo</a>
+              <a href="#musica" onClick={(e) => handleNavClick(e, 'musica')} className="hover:text-white transition-colors duration-200">Música</a>
               <a href="#informacion" onClick={(e) => handleNavClick(e, 'informacion')} className="hover:text-white transition-colors duration-200">Información</a>
             </div>
             <div className="flex items-center space-x-3">
@@ -430,18 +431,18 @@ export default function Home() {
                     Itinerario
                   </a>
                   <a
-                    href="#musica"
-                    onClick={(e) => handleNavClick(e, 'musica')}
-                    className="py-1 hover:text-white transition-colors duration-200"
-                  >
-                    Música
-                  </a>
-                  <a
                     href="#viaje"
                     onClick={(e) => handleNavClick(e, 'viaje')}
                     className="py-1 hover:text-white transition-colors duration-200"
                   >
                     Viaje · Regalo
+                  </a>
+                  <a
+                    href="#musica"
+                    onClick={(e) => handleNavClick(e, 'musica')}
+                    className="py-1 hover:text-white transition-colors duration-200"
+                  >
+                    Música
                   </a>
                   <a
                     href="#informacion"
@@ -950,7 +951,7 @@ export default function Home() {
         {/* 4. ITINERARIO SECTION */}
         <section
           id="itinerario"
-          className="py-12 text-primary itinerario-section"
+          className="pt-12 pb-20 md:pt-16 md:pb-28 text-primary itinerario-section"
           style={{
             backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1777711072/texturapapel-limoncello-scaled_cgfzov.jpg")',
             backgroundSize: 'contain',
@@ -987,7 +988,7 @@ export default function Home() {
                 className="font-serif text-secondary mt-2 italic"
                 style={{ fontSize: '14px' }}
               >
-                Hemos preparado todo para un día inolvidable
+                Preparamos todo para que sea un día inolvidable
               </p>
               <div className="h-px w-10 bg-primary/20 mx-auto mt-4" />
             </motion.div>
@@ -1055,7 +1056,7 @@ export default function Home() {
                     <div className="inline-block px-3 py-1 bg-primary/5 border border-primary/15 rounded-full text-primary font-sans font-medium text-xs mb-2">
                       17:45 H
                     </div>
-                    <h4 className="font-serif text-xl text-primary font-medium font-serif" >El Cóctel</h4>
+                    <h4 className="font-serif text-xl text-primary font-medium font-serif" >La Recepción</h4>
                   </div>
                 </motion.div>
 
@@ -1083,7 +1084,7 @@ export default function Home() {
                     <div className="inline-block px-3 py-1 bg-primary/5 border border-primary/15 rounded-full text-primary font-sans font-medium text-xs mb-2">
                       19:00 H
                     </div>
-                    <h4 className="font-serif text-xl text-primary font-medium font-serif" >Boda Civil</h4>
+                    <h4 className="font-serif text-xl text-primary font-medium font-serif" >Ceremonia Civil</h4>
                   </div>
                   {/* Spacer for desktop layout alignment */}
                   <div className="w-full md:w-1/2 hidden md:block" />
@@ -1154,112 +1155,10 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* 5. PLAYLIST / MUSIC SUGGESTIONS */}
-        <section
-          id="musica"
-          className="w-full py-12 relative"
-          style={{
-            backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1777711072/texturapapel-limoncello-scaled_cgfzov.jpg")',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundColor: '#fbf9f4',
-          }}
-        >
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={{
-              hidden: { opacity: 0 },
-              visible: {
-                opacity: 1,
-                transition: { staggerChildren: 0.15 }
-              }
-            }}
-            className="max-w-4xl mx-auto px-6 text-center relative z-10"
-          >
-            <motion.div
-              variants={{
-                hidden: { opacity: 0, y: 40 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
-              }}
-              className="bg-bg-light border border-primary/10 rounded-sm p-10 md:p-14 shadow-sm relative overflow-hidden"
-            >
-              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-48 h-1 bg-primary/10" />
-              <div className="flex justify-center mb-6">
-                <div className="relative w-28 h-28 md:w-36 md:h-36">
-                  <Image
-                    src="https://res.cloudinary.com/djqtkbyez/image/upload/v1780226276/ChatGPT_Image_31_may_2026_13_17_09_xdrx3s.png"
-                    alt="Música"
-                    fill
-                    className="object-contain"
-                    referrerPolicy="no-referrer"
-                  />
-                </div>
-              </div>
-
-              <h3 className="font-serif text-2xl md:text-3xl text-primary mb-4 font-light italic">
-                Ayúdanos con la música
-              </h3>
-
-              <p className="text-secondary text-[15px] italic leading-relaxed max-w-lg mx-auto mb-10">
-                ¿Qué canciones te gustaría que sonaran en la fiesta? Compártelas con nosotros y las añadiremos a la playlist para darlo todo en la pista 💃
-              </p>
-
-              <button
-                onClick={() => setShowMusicModal(true)}
-                className="inline-flex items-center space-x-3 px-8 py-3 bg-primary hover:bg-primary/90 text-white font-sans text-[10px] uppercase tracking-[0.2em] rounded-full transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 active:scale-95 cursor-pointer"
-              >
-                <Music size={13} />
-                <span>Sugerir Canciones</span>
-              </button>
-
-              {musicList.length > 0 && (
-                <div className="mt-12 text-left max-w-md mx-auto">
-                  <span className="text-[10px] uppercase tracking-wider text-secondary block mb-4 border-b border-primary/10 pb-2 font-sans font-semibold">
-                    Top canciones sugeridas:
-                  </span>
-                  <div className="space-y-3">
-                    {musicList.slice(0, 3).map((song, index) => (
-                      <div
-                        key={song.id}
-                        className="flex items-center justify-between text-xs bg-bg-warm/30 p-2.5 rounded-md border border-primary/5"
-                      >
-                        <div className="flex items-center gap-2.5 min-w-0">
-                          <span className="text-[10px] font-bold text-primary/40 font-sans w-4 shrink-0">#{index + 1}</span>
-                          <div className="min-w-0">
-                            <span className="font-bold text-primary block truncate">{song.title}</span>
-                            <span className="text-secondary">{song.artist}</span>
-                          </div>
-                        </div>
-                        <button
-                          onClick={() => handleVoteSong(song.id)}
-                          className="flex items-center space-x-1.5 px-2 py-1 hover:bg-primary/5 rounded font-sans text-[10px] uppercase text-secondary border border-primary/10 transition-colors shrink-0 ml-2"
-                        >
-                          <Heart size={10} className="fill-primary/20 text-primary" />
-                          <span>{song.votes}</span>
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                  {musicList.length > 3 && (
-                    <button
-                      onClick={() => setShowAllSongsModal(true)}
-                      className="mt-4 w-full py-2 text-[10px] uppercase tracking-wider font-sans font-semibold text-secondary border border-primary/15 rounded-full hover:bg-primary/5 transition-colors cursor-pointer"
-                    >
-                      Ver todas las canciones ({musicList.length})
-                    </button>
-                  )}
-                </div>
-              )}
-            </motion.div>
-          </motion.div>
-        </section>
-
-        {/* 6. NEXT ADVENTURE / LUNA DE MIEL */}
+        {/* 5. NEXT ADVENTURE / REGALO */}
         <section
           id="viaje"
-          className="py-12 relative text-accent"
+          className="pt-16 pb-12 md:pt-20 md:pb-16 relative text-accent"
           style={{
             backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1777711072/texturapapel-limoncello-scaled_cgfzov.jpg")',
             backgroundSize: 'cover',
@@ -1362,7 +1261,7 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* 7. CONFIRMA TU ASISTENCIA (RSVP Form) */}
+        {/* 6. CONFIRMA TU ASISTENCIA (RSVP Form) */}
         <section
           id="confirmacion"
           className="w-full py-12 confirmacion-section"
@@ -1444,6 +1343,108 @@ export default function Home() {
           </motion.div>
         </section>
 
+        {/* 7. PLAYLIST / MUSIC SUGGESTIONS */}
+        <section
+          id="musica"
+          className="w-full py-12 relative"
+          style={{
+            backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1777711072/texturapapel-limoncello-scaled_cgfzov.jpg")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundColor: '#fbf9f4',
+          }}
+        >
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: { staggerChildren: 0.15 }
+              }
+            }}
+            className="max-w-4xl mx-auto px-6 text-center relative z-10"
+          >
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 40 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+              }}
+              className="bg-bg-light border border-primary/10 rounded-sm p-10 md:p-14 shadow-sm relative overflow-hidden"
+            >
+              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-48 h-1 bg-primary/10" />
+              <div className="flex justify-center mb-6">
+                <div className="relative w-28 h-28 md:w-36 md:h-36">
+                  <Image
+                    src="https://res.cloudinary.com/djqtkbyez/image/upload/v1780226276/ChatGPT_Image_31_may_2026_13_17_09_xdrx3s.png"
+                    alt="Música"
+                    fill
+                    className="object-contain"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+              </div>
+
+              <h3 className="font-serif text-2xl md:text-3xl text-primary mb-4 font-light italic">
+                ¿Qué canciones te gustaría que bailemos en la fiesta?
+              </h3>
+
+              <p className="text-secondary text-[15px] italic leading-relaxed max-w-lg mx-auto mb-10">
+                Compartilas con nosotros así ese día lo damos todo 💃
+              </p>
+
+              <button
+                onClick={() => setShowMusicModal(true)}
+                className="inline-flex items-center space-x-3 px-8 py-3 bg-primary hover:bg-primary/90 text-white font-sans text-[10px] uppercase tracking-[0.2em] rounded-full transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 active:scale-95 cursor-pointer"
+              >
+                <Music size={13} />
+                <span>Sugerir Canciones</span>
+              </button>
+
+              {musicList.length > 0 && (
+                <div className="mt-12 text-left max-w-md mx-auto">
+                  <span className="text-[10px] uppercase tracking-wider text-secondary block mb-4 border-b border-primary/10 pb-2 font-sans font-semibold">
+                    Top canciones sugeridas:
+                  </span>
+                  <div className="space-y-3">
+                    {musicList.slice(0, 3).map((song, index) => (
+                      <div
+                        key={song.id}
+                        className="flex items-center justify-between text-xs bg-bg-warm/30 p-2.5 rounded-md border border-primary/5"
+                      >
+                        <div className="flex items-center gap-2.5 min-w-0">
+                          <span className="text-[10px] font-bold text-primary/40 font-sans w-4 shrink-0">#{index + 1}</span>
+                          <div className="min-w-0">
+                            <span className="font-bold text-primary block truncate">{song.title}</span>
+                            <span className="text-secondary">{song.artist}</span>
+                          </div>
+                        </div>
+                        <button
+                          onClick={() => handleVoteSong(song.id)}
+                          className="flex items-center space-x-1.5 px-2 py-1 hover:bg-primary/5 rounded font-sans text-[10px] uppercase text-secondary border border-primary/10 transition-colors shrink-0 ml-2"
+                        >
+                          <Heart size={10} className="fill-primary/20 text-primary" />
+                          <span>{song.votes}</span>
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                  {musicList.length > 3 && (
+                    <button
+                      onClick={() => setShowAllSongsModal(true)}
+                      className="mt-4 w-full py-2 text-[10px] uppercase tracking-wider font-sans font-semibold text-secondary border border-primary/15 rounded-full hover:bg-primary/5 transition-colors cursor-pointer"
+                    >
+                      Ver todas las canciones ({musicList.length})
+                    </button>
+                  )}
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
+        </section>
+
         {/* 8. INFORMACIÓN DE INTERÉS */}
         <section
           id="informacion"
@@ -1501,12 +1502,12 @@ export default function Home() {
                   >
                     Para tu estadía, te recomendamos reservar en el{' '}
                     <a
-                      href="https://maps.app.goo.gl/Z45hk3uDxLtTA3fK8?g_st=iw"
+                      href={weddingConfig.hotelMapUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="font-bold underline hover:text-accent/70 transition-colors cursor-pointer"
                     >
-                      Hotel Quinto Centenario
+                      {weddingConfig.hotelName}
                     </a>{' '}
                     (al hacer tu reserva, recordá mencionar que es a nombre del casamiento de Rocío y Juan).
                   </p>
@@ -1714,14 +1715,24 @@ export default function Home() {
                 </div>
 
                 <div className="bg-bg-warm/60 p-4 rounded-md border border-primary/10 mb-6 relative text-left">
-                  {/* Bank Section */}
-                  <div className="mb-4">
-                    <span className="block text-[8px] font-sans uppercase tracking-[0.2em] text-secondary mb-1 font-bold">
-                      Banco:
-                    </span>
-                    <span className="font-sans text-xs md:text-sm text-primary font-bold">
-                      {weddingConfig.bankDetails.bank}
-                    </span>
+                  {/* Bank & Account number */}
+                  <div className="mb-4 grid grid-cols-2 gap-2">
+                    <div>
+                      <span className="block text-[8px] font-sans uppercase tracking-[0.2em] text-secondary mb-1 font-bold">
+                        Banco:
+                      </span>
+                      <span className="font-sans text-xs md:text-sm text-primary font-bold">
+                        {weddingConfig.bankDetails.bank}
+                      </span>
+                    </div>
+                    <div>
+                      <span className="block text-[8px] font-sans uppercase tracking-[0.2em] text-secondary mb-1 font-bold">
+                        Nº de Cuenta:
+                      </span>
+                      <span className="font-sans text-xs md:text-sm text-primary font-bold">
+                        {weddingConfig.bankDetails[currency].accountNumber}
+                      </span>
+                    </div>
                   </div>
 
                   {/* CBU Section */}
@@ -1770,9 +1781,11 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <span className="block text-[8px] text-secondary mt-3 pt-2 border-t border-primary/5">
-                    Titular: {weddingConfig.bankDetails.holders}
-                  </span>
+                  {/* Titular & CUIT */}
+                  <div className="flex flex-col sm:flex-row sm:justify-between text-xs text-secondary mt-3 pt-2.5 border-t border-primary/10 gap-1.5 font-sans">
+                    <span><strong className="text-primary font-semibold">Titular:</strong> {weddingConfig.bankDetails.holders}</span>
+                    <span><strong className="text-primary font-semibold">CUIT:</strong> {weddingConfig.bankDetails.cuit}</span>
+                  </div>
                 </div>
 
                 <p className="text-[10px] text-secondary uppercase tracking-wider italic">
