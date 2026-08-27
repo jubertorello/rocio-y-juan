@@ -53,6 +53,7 @@ const weddingPhotos = [
 
 export default function Home() {
   const [showMain, setShowMain] = useState(false);
+  const [scrolledPastHero, setScrolledPastHero] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const sectionVideoRef = useRef<HTMLVideoElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -80,6 +81,15 @@ export default function Home() {
     return () => {
       observer.unobserve(video);
     };
+  }, []);
+
+  // Hide scroll indicator once user scrolls past hero
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolledPastHero(window.scrollY > window.innerHeight * 0.5);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   // Play audio on first user interaction — only until audioStarted
@@ -470,7 +480,7 @@ export default function Home() {
         {/* 1. HERO - INITIALS & INVITATION + NOMBRES & FECHA */}
         <section
           id="inicio"
-          className="w-full relative py-16 flex flex-col items-center justify-center text-center overflow-hidden"
+          className="w-full relative py-16 pb-12 pt-20 min-h-screen flex flex-col items-center justify-center text-center overflow-hidden"
           style={{
             backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1782138238/7afade95-eee3-4d2c-92f0-c27559a51b4c_pfpmft.webp")',
             backgroundSize: 'cover',
@@ -544,6 +554,8 @@ export default function Home() {
               </motion.p>
             </motion.div>
           </motion.div>
+
+
         </section>
 
         {/* Section for Couple Names & Date */}
@@ -2008,6 +2020,42 @@ export default function Home() {
             onStartExit={() => setShowMain(true)}
             onComplete={() => setShowMain(true)}
           />
+        )}
+      </AnimatePresence>
+      {/* Fixed scroll indicator — right side, over hero */}
+      <AnimatePresence>
+        {showMain && !scrolledPastHero && (
+          <motion.div
+            key="scroll-indicator"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ delay: 2, duration: 0.5 }}
+            className="fixed right-0 bottom-6 z-50 flex flex-col items-center gap-2 pointer-events-none"
+          >
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
+              className="w-14 h-14 bg-primary/40 backdrop-blur-sm rounded-full shadow-lg flex flex-col items-center justify-center text-bg-light border border-white/20"
+            >
+              <span className="text-[8px] font-sans tracking-[0.2em] uppercase font-bold mt-1 text-white">
+                Scroll
+              </span>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="-mt-1"
+              >
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
     </main>
