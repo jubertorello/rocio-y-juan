@@ -18,12 +18,12 @@ export default function EnvelopeIntro({ onComplete, onStartExit }: EnvelopeIntro
   const [showBackAssets, setShowBackAssets] = useState(false);
 
   const assets = {
-    front: 'https://res.cloudinary.com/djqtkbyez/image/upload/v1782138241/envelope_vzvnkc.webp',
-    backClosed: 'https://res.cloudinary.com/djqtkbyez/image/upload/v1782138240/envelope_3_x1vucq.webp',
-    base: 'https://res.cloudinary.com/djqtkbyez/image/upload/v1782138238/4072.portrait.back_liqheu.webp',
-    flapClosed: 'https://res.cloudinary.com/djqtkbyez/image/upload/v1782138240/envelope_4_gxzbpf.webp',
-    flapOpen: 'https://res.cloudinary.com/djqtkbyez/image/upload/v1782138411/flapopen.webp',
-    cardBg: 'https://res.cloudinary.com/djqtkbyez/image/upload/v1777711072/texturapapel-limoncello-scaled_cgfzov.jpg'
+    front: 'https://res.cloudinary.com/scihumn2/image/upload/v1789748032/rocio-y-juan/envelope_vzvnkc.webp',
+    backClosed: 'https://res.cloudinary.com/scihumn2/image/upload/v1789748029/rocio-y-juan/envelope_3_x1vucq.webp',
+    base: 'https://res.cloudinary.com/scihumn2/image/upload/v1789748027/rocio-y-juan/4072.portrait.back_liqheu.webp',
+    flapClosed: 'https://res.cloudinary.com/scihumn2/image/upload/v1789748031/rocio-y-juan/envelope_4_gxzbpf.webp',
+    flapOpen: 'https://res.cloudinary.com/scihumn2/image/upload/v1789748033/rocio-y-juan/flapopen.webp',
+    cardBg: 'https://res.cloudinary.com/scihumn2/image/upload/v1789748012/rocio-y-juan/texturapapel-limoncello-scaled_cgfzov.jpg'
   };
 
   useEffect(() => {
@@ -56,7 +56,7 @@ export default function EnvelopeIntro({ onComplete, onStartExit }: EnvelopeIntro
           <div
             className="absolute -inset-y-16 inset-x-0 z-[-1] md:hidden"
             style={{
-              backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1782379379/An%CC%83adir_un_ti%CC%81tulo_11_ymomd0.png")',
+              backgroundImage: 'url("https://res.cloudinary.com/scihumn2/image/upload/v1789748048/rocio-y-juan/Anadir_un_titulo_11_ymomd0.png")',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundColor: '#faf8f3',
@@ -67,7 +67,7 @@ export default function EnvelopeIntro({ onComplete, onStartExit }: EnvelopeIntro
           <div
             className="absolute inset-0 z-[-1] hidden md:block"
             style={{
-              backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1782377623/Disen%CC%83o_sin_ti%CC%81tulo_9_yb1wm6.png")',
+              backgroundImage: 'url("https://res.cloudinary.com/scihumn2/image/upload/v1789748046/rocio-y-juan/Diseno_sin_titulo_9_yb1wm6.png")',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundColor: '#faf8f3',

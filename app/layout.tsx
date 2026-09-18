@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     locale: 'es_ES',
     images: [
       {
-        url: 'https://res.cloudinary.com/djqtkbyez/image/upload/v1782215811/Disen%CC%83o_sin_ti%CC%81tulo_8_rsgpql.png',
+        url: 'https://res.cloudinary.com/scihumn2/image/upload/v1789748037/rocio-y-juan/Diseno_sin_titulo_8_rsgpql.png',
         width: 1200,
         height: 630,
         type: 'image/png',
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: `${weddingConfig.shortNames} · ${weddingConfig.weddingDay}.${weddingConfig.weddingMonth === 'Septiembre' ? '09' : '10'}.${weddingConfig.weddingYear}`,
     description: `¡Nos casamos! El ${weddingConfig.weddingDateText} celebramos el día más importante de nuestra vida y nos encantaría que nos acompañes.`,
-    images: ['https://res.cloudinary.com/djqtkbyez/image/upload/v1782215811/Disen%CC%83o_sin_ti%CC%81tulo_8_rsgpql.png'],
+    images: ['https://res.cloudinary.com/scihumn2/image/upload/v1789748037/rocio-y-juan/Diseno_sin_titulo_8_rsgpql.png'],
   },
 };
 
@@ -56,7 +56,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
         <div 
           className="fixed inset-0 pointer-events-none z-[-1] bg-[#fbf9f4]" 
           style={{ 
-            backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1777711072/texturapapel-limoncello-scaled_cgfzov.jpg")',
+            backgroundImage: 'url("https://res.cloudinary.com/scihumn2/image/upload/v1789748012/rocio-y-juan/texturapapel-limoncello-scaled_cgfzov.jpg")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}

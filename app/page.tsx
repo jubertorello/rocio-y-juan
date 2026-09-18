@@ -43,12 +43,12 @@ interface SuggestedSong {
 }
 
 const weddingPhotos = [
-  "https://res.cloudinary.com/djqtkbyez/image/upload/v1779325282/PHOTO-2026-05-17-16-41-18_yxwhdd.jpg",
-  "https://res.cloudinary.com/djqtkbyez/image/upload/v1779325282/PHOTO-2026-05-17-16-47-47_gvmlkc.jpg", // grande central
-  "https://res.cloudinary.com/djqtkbyez/image/upload/v1779325282/PHOTO-2026-05-17-16-41-17_w4a3qm.jpg",
-  "https://res.cloudinary.com/djqtkbyez/image/upload/v1779325282/PHOTO-2026-05-17-16-41-17_2_zhvxcp.jpg",
-  "https://res.cloudinary.com/djqtkbyez/image/upload/v1780340179/74ea0529-8ba3-4380-b687-f34ced26c06d_vw7cs1.jpg",
-  "https://res.cloudinary.com/djqtkbyez/image/upload/v1780340179/c62f8ae5-e96b-46bb-b6ce-27a6dfa36272_ztmret.jpg",
+  "https://res.cloudinary.com/scihumn2/image/upload/v1789748017/rocio-y-juan/PHOTO-2026-05-17-16-41-18_yxwhdd.jpg",
+  "https://res.cloudinary.com/scihumn2/image/upload/v1789748019/rocio-y-juan/PHOTO-2026-05-17-16-47-47_gvmlkc.jpg", // grande central
+  "https://res.cloudinary.com/scihumn2/image/upload/v1789748015/rocio-y-juan/PHOTO-2026-05-17-16-41-17_w4a3qm.jpg",
+  "https://res.cloudinary.com/scihumn2/image/upload/v1789748014/rocio-y-juan/PHOTO-2026-05-17-16-41-17_2_zhvxcp.jpg",
+  "https://res.cloudinary.com/scihumn2/image/upload/v1789748023/rocio-y-juan/74ea0529-8ba3-4380-b687-f34ced26c06d_vw7cs1.jpg",
+  "https://res.cloudinary.com/scihumn2/image/upload/v1789748025/rocio-y-juan/c62f8ae5-e96b-46bb-b6ce-27a6dfa36272_ztmret.jpg",
 ];
 
 export default function Home() {
@@ -329,7 +329,7 @@ export default function Home() {
   return (
     <main className={`min-h-screen relative selection:bg-primary/20 select-none md:select-text ${!showMain ? 'h-screen overflow-hidden' : ''}`}>
       <audio ref={audioRef} loop preload="auto">
-        <source src="https://res.cloudinary.com/djqtkbyez/video/upload/v1782844474/Felicita%CC%80_-_Al_Bano_Romina_Power___Sax_and_Violin___Daniele_Vitale_Karolina_Protsenko_-_64_Kbps_iyy37x.mp3" type="audio/mpeg" />
+        <source src="https://res.cloudinary.com/scihumn2/video/upload/v1789748052/rocio-y-juan/Felicita_-_Al_Bano_Romina_Power___Sax_and_Violin___Daniele_Vitale_Karolina_Protsenko_-_64_Kbps_iyy37x.mp3" type="audio/mpeg" />
       </audio>
 
       {/* Botón mute flotante — visible desde que arranca el audio */}
@@ -482,7 +482,7 @@ export default function Home() {
           id="inicio"
           className="w-full relative py-16 pb-12 pt-20 min-h-screen flex flex-col items-center justify-center text-center overflow-hidden"
           style={{
-            backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1782138238/7afade95-eee3-4d2c-92f0-c27559a51b4c_pfpmft.webp")',
+            backgroundImage: 'url("https://res.cloudinary.com/scihumn2/image/upload/v1789748028/rocio-y-juan/7afade95-eee3-4d2c-92f0-c27559a51b4c_pfpmft.webp")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundColor: '#afb5a6',
@@ -563,7 +563,7 @@ export default function Home() {
           id="bienvenida"
           className="w-full relative pt-12 pb-8 flex flex-col items-center justify-center text-center overflow-hidden"
           style={{
-            backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1777711072/texturapapel-limoncello-scaled_cgfzov.jpg")',
+            backgroundImage: 'url("https://res.cloudinary.com/scihumn2/image/upload/v1789748012/rocio-y-juan/texturapapel-limoncello-scaled_cgfzov.jpg")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundColor: '#fbf9f4',
@@ -679,7 +679,7 @@ export default function Home() {
           id="lugar"
           className="w-full pt-8 pb-12 md:pt-12 md:pb-24 relative"
           style={{
-            backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1777711072/texturapapel-limoncello-scaled_cgfzov.jpg")',
+            backgroundImage: 'url("https://res.cloudinary.com/scihumn2/image/upload/v1789748012/rocio-y-juan/texturapapel-limoncello-scaled_cgfzov.jpg")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundColor: '#fbf9f4',
@@ -741,7 +741,7 @@ export default function Home() {
 
                   <div className="relative h-64 md:h-72 w-full">
                     <Image
-                      src="https://res.cloudinary.com/djqtkbyez/image/upload/v1782205830/capilla.png"
+                      src="https://res.cloudinary.com/scihumn2/image/upload/v1789748034/rocio-y-juan/capilla.png"
                       alt="Lugar de la Ceremonia"
                       fill
                       priority
@@ -796,7 +796,7 @@ export default function Home() {
 
                   <div className="relative h-64 md:h-72 w-full">
                     <Image
-                      src="https://res.cloudinary.com/djqtkbyez/image/upload/v1782233059/WhatsApp_Image_2026-06-23_at_16.17.38-removebg-preview_yv0jqz.png"
+                      src="https://res.cloudinary.com/scihumn2/image/upload/v1789748039/rocio-y-juan/WhatsApp_Image_2026-06-23_at_16.17.38-removebg-preview_yv0jqz.png"
                       alt="Lugar de la Celebración"
                       fill
                       priority
@@ -832,7 +832,7 @@ export default function Home() {
           id="fotos"
           className="py-16 relative overflow-hidden"
           style={{
-            backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1782138238/7afade95-eee3-4d2c-92f0-c27559a51b4c_pfpmft.webp")',
+            backgroundImage: 'url("https://res.cloudinary.com/scihumn2/image/upload/v1789748028/rocio-y-juan/7afade95-eee3-4d2c-92f0-c27559a51b4c_pfpmft.webp")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundColor: '#afb5a6',
@@ -946,7 +946,7 @@ export default function Home() {
             >
               <video
                 ref={sectionVideoRef}
-                src="https://res.cloudinary.com/djqtkbyez/video/upload/v1782850085/WhatsApp_Video_2026-06-24_at_01.33.58_kvtvwr.mp4"
+                src="https://res.cloudinary.com/scihumn2/video/upload/v1789748055/rocio-y-juan/WhatsApp_Video_2026-06-24_at_01.33.58_kvtvwr.mp4"
                 autoPlay
                 loop
                 muted
@@ -965,7 +965,7 @@ export default function Home() {
           id="itinerario"
           className="pt-12 pb-20 md:pt-16 md:pb-28 text-primary itinerario-section"
           style={{
-            backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1777711072/texturapapel-limoncello-scaled_cgfzov.jpg")',
+            backgroundImage: 'url("https://res.cloudinary.com/scihumn2/image/upload/v1789748012/rocio-y-juan/texturapapel-limoncello-scaled_cgfzov.jpg")',
             backgroundSize: 'contain',
             backgroundPosition: 'top center',
             backgroundRepeat: 'repeat',
@@ -1022,7 +1022,7 @@ export default function Home() {
                   <div className="absolute left-[60px] md:left-1/2 transform -translate-x-1/2 flex items-center justify-center z-10">
                     <div className="relative w-28 h-28 md:w-36 md:h-36">
                       <Image
-                        src="https://res.cloudinary.com/djqtkbyez/image/upload/v1782206513/ceremonia-itinerario.png"
+                        src="https://res.cloudinary.com/scihumn2/image/upload/v1789748036/rocio-y-juan/ceremonia-itinerario.png"
                         alt="La Ceremonia"
                         fill
                         className="object-contain"
@@ -1052,7 +1052,7 @@ export default function Home() {
                   <div className="absolute left-[60px] md:left-1/2 transform -translate-x-1/2 flex items-center justify-center z-10">
                     <div className="relative w-28 h-28 md:w-36 md:h-36">
                       <Image
-                        src="https://res.cloudinary.com/djqtkbyez/image/upload/v1782233461/WhatsApp_Image_2026-06-23_at_16.29.23-removebg-preview_ozq2km.png"
+                        src="https://res.cloudinary.com/scihumn2/image/upload/v1789748042/rocio-y-juan/WhatsApp_Image_2026-06-23_at_16.29.23-removebg-preview_ozq2km.png"
                         alt="El Cóctel"
                         fill
                         className="object-contain"
@@ -1083,7 +1083,7 @@ export default function Home() {
                   <div className="absolute left-[60px] md:left-1/2 transform -translate-x-1/2 flex items-center justify-center z-10">
                     <div className="relative w-28 h-28 md:w-36 md:h-36">
                       <Image
-                        src="https://res.cloudinary.com/djqtkbyez/image/upload/v1782233574/WhatsApp_Image_2026-06-23_at_16.45.59-removebg-preview_dggjb1.png"
+                        src="https://res.cloudinary.com/scihumn2/image/upload/v1789748043/rocio-y-juan/WhatsApp_Image_2026-06-23_at_16.45.59-removebg-preview_dggjb1.png"
                         alt="Boda Civil"
                         fill
                         className="object-contain"
@@ -1113,7 +1113,7 @@ export default function Home() {
                   <div className="absolute left-[60px] md:left-1/2 transform -translate-x-1/2 flex items-center justify-center z-10">
                     <div className="relative w-28 h-28 md:w-36 md:h-36">
                       <Image
-                        src="https://res.cloudinary.com/djqtkbyez/image/upload/v1782233388/WhatsApp_Image_2026-06-23_at_16.21.06__1_-removebg-preview_ljw5cw.png"
+                        src="https://res.cloudinary.com/scihumn2/image/upload/v1789748040/rocio-y-juan/WhatsApp_Image_2026-06-23_at_16.21.06__1_-removebg-preview_ljw5cw.png"
                         alt="La Cena"
                         fill
                         className="object-contain"
@@ -1144,7 +1144,7 @@ export default function Home() {
                   <div className="absolute left-[60px] md:left-1/2 transform -translate-x-1/2 flex items-center justify-center z-10">
                     <div className="relative w-28 h-28 md:w-36 md:h-36">
                       <Image
-                        src="https://res.cloudinary.com/djqtkbyez/image/upload/v1782844020/WhatsApp_Image_2026-06-30_at_20.19.23-removebg-preview_qxlv2n.png"
+                        src="https://res.cloudinary.com/scihumn2/image/upload/v1789748050/rocio-y-juan/WhatsApp_Image_2026-06-30_at_20.19.23-removebg-preview_qxlv2n.png"
                         alt="El Baile & Fiesta"
                         fill
                         className="object-contain"
@@ -1172,7 +1172,7 @@ export default function Home() {
           id="viaje"
           className="pt-16 pb-12 md:pt-20 md:pb-16 relative text-accent"
           style={{
-            backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1777711072/texturapapel-limoncello-scaled_cgfzov.jpg")',
+            backgroundImage: 'url("https://res.cloudinary.com/scihumn2/image/upload/v1789748012/rocio-y-juan/texturapapel-limoncello-scaled_cgfzov.jpg")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundColor: '#C9CEBA',
@@ -1262,7 +1262,7 @@ export default function Home() {
                 className="relative w-84 h-50 md:w-90 md:h-62"
               >
                 <Image
-                  src="https://res.cloudinary.com/djqtkbyez/image/upload/v1782843667/WhatsApp_Image_2026-06-30_at_20.16.59-removebg-preview_irfc66.png"
+                  src="https://res.cloudinary.com/scihumn2/image/upload/v1789748049/rocio-y-juan/WhatsApp_Image_2026-06-30_at_20.16.59-removebg-preview_irfc66.png"
                   alt="Regalo"
                   fill
                   className="object-contain"
@@ -1278,7 +1278,7 @@ export default function Home() {
           id="confirmacion"
           className="w-full py-12 confirmacion-section"
           style={{
-            backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1777711072/texturapapel-limoncello-scaled_cgfzov.jpg")',
+            backgroundImage: 'url("https://res.cloudinary.com/scihumn2/image/upload/v1789748012/rocio-y-juan/texturapapel-limoncello-scaled_cgfzov.jpg")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundColor: '#C9CEBA',
@@ -1360,7 +1360,7 @@ export default function Home() {
           id="musica"
           className="w-full py-12 relative"
           style={{
-            backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1777711072/texturapapel-limoncello-scaled_cgfzov.jpg")',
+            backgroundImage: 'url("https://res.cloudinary.com/scihumn2/image/upload/v1789748012/rocio-y-juan/texturapapel-limoncello-scaled_cgfzov.jpg")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundColor: '#fbf9f4',
@@ -1390,7 +1390,7 @@ export default function Home() {
               <div className="flex justify-center mb-6">
                 <div className="relative w-28 h-28 md:w-36 md:h-36">
                   <Image
-                    src="https://res.cloudinary.com/djqtkbyez/image/upload/v1780226276/ChatGPT_Image_31_may_2026_13_17_09_xdrx3s.png"
+                    src="https://res.cloudinary.com/scihumn2/image/upload/v1789748021/rocio-y-juan/ChatGPT_Image_31_may_2026_13_17_09_xdrx3s.png"
                     alt="Música"
                     fill
                     className="object-contain"
@@ -1462,7 +1462,7 @@ export default function Home() {
           id="informacion"
           className="py-12 relative"
           style={{
-            backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1777711072/texturapapel-limoncello-scaled_cgfzov.jpg")',
+            backgroundImage: 'url("https://res.cloudinary.com/scihumn2/image/upload/v1789748012/rocio-y-juan/texturapapel-limoncello-scaled_cgfzov.jpg")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundColor: '#fbf9f4',
@@ -1555,7 +1555,7 @@ export default function Home() {
         <section
           className="py-12 dudas-section"
           style={{
-            backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1777711072/texturapapel-limoncello-scaled_cgfzov.jpg")',
+            backgroundImage: 'url("https://res.cloudinary.com/scihumn2/image/upload/v1789748012/rocio-y-juan/texturapapel-limoncello-scaled_cgfzov.jpg")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundColor: '#C9CEBA',
@@ -1629,7 +1629,7 @@ export default function Home() {
         <footer
           className="pt-28 pb-16 md:pt-32 md:pb-20 text-center relative overflow-hidden bg-bg-dark"
           style={{
-            backgroundImage: 'url("https://res.cloudinary.com/djqtkbyez/image/upload/v1782138238/7afade95-eee3-4d2c-92f0-c27559a51b4c_pfpmft.webp")',
+            backgroundImage: 'url("https://res.cloudinary.com/scihumn2/image/upload/v1789748028/rocio-y-juan/7afade95-eee3-4d2c-92f0-c27559a51b4c_pfpmft.webp")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundColor: '#afb5a6',
