@@ -1,15 +1,18 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { supabase } from '@/lib/supabase';
-import { Users, Music, Calendar, Clock, LogOut, Check, Heart, Bus, Download, RefreshCw, Eye, EyeOff, X, Trash2 } from 'lucide-react';
+import { Users, Music, Calendar, Clock, LogOut, Check, Heart, Bus, Download, RefreshCw, Eye, EyeOff, X, Trash2, Pencil, AlertTriangle, UserPlus } from 'lucide-react';
 
 interface UserSession {
   role: 'client' | 'master';
   clientId: string;
   displayName: string;
-  passwordUsed: string;
 }
+
+// La sesión queda guardada en el navegador durante estos días
+const SESSION_STORAGE_KEY = 'admin_session';
+const SESSION_DAYS = 7;
 
 interface ClientInfo {
   client_id: string;
@@ -25,8 +28,19 @@ export default function AdminDashboard() {
 
   const [rsvps, setRsvps] = useState<any[]>([]);
   const [songs, setSongs] = useState<any[]>([]);
-  const [selectedRsvp, setSelectedRsvp] = useState<any | null>(null);
+  const [selectedRsvpId, setSelectedRsvpId] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
+
+  // Edición y eliminación
+  const [editing, setEditing] = useState<any | null>(null);
+  const [savingEdit, setSavingEdit] = useState(false);
+  const [confirmDialog, setConfirmDialog] = useState<{
+    title: string;
+    description: string;
+    confirmLabel: string;
+    onConfirm: () => Promise<void>;
+  } | null>(null);
+  const [confirmBusy, setConfirmBusy] = useState(false);
 
   // Multi-tenant states
   const [userSession, setUserSession] = useState<UserSession | null>(null);
@@ -113,6 +127,29 @@ export default function AdminDashboard() {
     return result;
   }, [rsvps, searchTerm, attendanceFilter, busFilter, dietaryFilter, sortBy]);
 
+  // Detalle abierto, derivado de la lista para que refleje ediciones y borrados
+  const selectedRsvp = React.useMemo(() => {
+    if (!selectedRsvpId) return null;
+    const rsvp = rsvps.find((r: any) => r.id === selectedRsvpId);
+    if (!rsvp) return null;
+    return { rsvp, companions: rsvps.filter((c: any) => c.parent_rsvp_id === rsvp.id) };
+  }, [rsvps, selectedRsvpId]);
+
+  const saveSession = (session: UserSession, clients: ClientInfo[]) => {
+    try {
+      localStorage.setItem(
+        SESSION_STORAGE_KEY,
+        JSON.stringify({
+          session,
+          clients,
+          expiresAt: Date.now() + SESSION_DAYS * 24 * 60 * 60 * 1000
+        })
+      );
+    } catch {
+      // si el navegador bloquea el almacenamiento, la sesión dura solo esta visita
+    }
+  };
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!username.trim() || !password.trim()) return;
@@ -134,22 +171,24 @@ export default function AdminDashboard() {
         const session: UserSession = {
           role: data[0].role as 'client' | 'master',
           clientId: data[0].client_id,
-          displayName: data[0].display_name,
-          passwordUsed: password.trim()
+          displayName: data[0].display_name
         };
         setUserSession(session);
         setIsAuthenticated(true);
 
         // If master admin, fetch clients list
+        let clients: ClientInfo[] = [];
         if (session.role === 'master') {
           const { data: listData } = await supabase.rpc('get_clients_list', {
             master_password: password.trim()
           });
           if (listData) {
+            clients = listData;
             setClientsList(listData);
           }
         }
 
+        saveSession(session, clients);
         await fetchData(session, session.role === 'master' ? 'all' : session.clientId);
       } else {
         alert('Usuario o contraseña incorrecta');
@@ -191,12 +230,56 @@ export default function AdminDashboard() {
     }
   };
 
+  // Recupera la sesión guardada al abrir o actualizar la página
+  useEffect(() => {
+    const restoreSession = () => {
+      let stored: string | null = null;
+      try {
+        stored = localStorage.getItem(SESSION_STORAGE_KEY);
+      } catch {
+        return;
+      }
+      if (!stored) return;
+
+      try {
+        const parsed = JSON.parse(stored);
+        if (!parsed?.session?.role || !parsed?.expiresAt || Date.now() > parsed.expiresAt) {
+          localStorage.removeItem(SESSION_STORAGE_KEY);
+          return;
+        }
+
+        const session: UserSession = parsed.session;
+        setUserSession(session);
+        setIsAuthenticated(true);
+        if (session.role === 'master' && Array.isArray(parsed.clients)) {
+          setClientsList(parsed.clients);
+        }
+        fetchData(session, session.role === 'master' ? 'all' : session.clientId);
+      } catch {
+        try {
+          localStorage.removeItem(SESSION_STORAGE_KEY);
+        } catch {
+          // nada que hacer
+        }
+      }
+    };
+
+    const timer = setTimeout(restoreSession, 0);
+    return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const handleClientFilterChange = async (clientId: string) => {
     setSelectedClientId(clientId);
     await fetchData(userSession, clientId);
   };
 
   const handleLogout = () => {
+    try {
+      localStorage.removeItem(SESSION_STORAGE_KEY);
+    } catch {
+      // el navegador puede bloquear el almacenamiento: no es motivo para fallar
+    }
     setIsAuthenticated(false);
     setUserSession(null);
     setRsvps([]);
@@ -207,15 +290,250 @@ export default function AdminDashboard() {
     setPassword('');
   };
 
-  const handleDeleteSong = async (songId: string) => {
-    if (!confirm('¿Estás seguro de que quieres eliminar esta canción?')) return;
+  const parentNameOf = (companion: any) => {
+    const parent = rsvps.find((r: any) => r.id === companion.parent_rsvp_id);
+    return parent?.guest_name || '';
+  };
+
+  const askDeleteSong = (song: any) => {
+    setConfirmDialog({
+      title: 'Eliminar canción',
+      description: `Se eliminará «${song.title}»${song.artist ? ` de ${song.artist}` : ''} de la lista de sugerencias. Esta acción no se puede deshacer.`,
+      confirmLabel: 'Eliminar canción',
+      onConfirm: async () => {
+        const { error } = await supabase.from('songs').delete().eq('id', song.id);
+        if (error) throw error;
+        setSongs(prevSongs => prevSongs.filter(s => s.id !== song.id));
+      },
+    });
+  };
+
+  const askDeleteRsvp = (rsvp: any, companions: any[]) => {
+    const name = rsvp.guest_name || 'este invitado';
+    setConfirmDialog({
+      title: 'Eliminar confirmación',
+      description: companions.length > 0
+        ? `Se eliminará la confirmación de ${name} y también la de sus ${companions.length} acompañante${companions.length > 1 ? 's' : ''}. Esta acción no se puede deshacer.`
+        : `Se eliminará la confirmación de ${name}. Esta acción no se puede deshacer.`,
+      confirmLabel: 'Eliminar',
+      onConfirm: async () => {
+        if (companions.length > 0) {
+          const { error: companionsError } = await supabase.from('rsvps').delete().eq('parent_rsvp_id', rsvp.id);
+          if (companionsError) throw companionsError;
+        }
+        const { error } = await supabase.from('rsvps').delete().eq('id', rsvp.id);
+        if (error) throw error;
+        const deletedIds = new Set<string>([rsvp.id, ...companions.map((c: any) => c.id)]);
+        setRsvps(prev => prev.filter((r: any) => !deletedIds.has(r.id)));
+        setSelectedRsvpId(prev => (prev === rsvp.id ? null : prev));
+      },
+    });
+  };
+
+  const askDeleteCompanion = (companion: any) => {
+    setConfirmDialog({
+      title: 'Eliminar acompañante',
+      description: (() => {
+        const parentName = parentNameOf(companion);
+        return `Se eliminará a ${companion.guest_name || 'este acompañante'}${parentName ? `, acompañante de ${parentName}` : ''}. Esta acción no se puede deshacer.`;
+      })(),
+      confirmLabel: 'Eliminar',
+      onConfirm: async () => {
+        const { error } = await supabase.from('rsvps').delete().eq('id', companion.id);
+        if (error) throw error;
+        setRsvps(prev => prev.filter((r: any) => r.id !== companion.id));
+      },
+    });
+  };
+
+  const runConfirm = async () => {
+    if (!confirmDialog) return;
+    setConfirmBusy(true);
     try {
-      const { error } = await supabase.from('songs').delete().eq('id', songId);
-      if (error) throw error;
-      setSongs(prevSongs => prevSongs.filter(s => s.id !== songId));
+      await confirmDialog.onConfirm();
+      setConfirmDialog(null);
     } catch (error) {
-      console.error('Error deleting song:', error);
-      alert('Error al eliminar la canción');
+      console.error('Error al eliminar:', error);
+      alert('No se pudo eliminar. Inténtalo de nuevo.');
+    } finally {
+      setConfirmBusy(false);
+    }
+  };
+
+  const companionKeySeq = useRef(0);
+
+  const newCompanionDraft = () => ({
+    key: `nuevo-${(companionKeySeq.current += 1)}`,
+    guest_name: '',
+    dietary_restrictions: '',
+    bus_ida: false,
+    bus_vuelta: false,
+  });
+
+  // Abre la ficha completa: invitado principal + sus acompañantes
+  const openGroupEdit = (rsvp: any, options?: { addCompanion?: boolean }) => {
+    const companions = rsvps
+      .filter((c: any) => c.parent_rsvp_id === rsvp.id)
+      .map((c: any) => ({
+        key: c.id,
+        id: c.id,
+        guest_name: c.guest_name || '',
+        dietary_restrictions: c.dietary_restrictions || '',
+        bus_ida: !!c.bus_ida,
+        bus_vuelta: !!c.bus_vuelta,
+      }));
+
+    setEditing({
+      mode: 'group',
+      main: { ...rsvp },
+      companions: options?.addCompanion ? [...companions, newCompanionDraft()] : companions,
+      removedIds: [] as string[],
+    });
+  };
+
+  // Ficha de un solo acompañante, indicando de quién es
+  const openCompanionEdit = (companion: any) => {
+    const parent = rsvps.find((r: any) => r.id === companion.parent_rsvp_id);
+    if (!parent) return;
+    setEditing({
+      mode: 'companion',
+      main: { ...parent },
+      companions: [{
+        key: companion.id,
+        id: companion.id,
+        guest_name: companion.guest_name || '',
+        dietary_restrictions: companion.dietary_restrictions || '',
+        bus_ida: !!companion.bus_ida,
+        bus_vuelta: !!companion.bus_vuelta,
+      }],
+      removedIds: [] as string[],
+    });
+  };
+
+  const updateMainField = (field: string, value: any) => {
+    setEditing((prev: any) => (prev ? { ...prev, main: { ...prev.main, [field]: value } } : prev));
+  };
+
+  const updateCompanionField = (key: string, field: string, value: any) => {
+    setEditing((prev: any) =>
+      prev
+        ? { ...prev, companions: prev.companions.map((c: any) => (c.key === key ? { ...c, [field]: value } : c)) }
+        : prev
+    );
+  };
+
+  const addCompanionDraft = () => {
+    setEditing((prev: any) => (prev ? { ...prev, companions: [...prev.companions, newCompanionDraft()] } : prev));
+  };
+
+  const removeCompanionDraft = (companion: any) => {
+    const drop = () => {
+      setEditing((prev: any) =>
+        prev
+          ? {
+              ...prev,
+              companions: prev.companions.filter((c: any) => c.key !== companion.key),
+              removedIds: companion.id ? [...prev.removedIds, companion.id] : prev.removedIds,
+            }
+          : prev
+      );
+    };
+
+    // Los acompañantes que todavía no están guardados se quitan sin preguntar
+    if (!companion.id) {
+      drop();
+      return;
+    }
+
+    setConfirmDialog({
+      title: 'Quitar acompañante',
+      description: `Se eliminará a ${companion.guest_name || 'este acompañante'} al guardar los cambios. Esta acción no se puede deshacer.`,
+      confirmLabel: 'Quitar',
+      onConfirm: async () => {
+        drop();
+      },
+    });
+  };
+
+  // Guarda de una sola vez el invitado principal, sus acompañantes y los que se quitaron
+  const handleSaveEdit = async () => {
+    if (!editing) return;
+    const draft = editing;
+    setSavingEdit(true);
+    try {
+      const attending = draft.main.attending !== false;
+      const mainPayload = {
+        guest_name: (draft.main.guest_name || '').trim() || null,
+        attending,
+        dietary_restrictions: attending ? (draft.main.dietary_restrictions || '').trim() : '',
+        bus_ida: attending ? !!draft.main.bus_ida : false,
+        bus_vuelta: attending ? !!draft.main.bus_vuelta : false,
+        message: (draft.main.message || '').trim(),
+      };
+
+      let mainData: any = null;
+      if (draft.mode !== 'companion') {
+        const { data, error: mainError } = await supabase
+          .from('rsvps')
+          .update(mainPayload)
+          .eq('id', draft.main.id)
+          .select()
+          .single();
+        if (mainError) throw mainError;
+        mainData = data;
+      }
+
+      if (draft.removedIds.length > 0) {
+        const { error: removeError } = await supabase.from('rsvps').delete().in('id', draft.removedIds);
+        if (removeError) throw removeError;
+      }
+
+      const savedCompanions: any[] = [];
+      const newCompanions: any[] = [];
+
+      for (const companion of draft.companions) {
+        const name = (companion.guest_name || '').trim();
+        const payload = {
+          guest_name: name || null,
+          attending: true,
+          dietary_restrictions: (companion.dietary_restrictions || '').trim(),
+          bus_ida: !!companion.bus_ida,
+          bus_vuelta: !!companion.bus_vuelta,
+          message: '',
+        };
+
+        if (companion.id) {
+          const { data, error } = await supabase.from('rsvps').update(payload).eq('id', companion.id).select().single();
+          if (error) throw error;
+          savedCompanions.push(data);
+        } else if (name) {
+          const { data, error } = await supabase
+            .from('rsvps')
+            .insert([{ ...payload, client_id: draft.main.client_id, parent_rsvp_id: draft.main.id }])
+            .select()
+            .single();
+          if (error) throw error;
+          newCompanions.push(data);
+        }
+      }
+
+      setRsvps(prev => {
+        const removed = new Set<string>(draft.removedIds);
+        const changed = new Map<string, any>(
+          [mainData, ...savedCompanions].filter(Boolean).map((r: any) => [r.id, r])
+        );
+        const next = prev
+          .filter((r: any) => !removed.has(r.id))
+          .map((r: any) => (changed.has(r.id) ? { ...r, ...changed.get(r.id) } : r));
+        return [...next, ...newCompanions];
+      });
+
+      setEditing(null);
+    } catch (error) {
+      console.error('Error al guardar los cambios:', error);
+      alert('No se pudieron guardar los cambios. Inténtalo de nuevo.');
+    } finally {
+      setSavingEdit(false);
     }
   };
 
@@ -634,8 +952,14 @@ export default function AdminDashboard() {
                               </p>
                             </div>
                             <div className="flex items-center gap-2">
-                              <button onClick={() => setSelectedRsvp({ rsvp, companions })} className="p-1.5 rounded-full hover:bg-bg-warm text-secondary transition-colors">
+                              <button onClick={() => setSelectedRsvpId(rsvp.id)} className="p-1.5 rounded-full hover:bg-bg-warm text-secondary transition-colors" title="Ver detalle">
                                 <Eye size={14} />
+                              </button>
+                              <button onClick={() => openGroupEdit(rsvp)} className="p-1.5 rounded-full hover:bg-bg-warm text-secondary transition-colors" title="Editar">
+                                <Pencil size={14} />
+                              </button>
+                              <button onClick={() => askDeleteRsvp(rsvp, companions)} className="p-1.5 rounded-full hover:bg-red-50 text-red-500 transition-colors" title="Eliminar">
+                                <Trash2 size={14} />
                               </button>
                               <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-sans font-semibold uppercase tracking-wide ${isAttending ? 'bg-primary/10 text-primary' : 'bg-red-50 text-red-500'}`}>
                                 {isAttending ? 'Sí' : 'No'}
@@ -653,14 +977,24 @@ export default function AdminDashboard() {
                             <p className="text-xs text-secondary italic mt-2 pt-2 border-t border-primary/5">"{rsvp.message}"</p>
                           )}
                           {companions.map((c: any, ci: number) => (
-                            <div key={c.id} className="mt-2 pl-3 border-l-2 border-primary/10 pt-1">
-                              <p className="text-xs text-primary font-medium">
-                                <span className="text-[9px] uppercase tracking-wider text-secondary/60 mr-1">Acomp. {ci + 1}</span>
-                                {c.guest_name || '-'}
-                              </p>
-                              <div className="text-[10px] text-secondary mt-0.5 flex gap-3">
-                                {c.dietary_restrictions && <span>Intol.: {c.dietary_restrictions}</span>}
-                                <span>Bus: {[c.bus_ida && 'Ida', c.bus_vuelta && 'Vuelta'].filter(Boolean).join(' + ') || 'No'}</span>
+                            <div key={c.id} className="mt-2 pl-3 border-l-2 border-primary/10 pt-1 flex items-start justify-between gap-2">
+                              <div className="min-w-0">
+                                <p className="text-xs text-primary font-medium">
+                                  <span className="text-[9px] uppercase tracking-wider text-secondary/60 mr-1">Acomp. {ci + 1}</span>
+                                  {c.guest_name || '-'}
+                                </p>
+                                <div className="text-[10px] text-secondary mt-0.5 flex gap-3">
+                                  {c.dietary_restrictions && <span>Intol.: {c.dietary_restrictions}</span>}
+                                  <span>Bus: {[c.bus_ida && 'Ida', c.bus_vuelta && 'Vuelta'].filter(Boolean).join(' + ') || 'No'}</span>
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-1 shrink-0">
+                                <button onClick={() => openCompanionEdit(c)} className="p-1.5 rounded-full hover:bg-bg-warm text-secondary transition-colors" title="Editar acompañante">
+                                  <Pencil size={12} />
+                                </button>
+                                <button onClick={() => askDeleteCompanion(c)} className="p-1.5 rounded-full hover:bg-red-50 text-red-500 transition-colors" title="Eliminar acompañante">
+                                  <Trash2 size={12} />
+                                </button>
                               </div>
                             </div>
                           ))}
@@ -684,7 +1018,7 @@ export default function AdminDashboard() {
                           <th className="p-4 font-medium">Bus Vuelta</th>
                           <th className="p-4 font-medium">Mensaje</th>
                           <th className="p-4 font-medium text-right">Fecha</th>
-                          <th className="p-4 w-10" />
+                          <th className="p-4 font-medium w-28 text-right">Acciones</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-primary/5 text-sm">
@@ -731,9 +1065,17 @@ export default function AdminDashboard() {
                                     {new Date(rsvp.created_at).toLocaleDateString('es-ES', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
                                   </td>
                                   <td className="p-4">
-                                    <button onClick={() => setSelectedRsvp({ rsvp, companions })} className="p-1.5 rounded-full hover:bg-bg-warm text-secondary transition-colors">
-                                      <Eye size={14} />
-                                    </button>
+                                    <div className="flex items-center justify-end gap-1">
+                                      <button onClick={() => setSelectedRsvpId(rsvp.id)} className="p-1.5 rounded-full hover:bg-bg-warm text-secondary transition-colors" title="Ver detalle">
+                                        <Eye size={14} />
+                                      </button>
+                                      <button onClick={() => openGroupEdit(rsvp)} className="p-1.5 rounded-full hover:bg-bg-warm text-secondary transition-colors" title="Editar">
+                                        <Pencil size={14} />
+                                      </button>
+                                      <button onClick={() => askDeleteRsvp(rsvp, companions)} className="p-1.5 rounded-full hover:bg-red-50 text-red-500 transition-colors" title="Eliminar">
+                                        <Trash2 size={14} />
+                                      </button>
+                                    </div>
                                   </td>
                                 </tr>
                                 {companions.map((c: any, ci: number) => (
@@ -749,7 +1091,16 @@ export default function AdminDashboard() {
                                     <td className="py-2 px-4 text-xs text-secondary">{c.bus_vuelta ? 'SI' : 'NO'}</td>
                                     <td className="py-2 px-4" />
                                     <td className="py-2 px-4" />
-                                    <td className="py-2 px-4" />
+                                    <td className="py-2 px-4">
+                                      <div className="flex items-center justify-end gap-1">
+                                        <button onClick={() => openCompanionEdit(c)} className="p-1.5 rounded-full hover:bg-bg-warm text-secondary transition-colors" title="Editar acompañante">
+                                          <Pencil size={13} />
+                                        </button>
+                                        <button onClick={() => askDeleteCompanion(c)} className="p-1.5 rounded-full hover:bg-red-50 text-red-500 transition-colors" title="Eliminar acompañante">
+                                          <Trash2 size={13} />
+                                        </button>
+                                      </div>
+                                    </td>
                                   </tr>
                                 ))}
                               </React.Fragment>
@@ -799,7 +1150,7 @@ export default function AdminDashboard() {
                             <span>{song.votes}</span>
                           </div>
                           <button
-                            onClick={() => handleDeleteSong(song.id)}
+                            onClick={() => askDeleteSong(song)}
                             className="p-1.5 rounded-full hover:bg-red-50 text-red-500 transition-colors"
                             title="Eliminar canción"
                           >
@@ -849,7 +1200,7 @@ export default function AdminDashboard() {
                               <td className="p-4 text-secondary">{song.artist}</td>
                               <td className="p-4 text-center">
                                 <button
-                                  onClick={() => handleDeleteSong(song.id)}
+                                  onClick={() => askDeleteSong(song)}
                                   className="p-1.5 rounded-full hover:bg-red-50 text-red-500 transition-colors"
                                   title="Eliminar canción"
                                 >
@@ -871,9 +1222,9 @@ export default function AdminDashboard() {
 
       {/* Detail modal */}
       {selectedRsvp && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/30 backdrop-blur-sm" onClick={() => setSelectedRsvp(null)}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/30 backdrop-blur-sm" onClick={() => setSelectedRsvpId(null)}>
           <div className="bg-white rounded-xl shadow-xl max-w-md w-full max-h-[85vh] overflow-y-auto p-6 relative" onClick={(e) => e.stopPropagation()}>
-            <button onClick={() => setSelectedRsvp(null)} className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-bg-warm text-secondary transition-colors">
+            <button onClick={() => setSelectedRsvpId(null)} className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-bg-warm text-secondary transition-colors">
               <X size={16} />
             </button>
 
@@ -907,11 +1258,21 @@ export default function AdminDashboard() {
                     <p className="text-[10px] uppercase tracking-wider text-secondary mb-2">Acompañantes ({selectedRsvp.companions.length})</p>
                     <div className="space-y-2">
                       {selectedRsvp.companions.map((c: any, i: number) => (
-                        <div key={c.id} className="bg-bg-light rounded-lg p-3 border-l-2 border-primary/20">
-                          <p className="font-medium text-primary">{c.guest_name || '-'}</p>
-                          <p className="text-[11px] text-secondary mt-0.5">
-                            Intol.: {c.dietary_restrictions || 'Ninguna'} · Bus: {[c.bus_ida && 'Ida', c.bus_vuelta && 'Vuelta'].filter(Boolean).join(' + ') || 'No'}
-                          </p>
+                        <div key={c.id} className="bg-bg-light rounded-lg p-3 border-l-2 border-primary/20 flex items-start justify-between gap-2">
+                          <div className="min-w-0">
+                            <p className="font-medium text-primary">{c.guest_name || '-'}</p>
+                            <p className="text-[11px] text-secondary mt-0.5">
+                              Intol.: {c.dietary_restrictions || 'Ninguna'} · Bus: {[c.bus_ida && 'Ida', c.bus_vuelta && 'Vuelta'].filter(Boolean).join(' + ') || 'No'}
+                            </p>
+                          </div>
+                          <div className="flex items-center gap-1 shrink-0">
+                            <button onClick={() => openCompanionEdit(c)} className="p-1.5 rounded-full hover:bg-white text-secondary transition-colors" title="Editar acompañante">
+                              <Pencil size={13} />
+                            </button>
+                            <button onClick={() => askDeleteCompanion(c)} className="p-1.5 rounded-full hover:bg-red-50 text-red-500 transition-colors" title="Eliminar acompañante">
+                              <Trash2 size={13} />
+                            </button>
+                          </div>
                         </div>
                       ))}
                     </div>
@@ -933,6 +1294,278 @@ export default function AdminDashboard() {
                 <p className="text-primary italic">"{selectedRsvp.rsvp.message}"</p>
               </div>
             )}
+
+            {selectedRsvp.rsvp.attending !== false && (
+              <button
+                onClick={() => openGroupEdit(selectedRsvp.rsvp, { addCompanion: true })}
+                className="w-full mt-6 flex items-center justify-center gap-2 py-2.5 rounded-md border border-dashed border-primary/30 text-primary hover:bg-bg-warm/50 transition-colors text-[10px] uppercase tracking-widest font-semibold"
+              >
+                <UserPlus size={14} />
+                Añadir acompañante
+              </button>
+            )}
+
+            <div className="flex gap-2 mt-3 pt-4 border-t border-primary/10">
+              <button
+                onClick={() => openGroupEdit(selectedRsvp.rsvp)}
+                className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-md border border-primary/20 text-primary hover:bg-bg-warm/50 transition-colors text-[10px] uppercase tracking-widest font-semibold"
+              >
+                <Pencil size={13} />
+                Editar
+              </button>
+              <button
+                onClick={() => askDeleteRsvp(selectedRsvp.rsvp, selectedRsvp.companions)}
+                className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-md border border-red-200 text-red-500 hover:bg-red-50 transition-colors text-[10px] uppercase tracking-widest font-semibold"
+              >
+                <Trash2 size={13} />
+                Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal de edición: invitado principal + acompañantes */}
+      {editing && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/30 backdrop-blur-sm" onClick={() => !savingEdit && setEditing(null)}>
+          <div className="bg-white rounded-xl shadow-xl max-w-lg w-full max-h-[88vh] overflow-y-auto p-6 relative" onClick={(e) => e.stopPropagation()}>
+            <button
+              onClick={() => setEditing(null)}
+              disabled={savingEdit}
+              className="absolute top-4 right-4 p-1.5 rounded-full hover:bg-bg-warm text-secondary transition-colors disabled:opacity-50"
+            >
+              <X size={16} />
+            </button>
+
+            <h3 className="font-serif text-xl text-accent mb-1">
+              {editing.mode === 'companion' ? 'Editar acompañante' : 'Editar confirmación'}
+            </h3>
+            {editing.mode === 'companion' ? (
+              <p className="text-xs text-primary mb-5">
+                Acompañante de: <span className="font-semibold">{editing.main.guest_name || 'invitado sin nombre'}</span>
+              </p>
+            ) : (
+              <p className="text-[11px] text-secondary mb-5">
+                Podés cambiar los datos del invitado y de sus acompañantes, quitar acompañantes o añadir nuevos. Todo se guarda junto al pulsar «Guardar cambios».
+              </p>
+            )}
+
+            {editing.mode !== 'companion' && (
+            <div className="space-y-4 text-sm">
+              <div>
+                <label className="block text-[10px] uppercase tracking-wider text-secondary mb-1.5 font-semibold">Nombre</label>
+                <input
+                  type="text"
+                  value={editing.main.guest_name || ''}
+                  onChange={(e) => updateMainField('guest_name', e.target.value)}
+                  className="w-full bg-bg-warm/20 border border-primary/20 rounded p-2.5 text-primary focus:outline-none focus:border-primary text-sm"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[10px] uppercase tracking-wider text-secondary mb-1.5 font-semibold">¿Asiste?</label>
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={() => updateMainField('attending', true)}
+                    className={`flex-1 py-2 rounded text-[10px] uppercase tracking-widest font-semibold border transition-colors ${editing.main.attending !== false ? 'bg-primary text-white border-primary' : 'bg-white text-secondary border-primary/20 hover:border-primary/50'}`}
+                  >
+                    Sí
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => updateMainField('attending', false)}
+                    className={`flex-1 py-2 rounded text-[10px] uppercase tracking-widest font-semibold border transition-colors ${editing.main.attending === false ? 'bg-primary text-white border-primary' : 'bg-white text-secondary border-primary/20 hover:border-primary/50'}`}
+                  >
+                    No
+                  </button>
+                </div>
+              </div>
+
+              {editing.main.attending !== false && (
+                <>
+                  <div>
+                    <label className="block text-[10px] uppercase tracking-wider text-secondary mb-1.5 font-semibold">Intolerancia o alergia</label>
+                    <input
+                      type="text"
+                      value={editing.main.dietary_restrictions || ''}
+                      onChange={(e) => updateMainField('dietary_restrictions', e.target.value)}
+                      placeholder="Ninguna"
+                      className="w-full bg-bg-warm/20 border border-primary/20 rounded p-2.5 text-primary focus:outline-none focus:border-primary text-sm"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <label className="flex items-center gap-2 bg-bg-light rounded-lg p-3 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={!!editing.main.bus_ida}
+                        onChange={(e) => updateMainField('bus_ida', e.target.checked)}
+                        className="accent-[#7d8c5c]"
+                      />
+                      <span className="text-xs text-primary">Bus ida</span>
+                    </label>
+                    <label className="flex items-center gap-2 bg-bg-light rounded-lg p-3 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={!!editing.main.bus_vuelta}
+                        onChange={(e) => updateMainField('bus_vuelta', e.target.checked)}
+                        className="accent-[#7d8c5c]"
+                      />
+                      <span className="text-xs text-primary">Bus vuelta</span>
+                    </label>
+                  </div>
+                </>
+              )}
+
+              <div>
+                <label className="block text-[10px] uppercase tracking-wider text-secondary mb-1.5 font-semibold">Mensaje</label>
+                <textarea
+                  value={editing.main.message || ''}
+                  onChange={(e) => updateMainField('message', e.target.value)}
+                  rows={3}
+                  className="w-full bg-bg-warm/20 border border-primary/20 rounded p-2.5 text-primary focus:outline-none focus:border-primary text-sm resize-none"
+                />
+              </div>
+            </div>
+            )}
+
+            {/* Acompañantes */}
+            <div className={editing.mode === 'companion' ? '' : 'mt-6 pt-5 border-t border-primary/10'}>
+              {editing.mode !== 'companion' && (
+                <div className="flex items-center justify-between mb-3">
+                  <p className="text-[10px] uppercase tracking-wider text-secondary font-semibold">
+                    Acompañantes ({editing.companions.length})
+                  </p>
+                </div>
+              )}
+
+              {editing.mode !== 'companion' && editing.main.attending === false ? (
+                <p className="text-xs text-secondary bg-bg-light rounded-lg p-3">
+                  El invitado no asiste. Si tenía acompañantes, quitalos desde aquí marcando que sí asiste, o eliminá la confirmación completa.
+                </p>
+              ) : (
+                <>
+                  {editing.companions.length === 0 && (
+                    <p className="text-xs text-secondary mb-3">Todavía no tiene acompañantes.</p>
+                  )}
+
+                  <div className="space-y-3">
+                    {editing.companions.map((companion: any, index: number) => (
+                      <div key={companion.key} className="bg-bg-light rounded-lg p-3 border-l-2 border-primary/20 space-y-3">
+                        {editing.mode !== 'companion' && (
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="text-[9px] uppercase tracking-wider text-secondary/70 font-semibold">
+                              Acompañante {index + 1}{!companion.id && ' · nuevo'}
+                            </span>
+                            <button
+                              onClick={() => removeCompanionDraft(companion)}
+                              disabled={savingEdit}
+                              className="p-1.5 rounded-full hover:bg-red-50 text-red-500 transition-colors disabled:opacity-50"
+                              title="Quitar acompañante"
+                            >
+                              <Trash2 size={13} />
+                            </button>
+                          </div>
+                        )}
+
+                        <input
+                          type="text"
+                          value={companion.guest_name || ''}
+                          onChange={(e) => updateCompanionField(companion.key, 'guest_name', e.target.value)}
+                          placeholder="Nombre y apellidos"
+                          className="w-full bg-white border border-primary/20 rounded p-2.5 text-primary focus:outline-none focus:border-primary text-sm"
+                        />
+                        <input
+                          type="text"
+                          value={companion.dietary_restrictions || ''}
+                          onChange={(e) => updateCompanionField(companion.key, 'dietary_restrictions', e.target.value)}
+                          placeholder="Intolerancia o alergia (opcional)"
+                          className="w-full bg-white border border-primary/20 rounded p-2.5 text-primary focus:outline-none focus:border-primary text-sm"
+                        />
+                        <div className="grid grid-cols-2 gap-3">
+                          <label className="flex items-center gap-2 bg-white rounded-lg p-2.5 cursor-pointer border border-primary/10">
+                            <input
+                              type="checkbox"
+                              checked={!!companion.bus_ida}
+                              onChange={(e) => updateCompanionField(companion.key, 'bus_ida', e.target.checked)}
+                              className="accent-[#7d8c5c]"
+                            />
+                            <span className="text-xs text-primary">Bus ida</span>
+                          </label>
+                          <label className="flex items-center gap-2 bg-white rounded-lg p-2.5 cursor-pointer border border-primary/10">
+                            <input
+                              type="checkbox"
+                              checked={!!companion.bus_vuelta}
+                              onChange={(e) => updateCompanionField(companion.key, 'bus_vuelta', e.target.checked)}
+                              className="accent-[#7d8c5c]"
+                            />
+                            <span className="text-xs text-primary">Bus vuelta</span>
+                          </label>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {editing.mode !== 'companion' && (
+                  <button
+                    onClick={addCompanionDraft}
+                    disabled={savingEdit}
+                    className="w-full mt-3 flex items-center justify-center gap-2 py-2.5 rounded-md border border-dashed border-primary/30 text-primary hover:bg-bg-warm/50 transition-colors text-[10px] uppercase tracking-widest font-semibold disabled:opacity-50"
+                  >
+                    <UserPlus size={14} />
+                    Añadir acompañante
+                  </button>
+                  )}
+                </>
+              )}
+            </div>
+
+            <div className="flex gap-2 mt-6">
+              <button
+                onClick={() => setEditing(null)}
+                disabled={savingEdit}
+                className="flex-1 py-2.5 rounded-md border border-primary/20 text-secondary hover:bg-bg-warm/50 transition-colors text-[10px] uppercase tracking-widest font-semibold disabled:opacity-50"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={handleSaveEdit}
+                disabled={savingEdit}
+                className="flex-1 py-2.5 rounded-md bg-primary text-white hover:bg-primary/90 transition-colors text-[10px] uppercase tracking-widest font-semibold disabled:opacity-50"
+              >
+                {savingEdit ? 'Guardando...' : 'Guardar cambios'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal de confirmación */}
+      {confirmDialog && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm" onClick={() => !confirmBusy && setConfirmDialog(null)}>
+          <div className="bg-white rounded-xl shadow-xl max-w-sm w-full p-6 text-center" onClick={(e) => e.stopPropagation()}>
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-red-50 text-red-500 mb-4">
+              <AlertTriangle size={22} />
+            </div>
+            <h3 className="font-serif text-lg text-accent mb-2">{confirmDialog.title}</h3>
+            <p className="text-sm text-secondary leading-relaxed mb-6">{confirmDialog.description}</p>
+            <div className="flex gap-2">
+              <button
+                onClick={() => setConfirmDialog(null)}
+                disabled={confirmBusy}
+                className="flex-1 py-2.5 rounded-md border border-primary/20 text-secondary hover:bg-bg-warm/50 transition-colors text-[10px] uppercase tracking-widest font-semibold disabled:opacity-50"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={runConfirm}
+                disabled={confirmBusy}
+                className="flex-1 py-2.5 rounded-md bg-red-500 text-white hover:bg-red-600 transition-colors text-[10px] uppercase tracking-widest font-semibold disabled:opacity-50"
+              >
+                {confirmBusy ? 'Eliminando...' : confirmDialog.confirmLabel}
+              </button>
+            </div>
           </div>
         </div>
       )}
